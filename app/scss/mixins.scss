@@ -1,0 +1,50 @@
+$maxWrapperWidth : 1250px;
+$minWrapperWidth : 1000px;
+$footerHeight : 59px;
+$bodyFont : 'GillSans-Light', sans-serif;
+$bodyFontSize : 15px;
+$bodyColor : #000;
+$bodyLineHeight : 18px;
+
+$fontTreb : 'TrebuchetMS';
+$fontBold: 'GillSans-SemiBold';
+$fontTrebBold: 'TrebuchetMS-Bold';
+
+// @mixin bold {
+// 	font-family: 'elektra_light_probold';
+// }
+
+@mixin inlineBlock {
+	display: inline-block;
+	vertical-align: top;
+}
+
+@mixin cl {
+	&:before, &:after {content: " "; display: table;}
+	&:after {clear: both;}
+}
+
+@mixin placecolor($color: #000000) {
+    &::-webkit-input-placeholder {
+        color: $color;
+    }
+    &:-moz-placeholder {
+        color: $color;
+    }
+    &::-moz-placeholder {
+        color: $color;
+    }
+    &:-ms-input-placeholder {
+        color: $color;
+    }
+}
+
+@mixin noselect {
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    -o-user-select: none;
+    user-select: none;
+}

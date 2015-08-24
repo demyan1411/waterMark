@@ -1,0 +1,4 @@
+AddType "text/html; charset=utf-8" .htm .html
+AddDefaultCharset utf-8
+PHP_VALUE default_charset utf-8
+Options -Indexes

@@ -1,0 +1,10 @@
+.footer {
+  min-width: 1000px;
+  margin-top: -59px;
+  height: 59px;
+  background: #ea695d;
+  box-sizing: border-box;
+  padding-top: 20px;
+  color: #f6f4eb;
+  position: relative;
+  z-index: 10; }

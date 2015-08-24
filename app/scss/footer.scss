@@ -1,0 +1,14 @@
+@import "mixins";
+
+.footer {
+	min-width: $minWrapperWidth;
+	margin-top: -$footerHeight;
+	height: $footerHeight;
+	background: #ea695d;
+	box-sizing: border-box;
+	padding-top: 20px;
+	color: #f6f4eb;
+	position: relative;
+	z-index: 10;
+
+}

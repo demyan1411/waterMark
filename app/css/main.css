@@ -1,0 +1,302 @@
+.column-left {
+  float: left;
+  width: 230px;
+}
+
+.column-right {
+  float: right;
+  width: 740px;
+}
+/* defaul style */
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+address {
+  font-style: normal;
+}
+
+article,
+aside,
+details,
+figcaption,
+figure,
+footer,
+header,
+hgroup,
+main,
+menu,
+nav,
+section,
+summary {
+  display: block;
+}
+
+input,
+textarea {
+  outline: none;
+  border: none;
+}
+
+html,
+body {
+  font-family: "GillSans-Light", sans-serif;
+  font-size: 15px;
+  line-height: 18px;
+  color: #000;
+  margin: 0;
+  padding: 0;
+  -webkit-text-size-adjust: 100%;
+  -ms-text-size-adjust: 100%;
+  text-size-adjust: 100%;
+  height: 100%;
+}
+
+body {
+  position: relative;
+}
+
+.main-content {
+  height: auto;
+  min-height: 100%;
+  box-sizing: border-box;
+  background: #f7f6ed;
+  min-width: 1000px;
+  overflow: hidden;
+}
+
+.main-content__wrapper {
+  padding-bottom: 59px;
+  position: relative;
+}
+
+.wrapp {
+  max-width: 1250px;
+  min-width: 1000px;
+  margin: 0 auto;
+  padding: 0 15px;
+  position: relative;
+  z-index: 0;
+  box-sizing: border-box;
+}
+
+.wrapp:before,
+.wrapp:after {
+  content: " ";
+  display: table;
+}
+
+.wrapp:after {
+  clear: both;
+}
+
+/* defaul style end */
+/* fonts */
+
+/* fonts end */
+.footer {
+  min-width: 1000px;
+  margin-top: -59px;
+  height: 59px;
+  background: #ea695d;
+  box-sizing: border-box;
+  padding-top: 20px;
+  color: #f6f4eb;
+  position: relative;
+  z-index: 10;
+}
+.header {
+  padding: 22px 0 20px;
+  border-bottom: 1px solid #cbcbcb;
+  text-align: center;
+}
+
+
+.content {
+  position: relative;
+}
+
+.content__img {
+  position: absolute;
+  bottom: -166px;
+  z-index: 1;
+  left: 50%;
+  margin-left: -370px;
+  overflow: hidden;
+  width: 690px;
+}
+
+.content__img_block {
+  max-width: 738px;
+}
+
+.h1 {
+  text-align: center;
+  display: inline-block;
+  vertical-align: top;
+  margin-bottom: 25px;
+}
+
+.h1__minText {
+  font-family: "TrebuchetMS";
+  color: #9d9d9d;
+  font-weight: 500;
+}
+
+.h1__bigText {
+  font-family: "TrebuchetMS-Bold";
+  font-size: 82px;
+  line-height: 78px;
+}
+
+.redMenu {
+  text-align: center;
+  margin-bottom: 30px;
+}
+
+.redMenu__item {
+  display: inline-block;
+  vertical-align: top;
+  padding: 0 15px;
+}
+
+.redMenu__link {
+  font-family: "TrebuchetMS";
+  font-size: 18px;
+  line-height: 21px;
+  color: #f65b4f;
+  display: block;
+  padding-bottom: 2px;
+  border-bottom: 1px solid #f6bdb3;
+}
+
+.redMenu__link:hover {
+  border-bottom: 1px solid transparent;
+}
+
+.column_left {
+  float: left;
+  width: 255px;
+  margin-bottom: 20px;
+}
+
+.column_right {
+  float: right;
+  width: 245px;
+}
+
+.column_one {
+  width: 540px;
+  float: left;
+}
+
+.text-info {
+  margin-bottom: 25px;
+  position: relative;
+  z-index: 2;
+}
+
+.text-info_margin {
+  margin-bottom: 50px;
+}
+
+.text-info__title {
+  font-family: "GillSans-SemiBold";
+  margin-bottom: 15px;
+}
+
+.text-info__title_big {
+  font-size: 20px;
+  line-height: 23px;
+  margin-bottom: 20px;
+}
+
+.text-info__list {
+  max-width: 440px;
+}
+
+.text-info__li {
+  margin-bottom: 15px;
+  font-size: 18px;
+  line-height: 19px;
+}
+
+.text-info__text {
+  margin-bottom: 15px;
+}
+
+.text-info__text_min {
+  width: 195px;
+  margin-top: -60px;
+}
+
+.text-info__text_big {
+  font-size: 18px;
+  line-height: 19px;
+}
+
+.text-info__img {
+  margin-left: -57px;
+}
+
+.text-info__link {
+  color: #008de5;
+  display: inline-block;
+  margin-top: 1px;
+  border-bottom: 1px solid #008de5;
+}
+
+.text-info__link:hover {
+  border-bottom: 1px solid transparent;
+}
+
+.img_tech {
+  float: left;
+  width: 460px;
+  margin-left: 10px;
+}
+
+@media screen and (max-width: 1255px) {
+  .content__img {
+    bottom: 89px;
+    margin-left: -265px;
+    width: 506px;
+  }
+
+  .content__img_block {
+    max-width: 540px;
+  }
+
+  .wrapp {
+    padding: 0 15px;
+    max-width: 1044px;
+  }
+
+  .column_left {
+    width: 230px;
+  }
+
+  .column_right {
+    width: 225px;
+  }
+}
+
+@media screen and (max-width: 1170px) {
+  .column_one {
+    width: 540px;
+  }
+}
+
+@media screen and (max-width: 1080px) {
+  .column_one {
+    width: 475px;
+  }
+}
