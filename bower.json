@@ -14,8 +14,8 @@
     "app/bower"
   ],
   "dependencies": {
-    "jquery": "1.9.1",
-    "reset-css": "~2.0.2011012602"
+    "jquery": "1.11.3"
+
   },
   "devDependencies": {
     "modernizr": "~2.8.3"

@@ -21,6 +21,8 @@ var gulp = require("gulp"),
     gcallback = require('gulp-callback'),
     changed = require('gulp-changed');
 
+
+// превращаем jade в html
 gulp.task('jade', function () {
 	gulp.src('app/templates/pages/*.jade')
 	.pipe(jade({
@@ -35,6 +37,8 @@ gulp.task('clean-css', function() {
 	return gulp.src('app/css/**.*')
 		.pipe(clean());
 });
+
+// превращаем scss в css в папке css/all, затем сливаем в один main.css
 gulp.task('scss', ['clean-css'], function() {
 	gulp.src('app/scss/*.scss')
 		.pipe(sass({
@@ -56,6 +60,7 @@ gulp.task('scss', ['clean-css'], function() {
 		}));
 });
 
+// отдельная задача для старых ие, чтобы не сливался вместе со всеми
 gulp.task('scss_oldIe', function() {
 	gulp.src('app/scss/oldIe/*.scss')
 		.pipe(sass({
@@ -68,6 +73,8 @@ gulp.task('scss_oldIe', function() {
 		.pipe(gulp.dest('app/css'));
 });
 
+// cthdth
+
 gulp.task('server', ['jade', 'scss', 'scss_oldIe'], function () {
 	browserSync({
 		// open: false,
@@ -79,12 +86,8 @@ gulp.task('server', ['jade', 'scss', 'scss_oldIe'], function () {
 	});
 });
 
-// gulp.task('concatCss', function () {
-//   return gulp.src('app/css/all/*.css')
-//     .pipe(concatCss("main.css"))
-//     .pipe(gulp.dest('app/css'));
-// });
 
+// wiredep
 gulp.task('wiredep', function() {
 	gulp.src('app/templates/common/*.jade')
 		.pipe(wiredep({
@@ -93,7 +96,7 @@ gulp.task('wiredep', function() {
 		.pipe(gulp.dest('app/templates/common/'))
 });
 
-
+// watch
 gulp.task('watch', function () {
 	gulp.watch('app/templates/**/*.jade', ['jade']);
 	gulp.watch('app/scss/*.scss', ['scss']);
@@ -106,9 +109,12 @@ gulp.task('watch', function () {
 	]).on('change', reload);
 });
 
+// по команде gulp происходит всё что выше
 gulp.task('default', ['server', 'watch']);
 
 
+
+// сообщение возникающее при ошибке
 var log = function (error) {
   console.log([
     '',
@@ -121,12 +127,13 @@ var log = function (error) {
   this.end();
 }
 
-
+//чистим папку list
 gulp.task('clean', function() {
 	return gulp.src('dist')
 		.pipe(clean());
 });
 
+// минифицируем css js кладём в дист
 gulp.task('useref', function () {
 	var assets = useref.assets();
 	return gulp.src('app/*.html')
@@ -138,12 +145,14 @@ gulp.task('useref', function () {
 		.pipe(gulp.dest('dist'));
 });
 
+// шрифты в dist
 gulp.task('fonts', function() {
 	gulp.src('app/fonts/*')
 		.pipe(filter(['*.eot','*.svg','*.ttf','*.woff','*.woff2']))
 		.pipe(gulp.dest('dist/fonts/'))
 });
 
+// картинки в dist
 gulp.task('images', function () {
 	return gulp.src('app/img/**/*')
 		.pipe(imagemin({
@@ -153,6 +162,7 @@ gulp.task('images', function () {
 		.pipe(gulp.dest('dist/img'));
 });
 
+// доп файлы в dist
 gulp.task('extras', function () {
 	return gulp.src([
 		'app/*.*',
@@ -161,11 +171,12 @@ gulp.task('extras', function () {
 	]).pipe(gulp.dest('dist'));
 });
 
+// сборка
 gulp.task('dist', ['useref', 'images', 'fonts', 'extras'], function () {
 	return gulp.src('dist/**/*').pipe(size({title: 'build'}));
 });
 
-
+// удаляем лишний css
 gulp.task('uncss', function () {
     return gulp.src('dist/css/*.css')
         .pipe(uncss({
@@ -174,11 +185,13 @@ gulp.task('uncss', function () {
         .pipe(gulp.dest('dist/css'));
 });
 
+// ОСНОВНАЯ команда для сборки gulp-build
 gulp.task('build', ['clean', 'jade'], function () {
 	gulp.start('dist')
 		.start('uncss');
 });
 
+// сервер для dist gulp server-dist
 gulp.task('server-dist', function() {
 	browserSync({
 		notify: false,
@@ -189,6 +202,7 @@ gulp.task('server-dist', function() {
 	});
 });
 
+// deploy на хостинг gulp deply
 gulp.task('deploy', function() {
 	var conn = ftp.create({
 		host: '',
