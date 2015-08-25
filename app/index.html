@@ -1,0 +1,82 @@
+<!DOCTYPE html><!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
+<html lang="ru-RU">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>WaterMark</title>
+    <meta name="description" content="watermark">
+    <meta name="keywords" content="watermark">
+    <meta name="author" content="Анастасия Ким, Демьян Дроздов , Андрей Баландин, Тимофей Арбаев">
+    <link rel="shortcut icon" href="./favicon.ico" type="image/x-icon">
+    <link rel="icon" href="./favicon.ico" type="image/x-icon">
+    <!-- build:css css/vendor.min.css-->
+    <!-- bower:css-->
+    <link rel="stylesheet" href="bower/normalize-css/normalize.css">
+    <!-- endbower-->
+    <!-- endbuild-->
+    <!-- build:css css/style.min.css-->
+    <link rel="stylesheet" href="css/main.css">
+    <!--endbuild-->
+    <!-- build:css css/oldIe.min.css--><!--[if lte IE 8]>
+    <link rel="stylesheet" href="css/oldIe.css"><![endif]-->
+    <!-- endbuild-->
+    <!-- build:js js/modernizr.min.js-->
+    <script src="bower/modernizr/modernizr.js"></script>
+    <!-- endbuild-->
+  </head>
+  <body>
+    <!--[if lt IE 7]>
+    <p class="browsehappy">Ваш браузер <strong>устарел</strong>. Пожалуйста<a href="http://browsehappy.com/">обновите</a> его.</p>
+    <![endif]-->
+    <div class="wrapper">
+      <div class="main-content">
+        <div class="container">
+          <section class="generator">
+            <div class="generator__title">Генератор водяных знаков</div>
+            <div class="generator__img-wrap"></div>
+          </section>
+          <section class="settings">
+            <div class="settings__title">Настройки
+              <form action="" class="settings__form">
+                <div class="settings__form-wrap">
+                  <label for="original-img" class="settings__label">Исходное изображение
+                    <input id="original-img" type="file" class="settings__input-hide">
+                    <div class="settings__input">image.jpg</div>
+                  </label>
+                </div>
+                <div class="settings__form-wrap">
+                  <label for="water-mark" class="settings__label">Водяной знак
+                    <input id="water-mark" type="file" class="settings__input-hide">
+                    <div class="settings__input">image.png</div>
+                  </label>
+                </div>
+              </form>
+              <div class="settings__position">
+                <div class="settings__position-radiobtn"></div>
+                <div class="settings__position-coordinates"></div>
+              </div>
+            </div>
+          </section>
+        </div>
+      </div>
+    </div>
+    <!-- footer-->
+    <footer class="footer">
+      <div class="wrapp"></div>
+    </footer>
+    <!-- build:js js/vendor.min.js-->
+    <!-- bower:js-->
+    <script src="bower/jquery/dist/jquery.js"></script>
+    <script src="bower/jquery-ui/jquery-ui.js"></script>
+    <!-- endbower-->
+    <!-- endbuild-->
+    <!-- build:js js/main.min.js-->
+    <script src="js/modules.js"></script>
+    <script src="js/main.js"></script>
+    <!-- endbuild-->
+  </body>
+</html>

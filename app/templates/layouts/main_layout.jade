@@ -1,16 +1,20 @@
-include ../common/_mixins
+﻿include ../common/_mixins
 
 doctype html
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
+
 html(lang='ru-RU')
 	include ../common/head.jade
 	body
-		.main-content
-			.main-content__wrapper
-				include ../common/header.jade
-				.content
-					.wrapp
-						block content
-
-
+		<!--[if lt IE 7]>
+		<p class="browsehappy">Ваш браузер <strong>устарел</strong>. Пожалуйста<a href="http://browsehappy.com/">обновите</a> его.</p>
+		<![endif]-->
+		.wrapper
+			.main-content
+				block content
+		// footer
 		include ../common/footer.jade
 		include ../common/scripts.jade
