@@ -18,9 +18,7 @@ var gulp = require("gulp"),
     autoprefixer = require('gulp-autoprefixer'),
     uncss = require('gulp-uncss'),
     sass = require('gulp-sass'),
-    gcallback = require('gulp-callback'),
-    changed = require('gulp-changed');
-
+    gcallback = require('gulp-callback');
 
 // превращаем jade в html
 gulp.task('jade', function () {
@@ -33,13 +31,8 @@ gulp.task('jade', function () {
 	.pipe(reload({stream: true}));
 });
 
-gulp.task('clean-css', function() {
-	return gulp.src('app/css/**.*')
-		.pipe(clean());
-});
-
 // превращаем scss в css в папке css/all, затем сливаем в один main.css
-gulp.task('scss', ['clean-css'], function() {
+gulp.task('scss', function() {
 	gulp.src('app/scss/*.scss')
 		.pipe(sass({
 			noCache: true,
@@ -73,11 +66,9 @@ gulp.task('scss_oldIe', function() {
 		.pipe(gulp.dest('app/css'));
 });
 
-// cthdth
-
+// сервер
 gulp.task('server', ['jade', 'scss', 'scss_oldIe'], function () {
 	browserSync({
-		// open: false,
 		notify: false,
 		port: 9000,
 		server: {
@@ -85,6 +76,7 @@ gulp.task('server', ['jade', 'scss', 'scss_oldIe'], function () {
 		}
 	});
 });
+
 
 
 // wiredep
@@ -104,14 +96,14 @@ gulp.task('watch', function () {
 	gulp.watch('bower.json', ['wiredep']);
 	gulp.watch([
 		'app/js/**/*.js',
-		'app/css/main.css',
+		'app/css/*.css',
 		'app/*.html'
 	]).on('change', reload);
 });
 
+
 // по команде gulp происходит всё что выше
 gulp.task('default', ['server', 'watch']);
-
 
 
 // сообщение возникающее при ошибке

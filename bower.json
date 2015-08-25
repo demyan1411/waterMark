@@ -14,8 +14,9 @@
     "app/bower"
   ],
   "dependencies": {
-    "jquery": "1.11.3"
-
+    "jquery": "1.11.3",
+    "jquery-ui": "~1.11.4",
+    "normalize-css": "normalize.css#~3.0.3"
   },
   "devDependencies": {
     "modernizr": "~2.8.3"
