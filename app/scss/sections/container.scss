@@ -1,8 +1,6 @@
 ﻿/* главный контейнер */
 .main-content {
-	//display: table-cell;
-	//vertical-align: middle;
-	//padding-bottom: 81px;
+
 }
 .container {
 	@include clearfix();
@@ -16,15 +14,15 @@
 	float: left;
 	background: $bg-generator;
 	width: 700px;
+	height: 670px;
+	padding: 25px;
 		&__title {
 			font-size: 36px;
 			font-family: "SegoeUILight";
 			color: white;
-			padding: 20px 0 0 20px;
 			margin-bottom: 25px;
 		}
 		&__img-wrap {
-			margin: 25px;
 			background: url(../img/bg-mini.png) repeat;
 			width: 650px;
 			height: 537px;

@@ -29,6 +29,7 @@ body {
 	height:100%;
 }
 
+/* чтобы прибить футер к низу */
 .wrapper {
 
 		position: relative;
@@ -36,7 +37,6 @@ body {
 		min-width: 100%;
 		height: auto!important;
 		overflow: hidden;
-		//display: table;
 		&:after {
 			content: "";
 			height: 50px;

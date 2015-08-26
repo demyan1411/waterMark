@@ -1,1 +1,59 @@
 ﻿/* блок настройки */
+.settings {
+	color: $main-text;
+	&__title {
+		text-align: center;
+		font-size: 26px;
+		font-family: 'robotolight';
+		margin: 30px 0;
+	}
+}
+/* инпуты */
+.settings {
+		&__label {
+		font-size: 14px;
+		font-family: 'robotolight';
+		display: block;
+		margin-bottom: 5px;
+		}
+		&__form {
+		margin: 0 auto;
+		width: 218px;
+		}
+		&__input {
+				width: 100%;
+			border-radius: 3px;
+			border: 1px solid $border;
+			font-size: 12px;
+			color: $border;
+			outline: none;
+			padding: 3px;
+			line-height: 21px;
+			cursor: pointer;
+			height: 27px;
+			position: relative;
+			&:after {
+				content: ' ';
+				cursor: pointer;
+				position: absolute;
+				overflow: hidden;
+				width: 37px;
+				height: 27px;
+				background: url(../img/sprite.png) 3px -101px no-repeat $main-red;
+
+				border-radius: 0 3px 3px 0;
+
+    right: -1px;
+    top: -1px;
+			}
+			&-hide {
+				display: none;
+				overflow: hidden;
+			}
+		}
+}
+.settings__form-wrap {
+		margin-bottom: 25px;
+}
+
+/* инпуты END */

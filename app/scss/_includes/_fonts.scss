@@ -2,22 +2,22 @@
 
 @font-face {
 	font-family: "SegoeUILight";
-	src: url("../fonts/SegoeUILight/SegoeUILight.eot");
-	src: url("../fonts/SegoeUILight/SegoeUILight.eot?#iefix")format("embedded-opentype"),
-	url("../fonts/SegoeUILight/SegoeUILight.woff") format("woff"),
-	url("../fonts/SegoeUILight/SegoeUILight.ttf") format("truetype");
+	src: url("../fonts/SegoeUILight.eot");
+	src: url("../fonts/SegoeUILight.eot?#iefix")format("embedded-opentype"),
+	url("../fonts/SegoeUILight.woff") format("woff"),
+	url("../fonts/SegoeUILight.ttf") format("truetype");
 	font-style: normal;
 	font-weight: normal;
 }
 
 @font-face {
 	font-family: 'fira_sanslight';
-	src: url('firasans-light-webfont.eot');
-	src: url('firasans-light-webfont.eot?#iefix') format('embedded-opentype'),
-		 url('firasans-light-webfont.woff2') format('woff2'),
-		 url('firasans-light-webfont.woff') format('woff'),
-		 url('firasans-light-webfont.ttf') format('truetype'),
-		 url('firasans-light-webfont.svg#fira_sanslight') format('svg');
+	src: url('../fonts/firasans-light-webfont.eot');
+	src: url('../fonts/firasans-light-webfont.eot?#iefix') format('embedded-opentype'),
+		 url('../fonts/firasans-light-webfont.woff2') format('woff2'),
+		 url('../fonts/firasans-light-webfont.woff') format('woff'),
+		 url('../fonts/firasans-light-webfont.ttf') format('truetype'),
+		 url('../fonts/firasans-light-webfont.svg#fira_sanslight') format('svg');
 	font-weight: normal;
 	font-style: normal;
 
@@ -25,12 +25,12 @@
 
 @font-face {
 	font-family: 'robotolight';
-	src: url('roboto-light-webfont.eot');
-	src: url('roboto-light-webfont.eot?#iefix') format('embedded-opentype'),
-		 url('roboto-light-webfont.woff2') format('woff2'),
-		 url('roboto-light-webfont.woff') format('woff'),
-		 url('roboto-light-webfont.ttf') format('truetype'),
-		 url('roboto-light-webfont.svg#robotolight') format('svg');
+	src: url('../fonts/roboto-light-webfont.eot');
+	src: url('../fonts/roboto-light-webfont.eot?#iefix') format('embedded-opentype'),
+		 url('../fonts/roboto-light-webfont.woff2') format('woff2'),
+		 url('../fonts/roboto-light-webfont.woff') format('woff'),
+		 url('../fonts/roboto-light-webfont.ttf') format('truetype'),
+		 url('../fonts/roboto-light-webfont.svg#robotolight') format('svg');
 	font-weight: normal;
 	font-style: normal;
 
@@ -38,12 +38,12 @@
 
 @font-face {
 	font-family: 'robotomedium';
-	src: url('roboto-medium-webfont.eot');
-	src: url('roboto-medium-webfont.eot?#iefix') format('embedded-opentype'),
-		 url('roboto-medium-webfont.woff2') format('woff2'),
-		 url('roboto-medium-webfont.woff') format('woff'),
-		 url('roboto-medium-webfont.ttf') format('truetype'),
-		 url('roboto-medium-webfont.svg#robotomedium') format('svg');
+	src: url('../fonts/roboto-medium-webfont.eot');
+	src: url('../fonts/roboto-medium-webfont.eot?#iefix') format('embedded-opentype'),
+		 url('../fonts/roboto-medium-webfont.woff2') format('woff2'),
+		 url('../fonts/roboto-medium-webfont.woff') format('woff'),
+		 url('../fonts/roboto-medium-webfont.ttf') format('truetype'),
+		 url('../fonts/roboto-medium-webfont.svg#robotomedium') format('svg');
 	font-weight: normal;
 	font-style: normal;
 }
