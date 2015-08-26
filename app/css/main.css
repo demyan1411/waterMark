@@ -112,20 +112,20 @@ body {
     text-align: center;
     font-size: 26px;
     font-family: 'robotolight';
-    margin: 30px 0; }
+    margin: 16px 0 34px 0; }
 
 /* инпуты */
 .settings__label {
   font-size: 14px;
   font-family: 'robotolight';
-  display: block;
-  padding-bottom: 5px; }
+  display: block; }
 
 .settings__form {
   margin: 0 auto;
   width: 218px; }
 
 .settings__input {
+  margin-top: 5px;
   width: 100%;
   border-radius: 3px;
   border: 1px solid #9eb2c0;
@@ -156,6 +156,10 @@ body {
   margin-bottom: 25px; }
 
 /* инпуты END */
+/* линия красная с уголком */
+.line-top {
+  border-top: 1px solid #f97e76; }
+
 /* главный контейнер */
 .container {
   overflow: hidden;
@@ -172,17 +176,17 @@ body {
   float: left;
   background: #605b5e;
   width: 700px;
-  height: 670px;
-  padding: 25px; }
+  height: 670px; }
   .generator__title {
     font-size: 36px;
     font-family: "SegoeUILight";
     color: white;
-    margin-bottom: 25px; }
+    margin: 4px 0 56px 23px; }
   .generator__img-wrap {
     background: url(../img/bg-mini.png) repeat;
     width: 650px;
-    height: 537px; }
+    height: 537px;
+    margin: 0 auto; }
 
 .settings {
   float: right;

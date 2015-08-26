@@ -15,17 +15,17 @@
 	background: $bg-generator;
 	width: 700px;
 	height: 670px;
-	padding: 25px;
 		&__title {
 			font-size: 36px;
 			font-family: "SegoeUILight";
 			color: white;
-			margin-bottom: 25px;
+			margin: 4px 0 56px 23px;
 		}
 		&__img-wrap {
 			background: url(../img/bg-mini.png) repeat;
 			width: 650px;
 			height: 537px;
+			margin: 0 auto;
 		}
 }
 .settings {
