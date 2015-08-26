@@ -1,5 +1,30 @@
 ﻿/* главный контейнер */
+.main-content {
+	display: table-cell;
+	vertical-align: middle;
+	padding-bottom: 81px;
+}
 .container {
-    width: 960px;
-    margin: 0 auto;
+	@include clearfix();
+	overflow: hidden;
+	margin: 0 auto;
+	width: 960px;
+}
+
+.generator {
+	float: left;
+	background: $bg-generator;
+	width: 700px;
+		&__title {
+			font-size: 36px;
+			font-family: "SegoeUILight";
+			color: white;
+			padding: 20px 0 0 20px;
+			margin-bottom: 50px;
+		}
+}
+.settings {
+	float: right;
+	background: $bg-settings;
+	width: 260px;
 }

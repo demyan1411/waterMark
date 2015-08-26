@@ -31,10 +31,11 @@ body {
 
 .wrapper {
 		position: relative;
-		//min-height: 100%;
-		min-width: 1400px;
+		min-height: 100%;
+		min-width: 100%;
 		height: auto!important;
 		overflow: hidden;
+		display: table;
 		&:after {
 			content: "";
 			//height: $footer-height;
