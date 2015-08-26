@@ -14,7 +14,7 @@
 		font-size: 14px;
 		font-family: 'robotolight';
 		display: block;
-		margin-bottom: 5px;
+		padding-bottom: 5px;
 		}
 		&__form {
 		margin: 0 auto;
@@ -40,11 +40,9 @@
 				width: 37px;
 				height: 27px;
 				background: url(../img/sprite.png) 3px -101px no-repeat $main-red;
-
 				border-radius: 0 3px 3px 0;
-
-    right: -1px;
-    top: -1px;
+				right: -1px;
+				top: -1px;
 			}
 			&-hide {
 				display: none;

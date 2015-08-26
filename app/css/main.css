@@ -119,7 +119,7 @@ body {
   font-size: 14px;
   font-family: 'robotolight';
   display: block;
-  margin-bottom: 5px; }
+  padding-bottom: 5px; }
 
 .settings__form {
   margin: 0 auto;
