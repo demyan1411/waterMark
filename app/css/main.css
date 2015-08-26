@@ -56,7 +56,7 @@
   height: 50px;
   margin-top: -50px;
   text-align: center;
-  padding: 3px 0px; }
+  padding: 7px 0px; }
   .footer__text {
     font-family: 'fira_sanslight';
     font-size: 12px;
@@ -213,7 +213,7 @@ body {
 .container {
   overflow: hidden;
   position: relative;
-  margin: 60px auto;
+  margin: 60px auto 20px;
   width: 960px; }
   .container:before, .container:after {
     content: " ";
