@@ -1,24 +1,24 @@
 var gulp = require("gulp"),
-    jade = require('gulp-jade'),
-    prettify = require('gulp-prettify'),
-    wiredep = require('wiredep').stream,
-    useref = require('gulp-useref'),
-    uglify = require('gulp-uglify'),
-    clean = require('gulp-clean'),
-    gulpif = require('gulp-if'),
-    filter = require('gulp-filter'),
-    size = require('gulp-size'),
-    imagemin = require('gulp-imagemin'),
-    concatCss = require('gulp-concat-css'),
-    minifyCss = require('gulp-minify-css'),
-    browserSync = require('browser-sync'),
-    gutil = require('gulp-util'),
-    ftp = require('vinyl-ftp'),
-    reload = browserSync.reload,
-    autoprefixer = require('gulp-autoprefixer'),
-    uncss = require('gulp-uncss'),
-    sass = require('gulp-sass'),
-    gcallback = require('gulp-callback');
+	jade = require('gulp-jade'),
+	prettify = require('gulp-prettify'),
+	wiredep = require('wiredep').stream,
+	useref = require('gulp-useref'),
+	uglify = require('gulp-uglify'),
+	clean = require('gulp-clean'),
+	gulpif = require('gulp-if'),
+	filter = require('gulp-filter'),
+	size = require('gulp-size'),
+	imagemin = require('gulp-imagemin'),
+	concatCss = require('gulp-concat-css'),
+	minifyCss = require('gulp-minify-css'),
+	browserSync = require('browser-sync'),
+	gutil = require('gulp-util'),
+	ftp = require('vinyl-ftp'),
+	reload = browserSync.reload,
+	autoprefixer = require('gulp-autoprefixer'),
+	uncss = require('gulp-uncss'),
+	sass = require('gulp-sass'),
+	gcallback = require('gulp-callback');
 
 // превращаем jade в html
 gulp.task('jade', function () {
@@ -31,9 +31,18 @@ gulp.task('jade', function () {
 	.pipe(reload({stream: true}));
 });
 
+// Компилируем scss в css
+gulp.task('scss', function () {
+	gulp.src('app/scss/main.scss')
+	.pipe(sass())
+	.on('error', log)
+	.pipe(gulp.dest('app/css'))
+	.pipe(reload({stream: true}));
+});
+/*
 // превращаем scss в css в папке css/all, затем сливаем в один main.css
 gulp.task('scss', function() {
-	gulp.src('app/scss/*.scss')
+	gulp.src('app/scss/main.scss')
 		.pipe(sass({
 			noCache: true,
 			style: "expanded",
@@ -45,14 +54,19 @@ gulp.task('scss', function() {
 			browsers: ['last 2 versions', 'ie 8', 'ie 9'],
 			cascade: false
 		}))
+		.pipe(gulp.dest('app/css'))
+		/*
 		.pipe(gulp.dest('app/css/all'))
 		.pipe(gcallback(function() {
 			gulp.src('app/css/all/*.css')
-			    .pipe(concatCss("main.css"))
-			    .pipe(gulp.dest('app/css'));
-		}));
-});
+				.pipe(concatCss("main.css"))
+				.pipe(gulp.dest('app/css'));
+		}))
 
+		.pipe(reload({stream: true}));
+});
+*/
+/*
 // отдельная задача для старых ие, чтобы не сливался вместе со всеми
 gulp.task('scss_oldIe', function() {
 	gulp.src('app/scss/oldIe/*.scss')
@@ -65,9 +79,9 @@ gulp.task('scss_oldIe', function() {
 		.on('error', log)
 		.pipe(gulp.dest('app/css'));
 });
-
+*/
 // сервер
-gulp.task('server', ['jade', 'scss', 'scss_oldIe'], function () {
+gulp.task('server', ['jade'], function () {
 	browserSync({
 		notify: false,
 		port: 9000,
@@ -91,8 +105,8 @@ gulp.task('wiredep', function() {
 // watch
 gulp.task('watch', function () {
 	gulp.watch('app/templates/**/*.jade', ['jade']);
-	gulp.watch('app/scss/*.scss', ['scss']);
-	gulp.watch('app/scss/oldIe/*.scss', ['scss_oldIe']);
+	gulp.watch('app/scss/**/*.scss', ['scss']);
+	//gulp.watch('app/scss/oldIe/*.scss', ['scss_oldIe']);
 	gulp.watch('bower.json', ['wiredep']);
 	gulp.watch([
 		'app/js/**/*.js',
@@ -109,17 +123,17 @@ gulp.task('default', ['server', 'watch']);
 // сообщение возникающее при ошибке
 var log = function (error) {
   console.log([
-    '',
-    "----------ERROR MESSAGE START----------",
-    ("[" + error.name + " in " + error.plugin + "]"),
-    error.message,
-    "----------ERROR MESSAGE END----------",
-    ''
+	'',
+	"----------ERROR MESSAGE START----------",
+	("[" + error.name + " in " + error.plugin + "]"),
+	error.message,
+	"----------ERROR MESSAGE END----------",
+	''
   ].join('\n'));
   this.end();
 }
 
-//чистим папку list
+//чистим папку dist
 gulp.task('clean', function() {
 	return gulp.src('dist')
 		.pipe(clean());
@@ -170,11 +184,11 @@ gulp.task('dist', ['useref', 'images', 'fonts', 'extras'], function () {
 
 // удаляем лишний css
 gulp.task('uncss', function () {
-    return gulp.src('dist/css/*.css')
-        .pipe(uncss({
-            html: ['dist/*.html']
-        }))
-        .pipe(gulp.dest('dist/css'));
+	return gulp.src('dist/css/*.css')
+		.pipe(uncss({
+			html: ['dist/*.html']
+		}))
+		.pipe(gulp.dest('dist/css'));
 });
 
 // ОСНОВНАЯ команда для сборки gulp-build

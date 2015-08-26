@@ -1,4 +1,5 @@
 ﻿/* стили по умолчанию */
+* { box-sizing: border-box }
 a {
 	text-decoration: none;
 	color: inherit;
@@ -12,7 +13,7 @@ address {
 }
 
 article, aside, details, figcaption, figure, footer, header, hgroup, main, menu, nav, section, summary {
-    display: block;
+	display: block;
 }
 
 input, textarea {
@@ -20,52 +21,26 @@ input, textarea {
 	border: none;
 }
 
-html, body {
-	font-family: $bodyFont;
-	font-size: $bodyFontSize;
-	line-height: $bodyLineHeight;
-	color: $bodyColor;
-	margin:0;
-	padding:0;
-	-webkit-text-size-adjust:100%;
-	-ms-text-size-adjust:100%;
-	text-size-adjust:100%;
-	height: 100%;
+html {
+	height:100%;
+	width: 100%;
 }
 body {
-	position: relative;
+	height:100%;
 }
 
-.main-content {
-	height: auto;
-	min-height: 100%;
-	box-sizing: border-box;
-	background: #f7f6ed;
-	min-width: $minWrapperWidth;
-	overflow: hidden;
+.wrapper {
+		position: relative;
+		//min-height: 100%;
+		min-width: 1400px;
+		height: auto!important;
+		overflow: hidden;
+		&:after {
+			content: "";
+			//height: $footer-height;
+			display: block;
+		}
 }
-.main-content__wrapper {
-	padding-bottom: $footerHeight;
-	position: relative;
-}
-.wrapp {
-	max-width: $maxWrapperWidth;
-	min-width: $minWrapperWidth;
-	margin: 0 auto;
-	padding: 0 15px;
-	position: relative;
-	z-index: 0;
-	box-sizing: border-box;
-}
-.wrapp:before, .wrapp:after {
-	content: " ";
-	display: table;
-}
-.wrapp:after {
-	clear: both;
-}
-
-
 
 
 /* defaul style end */

@@ -1,14 +1,12 @@
-﻿
-
-.footer {
-	min-width: $minWrapperWidth;
-	margin-top: -$footerHeight;
-	height: $footerHeight;
-	background: #ea695d;
-	box-sizing: border-box;
-	padding-top: 20px;
-	color: #f6f4eb;
-	position: relative;
-	z-index: 10;
-
+﻿.footer {
+	position: absolute;
+	bottom: 0;
+	width: 100% ;
+	text-align: center;
+	padding: 3px 0px;
+		&__text {
+			font-family: 'fira_sanslight';
+			font-size: 12px;
+			color: white;
+		}
 }
