@@ -1,6 +1,18 @@
 ﻿/* иконки слева - язык и share */
 .icons {
-    position: fixed;
-    top: 100px;
-    left: 0;
+	position: fixed;
+	top: 100px;
+	left: 0;
+		&__language {
+			background:$bg-icons;
+			margin-bottom: 18px;
+			font-family: "SegoeUILight";
+			font-size: 20px;
+				&-item {
+					display: block;
+					min-width: 43px;
+					margin-bottom: 1px;
+				}
+		}
+
 }

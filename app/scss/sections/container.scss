@@ -1,13 +1,14 @@
 ﻿/* главный контейнер */
 .main-content {
-	display: table-cell;
-	vertical-align: middle;
-	padding-bottom: 81px;
+	//display: table-cell;
+	//vertical-align: middle;
+	//padding-bottom: 81px;
 }
 .container {
 	@include clearfix();
 	overflow: hidden;
-	margin: 0 auto;
+	position: relative;
+	margin: 60px auto;
 	width: 960px;
 }
 
@@ -20,11 +21,18 @@
 			font-family: "SegoeUILight";
 			color: white;
 			padding: 20px 0 0 20px;
-			margin-bottom: 50px;
+			margin-bottom: 25px;
+		}
+		&__img-wrap {
+			margin: 25px;
+			background: url(../img/bg-mini.png) repeat;
+			width: 650px;
+			height: 537px;
 		}
 }
 .settings {
 	float: right;
 	background: $bg-settings;
 	width: 260px;
+	height: 670px;
 }
