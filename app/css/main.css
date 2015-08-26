@@ -121,8 +121,8 @@ body {
   display: block; }
 
 .settings__form {
-  margin: 0 auto;
-  width: 218px; }
+  width: 218px;
+  margin: 0 auto; }
 
 .settings__input {
   margin-top: 5px;
@@ -158,7 +158,56 @@ body {
 /* инпуты END */
 /* линия красная с уголком */
 .line-top {
-  border-top: 1px solid #f97e76; }
+  border-top: 1px solid #f97e76;
+  position: relative; }
+
+/* положение */
+.settings__position {
+  min-height: 205px;
+  padding: 13px 20px 35px 20px; }
+  .settings__position-title {
+    font-size: 14px;
+    font-family: 'robotolight';
+    margin-bottom: 38px; }
+
+/* прозрачность */
+.settings__opacity {
+  min-height: 98px;
+  padding: 13px 20px 33px 20px; }
+  .settings__opacity-title {
+    font-size: 14px;
+    font-family: 'robotolight';
+    margin-bottom: 20px; }
+
+/* кнопки */
+.settings__btn {
+  padding: 57px 11px 25px 11px; }
+  .settings__btn:before, .settings__btn:after {
+    content: " ";
+    display: table; }
+  .settings__btn:after {
+    clear: both; }
+  .settings__btn-reset {
+    float: left;
+    background: #c1cfd9; }
+  .settings__btn-download {
+    float: right;
+    background: #f97e76; }
+
+.form__btn {
+  outline: none;
+  border: none;
+  padding: 8px;
+  color: #f1f1f5;
+  font-size: 18px;
+  font-family: 'robotomedium';
+  -webkit-border-radius: 3px;
+  -moz-border-radius: 3px;
+  border-radius: 3px;
+  -moz-background-clip: padding;
+  -webkit-background-clip: padding-box;
+  background-clip: padding-box;
+  width: 99px; }
 
 /* главный контейнер */
 .container {
