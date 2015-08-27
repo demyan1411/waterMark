@@ -16,7 +16,8 @@
   "dependencies": {
     "jquery": "1.11.3",
     "jquery-ui": "~1.11.4",
-    "normalize-css": "normalize.css#~3.0.3"
+    "normalize-css": "normalize.css#~3.0.3",
+    "jquery-file-upload": "~9.11.1"
   },
   "devDependencies": {
     "modernizr": "~2.8.3"
