@@ -23,9 +23,18 @@
 			margin-bottom: 25px;
 		}
 		&__img-wrap {
+			position: relative;
 			background: url(../img/bg-mini.png) repeat;
 			width: 650px;
 			height: 537px;
+			// временно стили для двух изображений внутри обертки
+			img {
+				position: absolute;
+				top: 0;
+				left: 0;
+				max-width: 100%;
+    		max-height: 100%;
+			}
 		}
 }
 .settings {

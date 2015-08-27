@@ -180,9 +180,16 @@ body {
     color: white;
     margin-bottom: 25px; }
   .generator__img-wrap {
+    position: relative;
     background: url(../img/bg-mini.png) repeat;
     width: 650px;
     height: 537px; }
+    .generator__img-wrap img {
+      position: absolute;
+      top: 0;
+      left: 0;
+      max-width: 100%;
+      max-height: 100%; }
 
 .settings {
   float: right;
