@@ -13,12 +13,12 @@ block content
 					form.settings__form(action='' , method='get')
 						.settings__form-wrap
 								label.settings__label(for='original-img') Исходное изображение
-									input.settings__input-hide(id='original-img', type= 'file', data-for="#picture")
-									div.settings__input image.jpg
+									input.settings__input-hide(id='original-img', type= 'file', data-img="#picture", data-fakeinput="#picture-fakeinput")
+									div#picture-fakeinput.settings__input image.jpg
 						.settings__form-wrap
 								label.settings__label(for='water-mark') Водяной знак
-									input.settings__input-hide(id='water-mark', type= 'file', data-for="#watermark")
-									div.settings__input image.png
+									input.settings__input-hide(id='water-mark', type= 'file', data-img="#watermark", data-fakeinput="#watermark-fakeinput")
+									div#watermark-fakeinput.settings__input image.png
 						.settings__position.line-top
 							.settings__position-title Положение
 							.settings__position-radiobtn

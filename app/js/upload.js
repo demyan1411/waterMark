@@ -5,6 +5,7 @@
      будет выбрано изображение (например, '#picture')
    - выбранный файл с помощью ajax-запроса передается php-обработчику upload.php
    - после ответа сервера у элемента с изображением изменяется src-атрибут
+   - после ответа сервера у элемента с фэйковым инпутом меняется текст
    - ошибки выводятся в консоль
 */
 
@@ -32,8 +33,9 @@ $(function () {
         // добавить файл в FormData
         data.append(0, this.files[0]);
 
-        // добавить информацию, для какого элемента выбирается картинка
-        data.append('datafor', this.dataset['for']);
+        // добавить информацию из дата-атрибутов, для каких элементов изменить значения после сохранения файла
+        data.append('dataimg', this.dataset['img']);
+        data.append('datafakeinput', this.dataset['fakeinput']);
 
         // выполнить ajax-запрос
         $.ajax({
@@ -51,8 +53,10 @@ $(function () {
         .done( function(answer) {
             console.log(answer.text);
             if (answer.status === 'OK') {
-                // изменить url картинки для элемента, который указан в атрибуте 'data-for'
-                $(answer.datafor).attr("src", answer.url);
+                // изменить url картинки для элемента, который указан в атрибуте 'data-img'
+                $(answer.dataimg).attr("src", answer.url);
+                // изменить текст фэйкового инпута на имя сохраненного файла
+                $(answer.datafakeinput).text(answer.filename);
             };
             btn.removeAttr('disabled'); // разблокировать кнопку
         });

@@ -56,14 +56,14 @@
             <form action="" method="get" class="settings__form">
               <div class="settings__form-wrap">
                 <label for="original-img" class="settings__label">Исходное изображение
-                  <input id="original-img" type="file" data-for="#picture" class="settings__input-hide">
-                  <div class="settings__input">image.jpg</div>
+                  <input id="original-img" type="file" data-img="#picture" data-fakeinput="#picture-fakeinput" class="settings__input-hide">
+                  <div id="picture-fakeinput" class="settings__input">image.jpg</div>
                 </label>
               </div>
               <div class="settings__form-wrap">
                 <label for="water-mark" class="settings__label">Водяной знак
-                  <input id="water-mark" type="file" data-for="#watermark" class="settings__input-hide">
-                  <div class="settings__input">image.png</div>
+                  <input id="water-mark" type="file" data-img="#watermark" data-fakeinput="#watermark-fakeinput" class="settings__input-hide">
+                  <div id="watermark-fakeinput" class="settings__input">image.png</div>
                 </label>
               </div>
               <div class="settings__position line-top">
