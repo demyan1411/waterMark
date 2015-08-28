@@ -82,15 +82,12 @@
     left: 0px; }
 
 .footer {
-  position: absolute;
-  top: auto;
-  bottom: 0;
-  left: 0px;
-  right: 0px;
   width: 100%;
+  min-width: 1000px;
   height: 50px;
   text-align: center;
-  padding: 7px 0px; }
+  padding: 7px 0px;
+  box-sizing: border-box; }
   .footer__text {
     font-family: 'fira_sanslight';
     font-size: 12px;
@@ -105,9 +102,6 @@ position: absolute;
 }
 */
 /* стили по умолчанию */
-* {
-  box-sizing: border-box; }
-
 a {
   text-decoration: none;
   color: inherit; }
@@ -136,20 +130,29 @@ body {
 
 /* чтобы прибить футер к низу */
 .wrapper {
+<<<<<<< HEAD
   position: absolute;
   left: 0px;
   right: 0px;
   box-sizing: content-box;
+=======
+  width: 100%;
+  height: 100%;
+>>>>>>> master
   min-height: 100%;
-  min-width: 1000px;
-  height: auto !important;
-  overflow: hidden; }
-  .wrapper:after {
-    content: "";
-    height: 50px;
-    display: block; }
+  display: table; }
 
-/* defaul style end */
+.main-content {
+  padding-bottom: 65px;
+  position: relative;
+  display: table-cell;
+  vertical-align: middle; }
+
+.main-content__wrapper {
+  max-width: 960px;
+  margin: 0 auto; }
+
+/* defaul style end  */
 /* блок настройки */
 .settings {
   color: #2e3641; }
@@ -181,7 +184,8 @@ body {
   line-height: 21px;
   cursor: pointer;
   height: 27px;
-  position: relative; }
+  position: relative;
+  box-sizing: border-box; }
   .settings__input:after {
     content: ' ';
     cursor: pointer;
@@ -231,7 +235,8 @@ body {
 /* положение */
 .settings__position {
   min-height: 205px;
-  padding: 13px 20px 35px 20px; }
+  padding: 13px 20px 35px 20px;
+  box-sizing: border-box; }
   .settings__position-title {
     font-size: 14px;
     font-family: 'robotolight';
@@ -240,7 +245,8 @@ body {
 /* прозрачность */
 .settings__opacity {
   min-height: 98px;
-  padding: 13px 20px 33px 20px; }
+  padding: 13px 20px 33px 20px;
+  box-sizing: border-box; }
   .settings__opacity-title {
     font-size: 14px;
     font-family: 'robotolight';
@@ -277,6 +283,7 @@ body {
   width: 99px; }
 
 /* главный контейнер */
+<<<<<<< HEAD
 .main-content {
   text-align: center;
   position: absolute;
@@ -294,6 +301,8 @@ body {
 	}
 }
 */
+=======
+>>>>>>> master
 .container {
   display: inline-block;
   vertical-align: middle; }

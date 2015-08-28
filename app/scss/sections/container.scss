@@ -1,22 +1,6 @@
 ﻿/* главный контейнер */
-.main-content {
-	text-align: center;
-	  position: absolute;
-    top: 0;
-    bottom: 50px;
-    left: 0;
-    right: 0;
-}
-	//vertical-align: middle;
-	/* &:before {
-		content: "";
-		display: inline-block;
-		height: 100%;
-		width: 0;
-		vertical-align: middle;
-	}
-}
-*/
+
+>>>>>>> master
 .container {
 	@include clearfix();
 	//overflow: hidden;

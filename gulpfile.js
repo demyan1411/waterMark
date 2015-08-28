@@ -169,7 +169,18 @@ gulp.task('images', function () {
 });
 
 // доп файлы в dist
-gulp.task('extras', function () {
+
+gulp.task('php', function () {
+	return gulp.src([
+		'app/php/*.*',
+	]).pipe(gulp.dest('dist/php'));
+});
+gulp.task('uploads', function () {
+	return gulp.src([
+		'app/uploads/*.*',
+	]).pipe(gulp.dest('dist/uploads'));
+});
+gulp.task('extras', ['php', 'uploads'] ,function () {
 	return gulp.src([
 		'app/*.*',
 		'app/.htaccess',
