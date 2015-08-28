@@ -18,6 +18,7 @@
     <!-- build:css css/style.min.css-->
     <link rel="stylesheet" href="css/main.css">
     <!--endbuild-->
+    
     <!-- build:css css/oldIe.min.css--><!--[if lte IE 8]>
     <link rel="stylesheet" href="css/oldIe.css"><![endif]-->
     <!-- endbuild-->
@@ -47,7 +48,9 @@
           <div class="container">
             <section class="generator">
               <div class="generator__title">Генератор водяных знаков</div>
-              <div class="generator__img-wrap"><img id="picture"><img id="watermark"></div>
+              <div class="generator__img-wrap cont"><img id="picture" class="img">
+                <div class="js-container"><img id="watermark" class="opacity_block draggable radio_position"></div>
+              </div>
             </section>
             <section class="settings">
               <div class="settings__title">Настройки</div>
@@ -68,12 +71,22 @@
                 </div>
                 <div class="settings__position line-top">
                   <div class="settings__position-title">Положение</div>
-                  <div class="settings__position-radiobtn"></div>
-                  <div class="settings__position-coordinates"></div>
+                  <div class="location">
+                    <div class="coordinates">
+                      <div class="coordinates__block coordinates__blockX">
+                        <div class="coordinates__input posX">0</div>
+                      </div>
+                      <div class="coordinates__block coordinates__blockY">
+                        <div class="coordinates__input posY">0</div>
+                      </div>
+                    </div>
+                  </div>
                 </div>
                 <div class="settings__opacity line-top">
                   <div class="settings__opacity-title">Прозрачность</div>
-                  <div class="settings__opacity-slider"></div>
+                  <div class="slider">
+                    <div class="ui-slider"></div>
+                  </div>
                 </div>
                 <div class="settings__btn line-top">
                   <button type="reset" class="settings__btn-reset form__btn">Сброс</button>
@@ -94,9 +107,9 @@
     <!-- build:js js/vendor.min.js-->
     <!-- bower:js-->
     <script src="bower/jquery/dist/jquery.js"></script>
-    <script src="bower/jquery-ui/jquery-ui.js"></script>
     <!-- endbower-->
     <!-- endbuild-->
+    <script src="js/jquery-ui.min.js"></script>
     <!-- build:js js/main.min.js-->
     <script src="js/modules.js"></script>
     <script src="js/main.js"></script>

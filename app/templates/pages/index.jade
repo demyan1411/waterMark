@@ -6,9 +6,10 @@ block content
 		.container
 			section.generator
 				.generator__title Генератор водяных знаков
-				.generator__img-wrap
-					img#picture
-					img#watermark
+				.generator__img-wrap.cont
+					img#picture.img
+					.js-container
+						img#watermark.opacity_block.draggable.radio_position
 			section.settings
 					.settings__title Настройки
 					form(action='' , method='get')
@@ -23,11 +24,18 @@ block content
 										div#watermark-fakeinput.settings__input Выберите файл
 						.settings__position.line-top
 							.settings__position-title Положение
-							.settings__position-radiobtn
-							.settings__position-coordinates
+							.location
+								.coordinates
+									.coordinates__block.coordinates__blockX
+										.coordinates__input.posX 0
+									.coordinates__block.coordinates__blockY
+										.coordinates__input.posY 0
+
 						.settings__opacity.line-top
 							.settings__opacity-title Прозрачность
-							.settings__opacity-slider
+							.slider
+								.ui-slider
+
 						.settings__btn.line-top
 							button.settings__btn-reset.form__btn(type='reset') Сброс
 							button.settings__btn-download.form__btn(type='submit') Скачать

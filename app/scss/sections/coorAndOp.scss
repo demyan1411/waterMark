@@ -1,0 +1,109 @@
+.js-container {
+
+  box-sizing:border-box;
+
+  position: absolute;
+  overflow: hidden;
+  display: block;
+  top: 50%;
+  left: 50%;
+  -webkit-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
+}
+.img {
+    position: relative;
+    top: 50%;
+    left: 50%;
+    -webkit-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
+    max-width: 100%;
+    max-height: 100%;
+}
+
+.location {
+  position: relative;
+  height: 100px;
+}
+.radio {
+  width: 101px;
+  height: 100px;
+  box-sizing: border-box;
+  border-radius: 3px;
+  overflow: hidden;
+  border: 1px solid #9eb2c0;
+  display: inline-block;
+  vertical-align: top;
+  position: relative;
+
+}
+.coordinates {
+  display: inline-block;
+  vertical-align: top;
+  margin-left: 10px;
+  position: relative;
+  height: inherit;
+  display: none;
+}
+.coordinates__input {
+  display: block;
+  width: 45px;
+  height: 45px;
+  border: 1px solid #9eb2c0;
+  border-radius: 3px;
+  box-sizing: border-box;
+  text-align: center;
+  line-height: 45px;
+}
+.coordinates__block {
+  position: absolute;
+}
+.coordinates__blockX {
+  top: 0;
+}
+.coordinates__blockY {
+  bottom: 0;
+}
+.coordinates__input_loc {
+  position: absolute;
+  background: url(../img/st1.png) 0 0 no-repeat;
+  width: 13px;
+  height: 8px;
+  right: -21px;
+  cursor: pointer;
+}
+.coordinates__input_loc:hover {
+  background-position: -14px 0;
+}
+.coordinates__input_loc-up {
+  top: 5px;
+}
+.coordinates__input_loc-bottom {
+  bottom: 5px;
+  -webkit-transform: rotate(180deg);
+  transform: rotate(180deg);
+}
+
+
+
+.radio_button {
+  display: none;
+}
+.radio__label {
+  width: 34px;
+  height: 34px;
+  box-sizing: border-box;
+  background: #dbe1e8;
+  border: 1px solid #9eb2c0;
+  border-right: none;
+  margin-left: -1px;
+  margin-top: -1px;
+  float: left;
+  cursor: pointer;
+  -webkit-transition: all linear .3s;
+  transition: all linear .3s;
+}
+
+
+input[type="radio"]:checked + .radio__label, input[checked="checked"] + .radio__label {
+    background: #f97e76;
+}
