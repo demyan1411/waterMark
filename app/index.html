@@ -43,52 +43,54 @@
             <li class="icons__share-item--socials"><a href="#" class="icons__share-link icons__share-link--tw">twitter</a></li>
           </ul>
         </aside>
-        <div class="container">
-          <section class="generator">
-            <div class="generator__title">Генератор водяных знаков</div>
-            <div class="generator__img-wrap"></div>
-          </section>
-          <section class="settings">
-            <div class="settings__title">Настройки</div>
-            <form action="" method="get">
-              <div class="settings__form">
-                <div class="settings__form-wrap">
-                  <label for="original-img" class="settings__label">Исходное изображение
-                    <input id="original-img" type="file" class="settings__input-hide">
-                    <div class="settings__input">image.jpg</div>
-                  </label>
+        <div class="main-content__wrapper">
+          <div class="container">
+            <section class="generator">
+              <div class="generator__title">Генератор водяных знаков</div>
+              <div class="generator__img-wrap"></div>
+            </section>
+            <section class="settings">
+              <div class="settings__title">Настройки</div>
+              <form action="" method="get">
+                <div class="settings__form">
+                  <div class="settings__form-wrap">
+                    <label for="original-img" class="settings__label">Исходное изображение
+                      <input id="original-img" type="file" class="settings__input-hide">
+                      <div class="settings__input">image.jpg</div>
+                    </label>
+                  </div>
+                  <div class="settings__form-wrap">
+                    <label for="water-mark" class="settings__label">Водяной знак
+                      <input id="water-mark" type="file" class="settings__input-hide">
+                      <div class="settings__input">image.png</div>
+                    </label>
+                  </div>
                 </div>
-                <div class="settings__form-wrap">
-                  <label for="water-mark" class="settings__label">Водяной знак
-                    <input id="water-mark" type="file" class="settings__input-hide">
-                    <div class="settings__input">image.png</div>
-                  </label>
+                <div class="settings__position line-top">
+                  <div class="settings__position-title">Положение</div>
+                  <div class="settings__position-radiobtn"></div>
+                  <div class="settings__position-coordinates"></div>
                 </div>
-              </div>
-              <div class="settings__position line-top">
-                <div class="settings__position-title">Положение</div>
-                <div class="settings__position-radiobtn"></div>
-                <div class="settings__position-coordinates"></div>
-              </div>
-              <div class="settings__opacity line-top">
-                <div class="settings__opacity-title">Прозрачность</div>
-                <div class="settings__opacity-slider"></div>
-              </div>
-              <div class="settings__btn line-top">
-                <button type="reset" class="settings__btn-reset form__btn">Сброс</button>
-                <button type="submit" class="settings__btn-download form__btn">Скачать</button>
-              </div>
-            </form>
-          </section>
+                <div class="settings__opacity line-top">
+                  <div class="settings__opacity-title">Прозрачность</div>
+                  <div class="settings__opacity-slider"></div>
+                </div>
+                <div class="settings__btn line-top">
+                  <button type="reset" class="settings__btn-reset form__btn">Сброс</button>
+                  <button type="submit" class="settings__btn-download form__btn">Скачать</button>
+                </div>
+              </form>
+            </section>
+          </div>
         </div>
       </div>
       <!-- footer-->
-      <footer class="footer">
-        <div class="footer__text-wrap">
-          <p class="footer__text">&copy; 2015. Это мой сайт, пожалуйста, не копируйте и не воруйте его</p>
-        </div>
-      </footer>
     </div>
+    <footer class="footer">
+      <div class="footer__text-wrap">
+        <p class="footer__text">&copy; 2015. Это мой сайт, пожалуйста, не копируйте и не воруйте его</p>
+      </div>
+    </footer>
     <!-- build:js js/vendor.min.js-->
     <!-- bower:js-->
     <script src="bower/jquery/dist/jquery.js"></script>

@@ -91,6 +91,7 @@
 .settings__position {
 	min-height: 205px;
 	padding: 13px 20px 35px 20px;
+	box-sizing: border-box;
 		&-title {
 			font-size: 14px;
 			font-family: 'robotolight';
@@ -102,6 +103,7 @@
 .settings__opacity {
 	min-height: 98px;
 	padding: 13px 20px 33px 20px;
+	box-sizing: border-box;
 	&-title {
 			font-size: 14px;
 			font-family: 'robotolight';

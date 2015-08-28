@@ -1,14 +1,11 @@
 ﻿.footer {
-	position: absolute;
-	top: auto;
-	bottom: 0;
-	left: 0px;
-	right: 0px;
 	width: 100% ;
+	min-width: 1000px;
 	height: 50px;
 	margin-top: -50px;
 	text-align: center;
 	padding: 7px 0px;
+	box-sizing: border-box;
 		&__text {
 			font-family: 'fira_sanslight';
 			font-size: 12px;
