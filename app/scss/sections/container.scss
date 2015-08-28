@@ -1,13 +1,30 @@
 ﻿/* главный контейнер */
-.main-content {
-
+//.main-content {
+	/*
+	position: absolute;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	text-align: center;
+	vertical-align: middle;
+	&:before {
+		content: "";
+		display: inline-block;
+		height: 100%;
+		width: 0;
+		vertical-align: middle;
+	}
 }
+*/
 .container {
 	@include clearfix();
-	overflow: hidden;
-	position: relative;
-	margin: 60px auto 20px;
-	width: 960px;
+	//overflow: hidden;
+	//position: relative;
+	//margin: 60px auto 20px;
+	//width: 960px;
+	display: inline-block;
+	vertical-align: middle;
 }
 
 .generator {

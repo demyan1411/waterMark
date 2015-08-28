@@ -31,10 +31,14 @@ body {
 
 /* чтобы прибить футер к низу */
 .wrapper {
-
-		position: relative;
+		position: absolute;
+		top: 0px;
+		bottom: -57px;
+		left: 0px;
+		right: 0px;
+		box-sizing: content-box;
 		min-height: 100%;
-		min-width: 100%;
+			min-width: 1000px;
 		height: auto!important;
 		overflow: hidden;
 		&:after {
