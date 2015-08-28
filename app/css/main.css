@@ -42,14 +42,44 @@
   top: 100px;
   left: 0; }
   .icons__language {
-    background: #d7d5d7;
-    margin-bottom: 18px;
+    margin: 0 0 18px 0;
     font-family: "SegoeUILight";
     font-size: 20px; }
-    .icons__language-item {
+    .icons__language-link {
       display: block;
       min-width: 43px;
-      margin-bottom: 1px; }
+      padding: 4px 3px;
+      color: #999ca1;
+      margin-bottom: 1px;
+      background: #d7d5d7;
+      text-align: center; }
+  .icons__share {
+    background: #d7d5d7 url(../img/sprite.png) no-repeat; }
+    .icons__share-link {
+      text-indent: -9999px;
+      display: block;
+      min-width: 43px;
+      background: #d7d5d7; }
+
+.icons__share-link--like {
+  width: 26px;
+  height: 32px;
+  background-position: -5px -42px;
+  text-indent: -9999px; }
+
+.icons__share-item--like {
+  position: absolute;
+  left: 0px; }
+  .icons__share-item--like:hover .icons__share-item--socials {
+    position: absolute;
+    left: 43px; }
+
+.icons__share-item--socials {
+  position: absolute;
+  left: -43px; }
+  .icons__share-item--socials:hover {
+    position: absolute;
+    left: 0px; }
 
 .footer {
   width: 100%;
@@ -158,8 +188,30 @@ body {
 /* инпуты END */
 /* линия красная с уголком */
 .line-top {
-  border-top: 1px solid #f97e76;
+  border-top: 1px solid #f4c3c2;
   position: relative; }
+  .line-top:after {
+    position: absolute;
+    z-index: 2;
+    bottom: -10px;
+    left: 50%;
+    margin-left: -9px;
+    content: '';
+    top: 0px;
+    border-top: 10px solid #f4c3c2;
+    border-right: 9px solid transparent;
+    border-left: 9px solid transparent; }
+  .line-top:before {
+    top: -1px;
+    position: absolute;
+    z-index: 5;
+    bottom: -8px;
+    left: 50%;
+    margin-left: -9px;
+    content: '';
+    border-top: 10px solid #f1f1f5;
+    border-right: 9px solid transparent;
+    border-left: 9px solid transparent; }
 
 /* положение */
 .settings__position {
