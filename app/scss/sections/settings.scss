@@ -5,7 +5,7 @@
 		text-align: center;
 		font-size: 26px;
 		font-family: 'robotolight';
-		margin: 30px 0;
+		margin: 16px 0 34px 0;
 	}
 }
 /* инпуты */
@@ -14,14 +14,14 @@
 		font-size: 14px;
 		font-family: 'robotolight';
 		display: block;
-		padding-bottom: 5px;
 		}
 		&__form {
-		margin: 0 auto;
 		width: 218px;
+		margin: 0 auto;
 		}
 		&__input {
-				width: 100%;
+			margin-top: 5px;
+			width: 100%;
 			border-radius: 3px;
 			border: 1px solid $border;
 			font-size: 12px;
@@ -32,6 +32,7 @@
 			cursor: pointer;
 			height: 27px;
 			position: relative;
+			box-sizing: border-box;
 			&:after {
 				content: ' ';
 				cursor: pointer;
@@ -55,3 +56,82 @@
 }
 
 /* инпуты END */
+
+/* линия красная с уголком */
+.line-top {
+		border-top: 1px solid $red-line;
+		position: relative;
+		&:after {
+			position: absolute;
+			z-index: 2;
+			bottom: -10px;
+			left: 50%;
+			margin-left: -9px;
+			content: '';
+			top: 0px;
+			border-top: 10px solid $red-line;
+			border-right: 9px solid transparent;
+			border-left: 9px solid transparent;
+
+		}
+		&:before {
+			top: -1px;
+			position: absolute;
+			z-index: 5;
+			bottom: -8px;
+			left: 50%;
+			margin-left: -9px;
+			content: '';
+			border-top: 10px solid $bg-settings;
+			border-right: 9px solid transparent;
+			border-left: 9px solid transparent;
+			}
+	}
+
+/* положение */
+.settings__position {
+	min-height: 205px;
+	padding: 13px 20px 35px 20px;
+	box-sizing: border-box;
+		&-title {
+			font-size: 14px;
+			font-family: 'robotolight';
+			margin-bottom: 38px;
+		}
+}
+
+/* прозрачность */
+.settings__opacity {
+	min-height: 98px;
+	padding: 13px 20px 33px 20px;
+	box-sizing: border-box;
+	&-title {
+			font-size: 14px;
+			font-family: 'robotolight';
+			margin-bottom: 20px;
+		}
+}
+
+/* кнопки */
+.settings__btn {
+	@include clearfix();
+	padding: 57px 11px 25px 11px;
+		&-reset {
+			float: left;
+			background: $btn-grey;
+		}
+		&-download {
+			float: right;
+			background: $main-red;
+		}
+}
+.form__btn {
+		outline: none;
+		border: none;
+		padding: 8px;
+		color: $btn-color;
+		font-size: 18px;
+		font-family: 'robotomedium';
+		@include border-radius (3px);
+		width: 99px;
+}

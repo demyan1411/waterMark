@@ -42,30 +42,67 @@
   top: 100px;
   left: 0; }
   .icons__language {
-    background: #d7d5d7;
-    margin-bottom: 18px;
+    margin: 0 0 18px 0;
     font-family: "SegoeUILight";
     font-size: 20px; }
-    .icons__language-item {
+    .icons__language-link {
       display: block;
       min-width: 43px;
-      margin-bottom: 1px; }
+      padding: 4px 3px;
+      color: #999ca1;
+      margin-bottom: 1px;
+      background: #d7d5d7;
+      text-align: center; }
+  .icons__share {
+    background: #d7d5d7 url(../img/sprite.png) no-repeat; }
+    .icons__share-link {
+      text-indent: -9999px;
+      display: block;
+      min-width: 43px;
+      background: #d7d5d7; }
+
+.icons__share-link--like {
+  width: 26px;
+  height: 32px;
+  background-position: -5px -42px;
+  text-indent: -9999px; }
+
+.icons__share-item--like {
+  position: absolute;
+  left: 0px; }
+  .icons__share-item--like:hover .icons__share-item--socials {
+    position: absolute;
+    left: 43px; }
+
+.icons__share-item--socials {
+  position: absolute;
+  left: -43px; }
+  .icons__share-item--socials:hover {
+    position: absolute;
+    left: 0px; }
 
 .footer {
   width: 100%;
+  min-width: 1000px;
   height: 50px;
   margin-top: -50px;
   text-align: center;
-  padding: 3px 0px; }
+  padding: 7px 0px;
+  box-sizing: border-box; }
   .footer__text {
     font-family: 'fira_sanslight';
     font-size: 12px;
     color: white; }
 
+/*.footer {
+position: absolute;
+    bottom: 0;
+    width: 100%;
+    height: 70px;
+    text-align: center;
+}
+*/
 /* стили по умолчанию */
-* {
-  box-sizing: border-box; }
-
 a {
   text-decoration: none;
   color: inherit; }
@@ -94,17 +131,22 @@ body {
 
 /* чтобы прибить футер к низу */
 .wrapper {
-  position: relative;
+  width: 100%;
+  height: 100%;
   min-height: 100%;
-  min-width: 100%;
-  height: auto !important;
-  overflow: hidden; }
-  .wrapper:after {
-    content: "";
-    height: 50px;
-    display: block; }
+  display: table; }
 
-/* defaul style end */
+.main-content {
+  padding-bottom: 65px;
+  position: relative;
+  display: table-cell;
+  vertical-align: middle; }
+
+.main-content__wrapper {
+  max-width: 960px;
+  margin: 0 auto; }
+
+/* defaul style end  */
 /* блок настройки */
 .settings {
   color: #2e3641; }
@@ -112,20 +154,20 @@ body {
     text-align: center;
     font-size: 26px;
     font-family: 'robotolight';
-    margin: 30px 0; }
+    margin: 16px 0 34px 0; }
 
 /* инпуты */
 .settings__label {
   font-size: 14px;
   font-family: 'robotolight';
-  display: block;
-  padding-bottom: 5px; }
+  display: block; }
 
 .settings__form {
-  margin: 0 auto;
-  width: 218px; }
+  width: 218px;
+  margin: 0 auto; }
 
 .settings__input {
+  margin-top: 5px;
   width: 100%;
   border-radius: 3px;
   border: 1px solid #9eb2c0;
@@ -136,7 +178,8 @@ body {
   line-height: 21px;
   cursor: pointer;
   height: 27px;
-  position: relative; }
+  position: relative;
+  box-sizing: border-box; }
   .settings__input:after {
     content: ' ';
     cursor: pointer;
@@ -156,12 +199,87 @@ body {
   margin-bottom: 25px; }
 
 /* инпуты END */
+/* линия красная с уголком */
+.line-top {
+  border-top: 1px solid #f4c3c2;
+  position: relative; }
+  .line-top:after {
+    position: absolute;
+    z-index: 2;
+    bottom: -10px;
+    left: 50%;
+    margin-left: -9px;
+    content: '';
+    top: 0px;
+    border-top: 10px solid #f4c3c2;
+    border-right: 9px solid transparent;
+    border-left: 9px solid transparent; }
+  .line-top:before {
+    top: -1px;
+    position: absolute;
+    z-index: 5;
+    bottom: -8px;
+    left: 50%;
+    margin-left: -9px;
+    content: '';
+    border-top: 10px solid #f1f1f5;
+    border-right: 9px solid transparent;
+    border-left: 9px solid transparent; }
+
+/* положение */
+.settings__position {
+  min-height: 205px;
+  padding: 13px 20px 35px 20px;
+  box-sizing: border-box; }
+  .settings__position-title {
+    font-size: 14px;
+    font-family: 'robotolight';
+    margin-bottom: 38px; }
+
+/* прозрачность */
+.settings__opacity {
+  min-height: 98px;
+  padding: 13px 20px 33px 20px;
+  box-sizing: border-box; }
+  .settings__opacity-title {
+    font-size: 14px;
+    font-family: 'robotolight';
+    margin-bottom: 20px; }
+
+/* кнопки */
+.settings__btn {
+  padding: 57px 11px 25px 11px; }
+  .settings__btn:before, .settings__btn:after {
+    content: " ";
+    display: table; }
+  .settings__btn:after {
+    clear: both; }
+  .settings__btn-reset {
+    float: left;
+    background: #c1cfd9; }
+  .settings__btn-download {
+    float: right;
+    background: #f97e76; }
+
+.form__btn {
+  outline: none;
+  border: none;
+  padding: 8px;
+  color: #f1f1f5;
+  font-size: 18px;
+  font-family: 'robotomedium';
+  -webkit-border-radius: 3px;
+  -moz-border-radius: 3px;
+  border-radius: 3px;
+  -moz-background-clip: padding;
+  -webkit-background-clip: padding-box;
+  background-clip: padding-box;
+  width: 99px; }
+
 /* главный контейнер */
 .container {
-  overflow: hidden;
-  position: relative;
-  margin: 60px auto;
-  width: 960px; }
+  display: inline-block;
+  vertical-align: middle; }
   .container:before, .container:after {
     content: " ";
     display: table; }
@@ -172,18 +290,18 @@ body {
   float: left;
   background: #605b5e;
   width: 700px;
-  height: 670px;
-  padding: 25px; }
+  height: 670px; }
   .generator__title {
     font-size: 36px;
     font-family: "SegoeUILight";
     color: white;
-    margin-bottom: 25px; }
+    margin: 4px 0 56px 23px; }
   .generator__img-wrap {
     position: relative;
     background: url(../img/bg-mini.png) repeat;
     width: 650px;
-    height: 537px; }
+    height: 537px;
+    margin: 0 auto; }
     .generator__img-wrap img {
       position: absolute;
       top: 0;

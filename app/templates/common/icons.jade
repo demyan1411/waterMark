@@ -5,8 +5,8 @@
 				a.icons__language-link(href="#")= items
 	ul.icons__share
 					li.icons__share-item.icons__share-item--like
-						a(href="#" class="icons__share-link--like") like
-				- var items = {'vk' : 'vkontakte', 'fb' : 'facebook', 'tw' : 'twitter'};
-				each value, key in items
-					li.icons__share-item
-						a(href="#" class="icons__share-link icons__share-link--" + key)= value
+						a(href="#" class="icons__share-link icons__share-link--like") like
+					- var items = {'vk' : 'vkontakte', 'fb' : 'facebook', 'tw' : 'twitter'};
+					each value, key in items
+						li.icons__share-item--socials
+							a(href="#" class="icons__share-link icons__share-link--" + key)= value

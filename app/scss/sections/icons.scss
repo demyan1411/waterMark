@@ -4,15 +4,52 @@
 	top: 100px;
 	left: 0;
 		&__language {
-			background:$bg-icons;
-			margin-bottom: 18px;
+			margin: 0 0 18px 0;
 			font-family: "SegoeUILight";
 			font-size: 20px;
-				&-item {
+				&-link {
 					display: block;
 					min-width: 43px;
+					padding: 4px 3px;
+					color:$text-icons;
 					margin-bottom: 1px;
+					background:$bg-icons;
+					text-align: center;
 				}
 		}
+		&__share {
+			background: $bg-icons url(../img/sprite.png) no-repeat;
+			&-link {
+			text-indent: -9999px;
+			display: block;
+			min-width: 43px;
+			background:$bg-icons;
+			}
+		}
 
+}
+
+.icons__share-link {
+		&--like {
+			width: 26px;
+			height: 32px;
+			background-position: -5px -42px;
+			text-indent: -9999px;
+		}
+}
+.icons__share-item--like {
+	position: absolute;
+	left:0px;
+	&:hover .icons__share-item--socials {
+		position: absolute;
+		left: 43px;
+		}
+}
+.icons__share-item--socials {
+	position: absolute;
+	left:-43px;
+	&:hover {
+			position: absolute;
+		left: 0px;
+	}
 }

@@ -1,5 +1,5 @@
 ﻿/* стили по умолчанию */
-* { box-sizing: border-box }
+
 a {
 	text-decoration: none;
 	color: inherit;
@@ -31,18 +31,20 @@ body {
 
 /* чтобы прибить футер к низу */
 .wrapper {
-
-		position: relative;
-		min-height: 100%;
-		min-width: 100%;
-		height: auto!important;
-		overflow: hidden;
-		&:after {
-			content: "";
-			height: 50px;
-			display: block;
-		}
+	width: 100%;
+	height: 100%;
+	min-height: 100%;
+	display: table;
+}
+.main-content {
+	padding-bottom: 65px;
+	position: relative;
+	display: table-cell;
+	vertical-align: middle;
+}
+.main-content__wrapper {
+    max-width: 960px;
+    margin: 0 auto;
 }
 
-
-/* defaul style end */
+/* defaul style end  */

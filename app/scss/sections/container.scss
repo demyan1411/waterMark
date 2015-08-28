@@ -1,45 +1,45 @@
 ﻿/* главный контейнер */
-.main-content {
 
-}
 .container {
-	@include clearfix();
-	overflow: hidden;
-	position: relative;
-	margin: 60px auto;
-	width: 960px;
+  @include clearfix();
+  //overflow: hidden;
+  //position: relative;
+  //margin: 60px auto 20px;
+  //width: 960px;
+  display: inline-block;
+  vertical-align: middle;
 }
 
 .generator {
-	float: left;
-	background: $bg-generator;
-	width: 700px;
-	height: 670px;
-	padding: 25px;
-		&__title {
-			font-size: 36px;
-			font-family: "SegoeUILight";
-			color: white;
-			margin-bottom: 25px;
-		}
-		&__img-wrap {
-			position: relative;
-			background: url(../img/bg-mini.png) repeat;
-			width: 650px;
-			height: 537px;
-			// временно стили для двух изображений внутри обертки
-			img {
-				position: absolute;
-				top: 0;
-				left: 0;
-				max-width: 100%;
-    		max-height: 100%;
-			}
-		}
+  float: left;
+  background: $bg-generator;
+  width: 700px;
+  height: 670px;
+  &__title {
+    font-size: 36px;
+    font-family: "SegoeUILight";
+    color: white;
+    margin: 4px 0 56px 23px;
+  }
+  &__img-wrap {
+    position: relative;
+    background: url(../img/bg-mini.png) repeat;
+    width: 650px;
+    height: 537px;
+    margin: 0 auto;
+    // временные стили для двух изображений внутри обертки
+    img {
+      position: absolute;
+      top: 0;
+      left: 0;
+      max-width: 100%;
+      max-height: 100%;
+    }
+  }
 }
 .settings {
-	float: right;
-	background: $bg-settings;
-	width: 260px;
-	height: 670px;
+  float: right;
+  background: $bg-settings;
+  width: 260px;
+  height: 670px;
 }
