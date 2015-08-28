@@ -178,7 +178,8 @@ body {
   line-height: 21px;
   cursor: pointer;
   height: 27px;
-  position: relative; }
+  position: relative;
+  box-sizing: border-box; }
   .settings__input:after {
     content: ' ';
     cursor: pointer;

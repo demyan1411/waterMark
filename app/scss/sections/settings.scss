@@ -32,6 +32,7 @@
 			cursor: pointer;
 			height: 27px;
 			position: relative;
+			box-sizing: border-box;
 			&:after {
 				content: ' ';
 				cursor: pointer;
