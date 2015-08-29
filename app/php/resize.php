@@ -1,42 +1,59 @@
 <?php
 use PHPImageWorkshop\ImageWorkshop;
-require_once('lib/PHPImageWorkshop/ImageWorkshop.php'); // Be sure of the path to the class
+require_once('lib/PHPImageWorkshop/ImageWorkshop.php');
 
 // Максимальный размер картинки в px
 $WidthMax = 650;
 $HeightMax = 537;
 
-// путь к загружаемым картинкам
-$img_path = "/../uploads/";
-
 //Входные параметры
-$img_main = $_POST['imgmain'];
-$img_wmark = $_POST['imgwmark'];
+$img_main = $_GET['imgmain'];
+$img_wmark = $_GET['imgwmark'];
 
-// подключаем картинку
-$mainLayer = ImageWorkshop::initFromPath(__DIR__.'/../uploads/2.jpg');
+// сохранять пропорции картинки?
+$conserveProportion = true;
 
-// получаем размеры картинки
-$mainWidth = $mainLayer->getWidth();
-$mainHeight = $mainLayer->getHeight();
+// путь к загружаемым картинкам
+$img_path = __DIR__.'/../uploads/';
+// подключаем картинки
+// $layer = ImageWorkshop::initFromPath($_FILES['image']['tmp_name']); - так подключаем из формы
+$mainLayer = ImageWorkshop::initFromPath($img_path .$img_main);
+$wmarkLayer = ImageWorkshop::initFromPath($img_path .$img_wmark);
 
-if ($mainWidth > $mainHeight && $mainWidth > $WidthMax) {
-
-	// ресайз по ширине
-	$conserveProportion = true;
-	$mainLayer->resizeInPixel($WidthMax, null, $conserveProportion);
-
-	} elseif ( $mainHeight > $HeightMax ) {
-		// ресайз по высоте
-		$conserveProportion = true;
-		$mainLayer->resizeInPixel(null, $HeightMax, $conserveProportion);
-}
-
-$image = $mainLayer->getResult();
-
-header('Content-type: image/jpeg');
-header('Content-Disposition: filename="butterfly.jpg"');
-imagejpeg($image, null, 95); // We choose to show a JPEG (quality of 95%)
+resizeToCanvas($mainLayer);
+resizeToCanvas($wmarkLayer);
+showImage($mainLayer);
+// showImage($wmarkLayer);
 exit;
 
+
+// ресайз картинки, если она больше канваса
+function resizeToCanvas($imgLayer)
+{
+	global $WidthMax, $HeightMax, $conserveProportion;
+	// получаем размеры картинки
+	$imgWidth = $imgLayer->getWidth();
+	$imgHeight = $imgLayer->getHeight();
+
+	if ($imgWidth > $imgHeight && $imgWidth > $WidthMax) {
+
+		// ресайз по ширине
+		$imgLayer->resizeInPixel($WidthMax, null, $conserveProportion);
+
+		} elseif ( $imgHeight > $HeightMax ) {
+			// ресайз по высоте
+			$imgLayer->resizeInPixel(null, $HeightMax, $conserveProportion);
+	}
+
+	return $imgLayer;
+}
+
+// показать результат (для теста)
+function showImage($imgLayer)
+{
+	$image = $imgLayer->getResult("ffffff");
+	header('Content-type: image/png');
+	imagepng($image, null, 8);
+	return true;
+}
 ?>
