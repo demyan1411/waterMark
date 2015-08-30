@@ -1,23 +1,22 @@
-.js-container {
+// .js-container {
 
-  box-sizing:border-box;
+//   box-sizing:border-box;
 
-  position: absolute;
-  overflow: hidden;
-  display: block;
-  top: 50%;
-  left: 50%;
-  -webkit-transform: translate(-50%, -50%);
-  transform: translate(-50%, -50%);
-}
-.img {
+//   position: absolute;
+//   overflow: hidden;
+//   display: block;
+//   top: 50%;
+//   left: 50%;
+//   -webkit-transform: translate(-50%, -50%);
+//   transform: translate(-50%, -50%);
+// }
+.main-img {
     position: relative;
     top: 50%;
     left: 50%;
     -webkit-transform: translate(-50%, -50%);
     transform: translate(-50%, -50%);
-    max-width: 100%;
-    max-height: 100%;
+    overflow: hidden;
 }
 
 .location {
@@ -90,13 +89,14 @@
 }
 .radio__label {
   width: 34px;
-  height: 34px;
+  height: 36px;
   box-sizing: border-box;
   background: #dbe1e8;
   border: 1px solid #9eb2c0;
   border-right: none;
   margin-left: -1px;
-  margin-top: -1px;
+  margin-top: -2px;
+  margin-right: 0;
   float: left;
   cursor: pointer;
   -webkit-transition: all linear .3s;

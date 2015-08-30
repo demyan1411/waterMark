@@ -52,11 +52,21 @@
 
 
 //////////// plugin for drag and coordinates
-
+var objPosArray = [
+      'top-left',
+      'top-middle',
+      'top-right',
+      'middle-left',
+      'middle-middle',
+      'middle-right',
+      'bottom-left',
+      'bottom-middle',
+      'bottom-right'
+    ];
 $.fn.draga = function(options) {
-
+  console.log('qwe');
  	options = {
- 		container: options.container || '.js-container',
+ 		container: options.container || '.main-img',
     arrows: options.arrows || false,
     radio: options.radio || false
  	}
@@ -80,45 +90,45 @@ $.fn.draga = function(options) {
  		elemMiddlePositonWidth = (containerWidth / 2) - (elemWidth / 2),
  		elemMiddlePositonHeight = (containerHeight / 2) - (elemHeight / 2);
 
+
     var objPos = {
-  		'top-left': {
+      'top-left': {
         'left': 0,
         'top': 0
       },
-  		'top-middle': {
+      'top-middle': {
         'left': elemMiddlePositonWidth,
         'top': 0
       },
-  		'top-right': {
+      'top-right': {
         'left': elemRightPosition,
         'top': 0
       },
-  		'middle-left': {
+      'middle-left': {
         'left': 0,
         'top': elemMiddlePositonHeight
       },
-  		'middle-middle': {
+      'middle-middle': {
         'left': elemMiddlePositonWidth,
         'top': elemMiddlePositonHeight
       },
-  		'middle-right': {
+      'middle-right': {
         'left': elemRightPosition,
         'top': elemMiddlePositonHeight
       },
-  		'bottom-left': {
+      'bottom-left': {
         'left': 0,
         'top': elemBottomPosition
       },
-  		'bottom-middle': {
+      'bottom-middle': {
         'left': elemMiddlePositonWidth,
         'top': elemBottomPosition
       },
-  		'bottom-right': {
+      'bottom-right': {
         'left': elemRightPosition,
         'top': elemBottomPosition
       }
-  	};
-
+    };
 
 
 // method for create 9 radio buttons for change coordinates
@@ -130,22 +140,15 @@ $.fn.draga = function(options) {
       }
     },
     _setUpListeners = function() {
-      $('.location').prepend('<div class="radio"></div>')
-
-      _addInputs();
       _clickInput();
     },
-    _addInputs = function() {
-      for(var key in objPos) {
-        var input = '<input type="radio" id="' + key + '" name="radio" class="radio_button" data-pos="' + key + '"><label class="radio__label" for="' + key + '"></label>'
-    			$('.radio').append(input);
-      }
-    },
+
     _clickInput = function() {
       $('[data-pos]').on('click', function() {
         $('[type=radio]').removeAttr("checked");
         $(this).attr("checked", "checked");
      		var position = $(this).data('pos');
+
 
         posLeft = objPos[position].left,
         posTop = objPos[position].top;
@@ -280,27 +283,27 @@ $.fn.draga = function(options) {
               posLeft,
               posTop;
 
-          $('.btn').on('click', function() {
-            cont = false;
-            $('.draggable').draggable({
-              containment: cont
-            });
-            elem.addClass('repeat');
-          });
+          // $('.btn').on('click', function() {
+          //   cont = false;
+          //   $('.draggable').draggable({
+          //     containment: cont
+          //   });
+          //   elem.addClass('repeat');
+          // });
 
-          $('.btn2').on('click', function() {
-            cont = '.js-container';
-            $('.draggable').draggable({
-              containment: cont
-            });
-            elem.removeClass('repeat')
-                .css({
-                  'top': 0,
-                  'left': 0
-                });
-            $('.posX').text(0);
-            $('.posY').text(0);
-          });
+          // $('.btn2').on('click', function() {
+          //   cont = '.js-container';
+          //   $('.draggable').draggable({
+          //     containment: cont
+          //   });
+          //   elem.removeClass('repeat')
+          //       .css({
+          //         'top': 0,
+          //         'left': 0
+          //       });
+          //   $('.posX').text(0);
+          //   $('.posY').text(0);
+          // });
 
           $('.draggable').draggable({
 
@@ -320,7 +323,7 @@ $.fn.draga = function(options) {
               addRed(posLeft, posTop);
 
         	  },
-            containment: '.js-container'
+            containment: options.container
 
          	});
         }
@@ -343,4 +346,29 @@ $.fn.draga = function(options) {
 
 
 }
+var inputs = (function() {
+
+    var start = function() {
+        _setUpListeners();
+      },
+      _setUpListeners = function() {
+        _addInputs();
+      },
+      _addInputs = function() {
+        $('.location').prepend('<div class="radio"></div>');
+
+        for( var i = 0; i < 9; i++) {
+
+          var input = '<input type="radio" id="' + objPosArray[i] + '" name="radio" class="radio_button" data-pos="' + objPosArray[i] + '"><label class="radio__label" for="' + objPosArray[i] + '"></label>'
+            $('.radio').append(input);
+        }
+      }
+
+    return {
+          init: start()
+    }
+
+  }());
+
+
 

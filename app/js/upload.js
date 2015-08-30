@@ -55,7 +55,17 @@ $(function () {
             if (answer.status === 'OK') {
                 // изменить url картинки для элемента, который указан в атрибуте 'data-img'
                 // размеры картинки: answer.width, answer.height
+
                 $(answer.dataimg).attr("src", answer.url);
+
+                $(answer.dataimg).css({
+                    'background': 'url(' + answer.url + ') no-repeat 0 0',
+                    'width': answer.width,
+                    'height': answer.height
+                });
+
+
+
                 // изменить текст фэйкового инпута на имя сохраненного файла
                 $(answer.datafakeinput).text(answer.filename);
             };
