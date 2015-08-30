@@ -41,21 +41,25 @@ else if ($_FILES[0]["size"] > $maxSize) {
 else if (!move_uploaded_file($tmp_file, $target_file)) {
     $answer['status'] = 'Error';
     $answer['text'] = 'Ошибка: не удалось сохранить файл';
+} else {
+    // пробуем уменьшить изображение к размерам нашего контейнера
+    $newSize = resize($target_file, $maxWidth, $maxHeight);
+    if (!$newSize) {
+        $answer['status'] = 'Error';
+        $answer['text'] = 'Ошибка: не удалось обработать и уменьшить изображение';
+    }
+    // все удачно завершилось, сформировать ответ сервера
+    else {
+        $answer['status'] = 'OK';
+        $answer['text'] = 'Файл сохранен: ' . $target_url . ' ('. $newSize['width'] . ' x ' . $newSize['height'] .')';
+        $answer['url'] = $target_url;
+        $answer['filename'] = $filename;
+        $answer['dataimg'] = $_POST['dataimg'];
+        $answer['datafakeinput'] = $_POST['datafakeinput'];
+        $answer['width'] = $newSize['width'];
+        $answer['height'] = $newSize['height'];
+    };
 }
-// пробуем уменьшить изображение к размерам нашего контейнера
-else if (!resize($target_file, $maxWidth, $maxHeight)) {
-    $answer['status'] = 'Error';
-    $answer['text'] = 'Ошибка: не удалось обработать и уменьшить изображение';
-}
-// все удачно завершилось, сформировать ответ сервера
-else {
-    $answer['status'] = 'OK';
-    $answer['text'] = 'Файл сохранен: ' . $target_url;
-    $answer['url'] = $target_url;
-    $answer['filename'] = $filename;
-    $answer['dataimg'] = $_POST['dataimg'];
-    $answer['datafakeinput'] = $_POST['datafakeinput'];
-};
 
 header("Content-Type: application/json");
 echo json_encode($answer);
