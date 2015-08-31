@@ -73,17 +73,9 @@ $.fn.draga = function(options) {
     posX,
     posY;
 
-		// var containerWidth = $(options.container).width(),
-		// 		containerHeight = $(options.container).height(),
-		//
-		// 		elemRightPosition = containerWidth - elemWidth,
-		// 		elemBottomPosition = containerHeight - elemHeight,
-		//
-		// 		elemMiddlePositonWidth = (containerWidth / 2) - (elemWidth / 2),
-		// 		elemMiddlePositonHeight = (containerHeight / 2) - (elemHeight / 2);
 
 
-		if(options.startSize) {
+
 			var containerWidth = $(options.container).width(),
 	 		containerHeight = $(options.container).height(),
 
@@ -92,7 +84,7 @@ $.fn.draga = function(options) {
 
 			elemMiddlePositonWidth = (containerWidth / 2) - (elemWidth / 2),
 			elemMiddlePositonHeight = (containerHeight / 2) - (elemHeight / 2);
-		}
+
 		//console.log(containerWidth);
 
     var objPos = {
