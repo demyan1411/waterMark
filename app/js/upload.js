@@ -56,15 +56,30 @@ $(function () {
                 // изменить url картинки для элемента, который указан в атрибуте 'data-img'
                 // размеры картинки: answer.width, answer.height
 
+                $('.main-img-container').append('<img id="' + answer.dataimg.substr(1) +'">');
+
                 $(answer.dataimg).attr("src", answer.url);
 
-                $(answer.dataimg).css({
-                    'background': 'url(' + answer.url + ') no-repeat 0 0',
-                    'width': answer.width,
-                    'height': answer.height
+                $('#picture').on('load', function() {
+                  $(this).addClass('main-img');
+
+                  $('.main-img-container').css({
+                      'width': answer.width,
+                      'height': answer.height
+                  });
+
+                  if($('#watermark').hasClass('radio_position')) {
+                    startDraga(true, true);
+                  };
+
                 });
 
-
+                $('#watermark').on('load', function() {
+                  $(this).addClass('opacity_block')
+                         .addClass('draggable')
+                         .addClass('radio_position');
+                  startDraga(true, true);
+                });
 
                 // изменить текст фэйкового инпута на имя сохраненного файла
                 $(answer.datafakeinput).text(answer.filename);
@@ -72,5 +87,7 @@ $(function () {
             btn.removeAttr('disabled'); // разблокировать кнопку
         });
     });
+
+
 
 });

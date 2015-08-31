@@ -7,8 +7,9 @@ block content
 			section.generator
 				.generator__title Генератор водяных знаков
 				.generator__img-wrap.cont
-					#picture.main-img
-						img#watermark.opacity_block.draggable.radio_position
+					.main-img-container
+						//- img#picture.main-img
+						//- img#watermark.opacity_block.draggable.radio_position
 			section.settings
 					.settings__title Настройки
 					form(action='' , method='get')
@@ -38,11 +39,3 @@ block content
 						.settings__btn.line-top
 							button.settings__btn-reset.form__btn(type='reset') Сброс
 							button.settings__btn-download.form__btn(type='submit') Скачать
-
-
-
-
-
-
-
-

@@ -52,23 +52,15 @@
 
 
 //////////// plugin for drag and coordinates
-var objPosArray = [
-      'top-left',
-      'top-middle',
-      'top-right',
-      'middle-left',
-      'middle-middle',
-      'middle-right',
-      'bottom-left',
-      'bottom-middle',
-      'bottom-right'
-    ];
+
+
 $.fn.draga = function(options) {
-  console.log('qwe');
+  //console.log('qwe');
  	options = {
- 		container: options.container || '.main-img',
+ 		container: options.container || '.main-img-container',
     arrows: options.arrows || false,
-    radio: options.radio || false
+		startRadio: options.startRadio || false,
+		startSize: options.startSize || false
  	}
 
  	var elem = this;
@@ -79,17 +71,29 @@ $.fn.draga = function(options) {
     posLeft = 0,
     posTop = 0,
     posX,
-    posY,
+    posY;
 
- 		containerWidth = $(options.container).width(),
- 		containerHeight = $(options.container).height(),
+		// var containerWidth = $(options.container).width(),
+		// 		containerHeight = $(options.container).height(),
+		//
+		// 		elemRightPosition = containerWidth - elemWidth,
+		// 		elemBottomPosition = containerHeight - elemHeight,
+		//
+		// 		elemMiddlePositonWidth = (containerWidth / 2) - (elemWidth / 2),
+		// 		elemMiddlePositonHeight = (containerHeight / 2) - (elemHeight / 2);
 
- 		elemRightPosition = containerWidth - elemWidth,
- 		elemBottomPosition = containerHeight - elemHeight,
 
- 		elemMiddlePositonWidth = (containerWidth / 2) - (elemWidth / 2),
- 		elemMiddlePositonHeight = (containerHeight / 2) - (elemHeight / 2);
+		if(options.startSize) {
+			var containerWidth = $(options.container).width(),
+	 		containerHeight = $(options.container).height(),
 
+			elemRightPosition = containerWidth - elemWidth,
+			elemBottomPosition = containerHeight - elemHeight,
+
+			elemMiddlePositonWidth = (containerWidth / 2) - (elemWidth / 2),
+			elemMiddlePositonHeight = (containerHeight / 2) - (elemHeight / 2);
+		}
+		//console.log(containerWidth);
 
     var objPos = {
       'top-left': {
@@ -135,12 +139,26 @@ $.fn.draga = function(options) {
   var buttons = (function() {
 
     var start = function() {
-      if(options.radio) {
+
         _setUpListeners();
-      }
+
     },
     _setUpListeners = function() {
-      _clickInput();
+			elem.css(objPos['top-left']);
+			$('[type=radio]').removeAttr("checked");
+
+			if(options.startRadio) {
+
+				$('[type=radio]').addClass('click');
+				_clickInput();
+			};
+
+			$('[data-pos=top-left]').attr("checked", "checked");
+
+			$('.posX').text('0');
+			$('.posY').text('0');
+
+
     },
 
     _clickInput = function() {
@@ -152,6 +170,7 @@ $.fn.draga = function(options) {
 
         posLeft = objPos[position].left,
         posTop = objPos[position].top;
+
 
       	elem.css(objPos[position]);
 
@@ -182,12 +201,15 @@ $.fn.draga = function(options) {
     _setUpListeners = function() {
       $('.coordinates').css({'display': 'inline-block'});
       _addArrows();
-      $('.coordinates__input_loc')
-          .on('click', function() {
-            arrow = $(this);
-            _moveElem();
-          });
-      _mousePress();
+
+			if(options.startRadio) {
+	      $('.coordinates__input_loc')
+	          .on('click', function() {
+	            arrow = $(this);
+	            _moveElem();
+	          });
+	      _mousePress();
+			}
     },
     _addArrows = function() {
       $('.coordinates__block').append(coordinatesButtons);
@@ -201,7 +223,7 @@ $.fn.draga = function(options) {
           elemCssLeftNumber,
           elemCssTop,
           elemCssTopNumber;
-      console.log(elemRightPosition);
+      //console.log(elemRightPosition);
       if(arrow.hasClass(up)) {
         _move(1);
       } else {
@@ -342,12 +364,20 @@ $.fn.draga = function(options) {
       }
     }
 
-
-
-
 }
-var inputs = (function() {
 
+var inputs = (function() {
+	var objPosArray = [
+	      'top-left',
+	      'top-middle',
+	      'top-right',
+	      'middle-left',
+	      'middle-middle',
+	      'middle-right',
+	      'bottom-left',
+	      'bottom-middle',
+	      'bottom-right'
+	    ];
     var start = function() {
         _setUpListeners();
       },
@@ -369,6 +399,3 @@ var inputs = (function() {
     }
 
   }());
-
-
-
