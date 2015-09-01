@@ -1,12 +1,12 @@
 ﻿/* главный контейнер */
 
->>>>>>> master
+
 .container {
 	@include clearfix();
 	//overflow: hidden;
 	//position: relative;
 	//margin: 60px auto 20px;
-	//width: 960px;
+	min-width: 960px;
 	display: inline-block;
 	vertical-align: middle;
 }

@@ -9,47 +9,83 @@
 			font-size: 20px;
 				&-link {
 					display: block;
-					min-width: 43px;
-					padding: 4px 3px;
+					//min-width: 43px;
+					padding: 4px 2px;
 					color:$text-icons;
 					margin-bottom: 1px;
 					background:$bg-icons;
 					text-align: center;
 				}
 		}
+}
+.icons {
 		&__share {
-			background: $bg-icons url(../img/sprite.png) no-repeat;
+
 			&-link {
-			text-indent: -9999px;
 			display: block;
-			min-width: 43px;
-			background:$bg-icons;
+			width: 43px;
+			height: 41px;
+			background: $bg-icons url(../img/sprite.png) no-repeat;
+			text-indent: -9999px;
 			}
 		}
-
 }
 
 .icons__share-link {
 		&--like {
-			width: 26px;
-			height: 32px;
-			background-position: -5px -42px;
+			position: absolute;
+			top:0px;
+			left: 43px;
+			background-position: -12px -157px;
 			text-indent: -9999px;
+			&:hover {
+				background-position: -12px -209px;
+			}
 		}
 }
-.icons__share-item--like {
-	position: absolute;
-	left:0px;
-	&:hover .icons__share-item--socials {
-		position: absolute;
-		left: 43px;
-		}
+.icons__share-link--like {
+		&:hover {
+			left: 43px;
+			//position: absolute;
+			top:0;
+			}
 }
 .icons__share-item--socials {
+	display: block;
+}
+.icons__share {
 	position: absolute;
-	left:-43px;
+	left:0;
 	&:hover {
-			position: absolute;
-		left: 0px;
+		//position: absolute;
+		//left: 0px;
+	}
+}
+.icons__share-link {
+		&--fb {
+		background-position: -7px -342px;
+			&:hover {
+			background-position: -7px -295px;
+			}
+		}
+		&--tw {
+		background-position: -13px -109px;
+			&:hover {
+			background-position: -13px -67px;
+			}
+		}
+		&--vk {
+		background-position: -15px -26px;
+			&:hover {
+			background-position: -15px 12px;
+			}
+		}
+}
+.icons__socials{
+	position: absolute;
+	left: -44px;
+	@include transition(left linear .5s);
+	&:hover {
+		left:0;
 	}
 }

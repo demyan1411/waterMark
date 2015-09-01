@@ -37,14 +37,15 @@ body {
 	display: table;
 }
 .main-content {
-	padding-bottom: 65px;
+
+	padding: 60px 0px 65px 0px;
 	position: relative;
 	display: table-cell;
 	vertical-align: middle;
 }
 .main-content__wrapper {
-    max-width: 960px;
-    margin: 0 auto;
+	max-width: 960px;
+	margin: 0 auto;
 
 }
 
