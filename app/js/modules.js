@@ -65,6 +65,7 @@ $.fn.draga = function(options) {
 		  posX,
 		  posY;
 
+
  // если была загружена основная картинка
 	if(input === '#picture') {
 		containerWidth = options.containerWidth;
@@ -89,13 +90,14 @@ $.fn.draga = function(options) {
 
 
 
-	var elemRightPosition = containerWidth - elemWidth,
-			elemBottomPosition = containerHeight - elemHeight,
 
-			elemMiddlePositonWidth = (containerWidth / 2) - (elemWidth / 2),
-			elemMiddlePositonHeight = (containerHeight / 2) - (elemHeight / 2);
+	  var elemRightPosition = containerWidth - elemWidth,
+		    elemBottomPosition = containerHeight - elemHeight,
 
-	console.log(elemRightPosition);
+			  elemMiddlePositonWidth = (containerWidth / 2) - (elemWidth / 2),
+			  elemMiddlePositonHeight = (containerHeight / 2) - (elemHeight / 2);
+
+
 
 	var objPos = {
     'top-left': {
@@ -203,39 +205,49 @@ $.fn.draga = function(options) {
 
       $('.coordinates__input_loc')
           .on('click', function() {
+
         arrow = $(this);
         _moveElem();
       });
       _mousePress();
 			_moveByText();
 
+
     },
 		_moveByText = function() {
 
-			$('.coordinates__input').on('focus', function() {
-				$(this).val('');
-			}).on('keyup', function() {
+			// $('.coordinates__input').on('focus', function() {
+			// 	$(this).val('');
+      //
+			// });
+      $('.coordinates__input').on('keyup', function() {
+
 				$this = $(this);
 				//$this.val('');
-				thisText = $this.val();
-				var regExp = /[0-9]/,
-					isInSize = regExp.test($this.val());
-				if(!isInSize){
-					$this.val('');
-				} else {
-					if($this.hasClass('posX') && $this.val() > elemRightPosition) {
-						console.log(elemRightPosition);
+				//thisText = parseInt($this.val(), 10);
+
+				// var regExp = /[0-9]/,
+				// 	isInSize = regExp.test($this.val());
+				// if(!isInSize){
+				// 	$this.val('');
+				// } else {
+					if($this.hasClass('posX') && $('.posX').val() > elemRightPosition) {
+
+
 					 $('.posX').val(elemRightPosition);
-					} else if($this.hasClass('posY') && $this.val() > elemBottomPosition) {
+
+					} else if($this.hasClass('posY') && $('.posY').val() > elemBottomPosition) {
+
 						$('.posY').val(elemBottomPosition);
 					}
-				}
+
 
 				elem.css({
 					'left': $('.posX').val() + 'px',
 					'top': $('.posY').val() + 'px'
 				});
 				_addRed();
+
 			})
 			.on('blur', function() {
 				if($(this).val() === '') {
@@ -249,6 +261,7 @@ $.fn.draga = function(options) {
 				}
 			});
 		},
+
     _moveElem = function() {
 
       var up = 'coordinates__input_loc-up',
@@ -289,9 +302,11 @@ $.fn.draga = function(options) {
     },
 
     _mousePress = function() {
+
       var mousedown = false;
       var mousedown_timer = '';
       $('.coordinates__input_loc').mousedown(function() {
+
           arrow = $(this);
           mousedown = true;
           mousedown_timer = setInterval(function() {
@@ -399,10 +414,11 @@ $.fn.draga = function(options) {
     }
   }
 
-	buttons.init();
 
-	drag.init();
-	arrows.init();
+  	buttons.init();
+
+  	drag.init();
+  	arrows.init();
 
 }
 
