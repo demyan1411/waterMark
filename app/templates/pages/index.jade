@@ -8,8 +8,8 @@ block content
 				.generator__title Генератор водяных знаков
 				.generator__img-wrap.cont
 					.main-img-container
-						//- img#picture.main-img
-						//- img#watermark.opacity_block.draggable.radio_position
+						img#picture.main-img
+						img#watermark.opacity_block.draggable.radio_position
 			section.settings
 					.settings__title Настройки
 					form(action='' , method='get')
@@ -27,9 +27,9 @@ block content
 							.location
 								.coordinates
 									.coordinates__block.coordinates__blockX
-										.coordinates__input.posX 0
+										input.coordinates__input.posX(value="0")
 									.coordinates__block.coordinates__blockY
-										.coordinates__input.posY 0
+										input.coordinates__input.posY(value="0")
 
 						.settings__opacity.line-top
 							.settings__opacity-title Прозрачность

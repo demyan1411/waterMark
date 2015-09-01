@@ -37,7 +37,7 @@
 /* fonts end */
 /* --------- sections --------- */
 .main-img-container {
-  position: relative;
+  position: absolute;
   top: 50%;
   left: 50%;
   -webkit-transform: translate(-50%, -50%);
@@ -56,7 +56,8 @@
 
 .location {
   position: relative;
-  height: 100px; }
+  height: 100px;
+  opacity: .5; }
 
 .radio {
   width: 101px;
@@ -75,7 +76,7 @@
   margin-left: 10px;
   position: relative;
   height: inherit;
-  display: none; }
+  display: inline-block; }
 
 .coordinates__input {
   display: block;
@@ -85,7 +86,8 @@
   border-radius: 3px;
   box-sizing: border-box;
   text-align: center;
-  line-height: 45px; }
+  line-height: 45px;
+  background: #dbe1e8; }
 
 .coordinates__block {
   position: absolute; }
@@ -113,7 +115,19 @@
 .coordinates__input_loc-bottom {
   bottom: 5px;
   -webkit-transform: rotate(180deg);
-  transform: rotate(180deg); }
+  transform: rotate(180deg);
+  display: block;
+  border: none;
+  outline: none; }
+
+.noselect {
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  -o-user-select: none;
+  user-select: none; }
 
 .radio_button {
   display: none; }

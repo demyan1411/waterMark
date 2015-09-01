@@ -1,15 +1,8 @@
-//******* ie8 preventDefault
-	function ie8SafePreventEvent(e) {
-	    if (e.preventDefault) {
-	        e.preventDefault()
-	    } else {
-	        e.stop()
-	    };
 
-	    e.returnValue = false;
-	    e.stopPropagation();
-	}
-//Tooltips && Validator
+var containerWidth,
+		containerHeight,
+		elemWidth,
+		elemHeight;
 
 // module for opacity and ui-slider
  	var opacity = (function() {
@@ -57,99 +50,108 @@
 $.fn.draga = function(options) {
   //console.log('qwe');
  	options = {
- 		container: options.container || '.main-img-container',
-    arrows: options.arrows || false,
-		startRadio: options.startRadio || false,
-		startSize: options.startSize || false
+		container: options.container || '.main-img-container',
+		containerWidth: options.containerWidth,
+		containerHeight: options.containerHeight,
+		inputPush: options.inputPush
  	}
 
- 	var elem = this;
 
 
- 	var elemWidth = elem.width(),
- 		elemHeight = elem.height(),
-    posLeft = 0,
-    posTop = 0,
-    posX,
-    posY;
+ 	var elem = this,
+			input = options.inputPush,
+		 	posLeft = 0,
+		  posTop = 0,
+		  posX,
+		  posY;
 
 
+	if(input === '#picture') {
+		containerWidth = options.containerWidth;
+		containerHeight = options.containerHeight;
 
+		$(options.container).css({
+			'width': containerWidth + 'px',
+			'height': containerHeight + 'px'
+		});
+	}
 
-			var containerWidth = $(options.container).width(),
-	 		containerHeight = $(options.container).height(),
+	if(input === '#watermark') {
+		elemWidth = options.containerWidth;
+	 	elemHeight = options.containerHeight;
 
-			elemRightPosition = containerWidth - elemWidth,
+		$('.location').css({
+			'opacity': 1
+		});
+
+		$('#watermark').addClass('buttons');
+	}
+
+	var elemRightPosition = containerWidth - elemWidth,
 			elemBottomPosition = containerHeight - elemHeight,
 
 			elemMiddlePositonWidth = (containerWidth / 2) - (elemWidth / 2),
 			elemMiddlePositonHeight = (containerHeight / 2) - (elemHeight / 2);
 
-		//console.log(containerWidth);
+	var objPos = {
+    'top-left': {
+      'left': 0,
+      'top': 0
+    },
+    'top-middle': {
+      'left': elemMiddlePositonWidth,
+      'top': 0
+    },
+    'top-right': {
+      'left': elemRightPosition,
+      'top': 0
+    },
+    'middle-left': {
+      'left': 0,
+      'top': elemMiddlePositonHeight
+    },
+    'middle-middle': {
+      'left': elemMiddlePositonWidth,
+      'top': elemMiddlePositonHeight
+    },
+    'middle-right': {
+      'left': elemRightPosition,
+      'top': elemMiddlePositonHeight
+    },
+    'bottom-left': {
+      'left': 0,
+      'top': elemBottomPosition
+    },
+    'bottom-middle': {
+      'left': elemMiddlePositonWidth,
+      'top': elemBottomPosition
+    },
+    'bottom-right': {
+      'left': elemRightPosition,
+      'top': elemBottomPosition
+    }
+  };
 
-    var objPos = {
-      'top-left': {
-        'left': 0,
-        'top': 0
-      },
-      'top-middle': {
-        'left': elemMiddlePositonWidth,
-        'top': 0
-      },
-      'top-right': {
-        'left': elemRightPosition,
-        'top': 0
-      },
-      'middle-left': {
-        'left': 0,
-        'top': elemMiddlePositonHeight
-      },
-      'middle-middle': {
-        'left': elemMiddlePositonWidth,
-        'top': elemMiddlePositonHeight
-      },
-      'middle-right': {
-        'left': elemRightPosition,
-        'top': elemMiddlePositonHeight
-      },
-      'bottom-left': {
-        'left': 0,
-        'top': elemBottomPosition
-      },
-      'bottom-middle': {
-        'left': elemMiddlePositonWidth,
-        'top': elemBottomPosition
-      },
-      'bottom-right': {
-        'left': elemRightPosition,
-        'top': elemBottomPosition
-      }
-    };
-
-
-// method for create 9 radio buttons for change coordinates
+// method for 9 radio buttons for change coordinates
   var buttons = (function() {
 
     var start = function() {
-
-        _setUpListeners();
+			if($('#watermark').hasClass('buttons')) {
+      	_setUpListeners();
+			}
 
     },
     _setUpListeners = function() {
 			elem.css(objPos['top-left']);
-			$('[type=radio]').removeAttr("checked");
+			$('[type=radio]').removeAttr("checked")
+											 .addClass('click');
 
-			if(options.startRadio) {
-
-				$('[type=radio]').addClass('click');
-				_clickInput();
-			};
+			_clickInput();
 
 			$('[data-pos=top-left]').attr("checked", "checked");
 
-			$('.posX').text('0');
-			$('.posY').text('0');
-
+			$('.posX').val('0');
+			$('.posY').val('0');
 
     },
 
@@ -157,6 +159,7 @@ $.fn.draga = function(options) {
       $('[data-pos]').on('click', function() {
         $('[type=radio]').removeAttr("checked");
         $(this).attr("checked", "checked");
+
      		var position = $(this).data('pos');
 
 
@@ -166,8 +169,8 @@ $.fn.draga = function(options) {
 
       	elem.css(objPos[position]);
 
-      	$('.posX').text(posLeft);
-    	  $('.posY').text(posTop);
+      	$('.posX').val(posLeft);
+    	  $('.posY').val(posTop);
 
      	});
     }
@@ -178,45 +181,51 @@ $.fn.draga = function(options) {
 
   }());
 
-
 // method for arrows whitch move elem
-
   var arrows = (function() {
-    var coordinatesButtons = '<div class="noselect coordinates__input_loc coordinates__input_loc-up"></div><div class="noselect coordinates__input_loc coordinates__input_loc-bottom"></div>';
+
     var arrow;
 
     var start = function() {
-      if(options.arrows) {
+			if($('#watermark').hasClass('buttons')) {
         _setUpListeners();
-      }
+			}
+
+
     },
     _setUpListeners = function() {
-      $('.coordinates').css({'display': 'inline-block'});
-      _addArrows();
 
-			if(options.startRadio) {
-	      $('.coordinates__input_loc')
-	          .on('click', function() {
-	            arrow = $(this);
-	            _moveElem();
-	          });
-	      _mousePress();
-			}
+
+      $('.coordinates__input_loc')
+          .on('click', function() {
+        arrow = $(this);
+        _moveElem();
+      });
+      _mousePress();
+
+			$('.coordinates__input').on('change', function(e) {
+				e.preventDefault();
+				console.log('qwe');
+				elem.css({
+					'left': $('.posX').val() + 'px',
+					'top': $('.posY').val() + 'px'
+				});
+			});
     },
-    _addArrows = function() {
-      $('.coordinates__block').append(coordinatesButtons);
-    },
+
     _moveElem = function() {
 
       var up = 'coordinates__input_loc-up',
           inputText = arrow.siblings('.coordinates__input'),
-          thisText = parseInt(inputText.text(), 10),
+          thisText = parseInt(inputText.val(), 10),
           elemCssLeft,
           elemCssLeftNumber,
           elemCssTop,
           elemCssTopNumber;
       //console.log(elemRightPosition);
-      if(arrow.hasClass(up)) {
+
+
+			if(arrow.hasClass(up)) {
         _move(1);
       } else {
         if(thisText < 1) { thisText = 1; }
@@ -226,13 +235,13 @@ $.fn.draga = function(options) {
       function _move(one) {
         if(inputText.hasClass('posX')){
           if(thisText > elemRightPosition - 1) { thisText = elemRightPosition - 1; }
-          inputText.text(thisText + one);
+          inputText.val(thisText + one);
           elem.css({
             'left': thisText + one
           });
         } else {
           if(thisText > elemBottomPosition - 1) { thisText = elemBottomPosition - 1; }
-          inputText.text(thisText + one);
+          inputText.val(thisText + one);
           elem.css({
             'top': thisText + one
           });
@@ -261,7 +270,7 @@ $.fn.draga = function(options) {
               if(mousedown) {
                   _moveElem();
               }
-          }, 70);
+          }, 120);
       }).mouseup(function() {
           mousedown = false;
           clearInterval(mousedown_timer);
@@ -277,88 +286,100 @@ $.fn.draga = function(options) {
 
   }());
 
-
   // method for drag elem
+  var drag = (function() {
+
+    var start = function() {
+        _setUpListeners();
+      },
+      _setUpListeners = function() {
+        _onDrag();
+      },
+      _onDrag = function() {
+        var cont,
+            left,
+            top,
+            posLeft,
+            posTop;
+
+        // $('.btn').on('click', function() {
+        //   cont = false;
+        //   $('.draggable').draggable({
+        //     containment: cont
+        //   });
+        //   elem.addClass('repeat');
+        // });
+
+        // $('.btn2').on('click', function() {
+        //   cont = '.js-container';
+        //   $('.draggable').draggable({
+        //     containment: cont
+        //   });
+        //   elem.removeClass('repeat')
+        //       .css({
+        //         'top': 0,
+        //         'left': 0
+        //       });
+        //   $('.posX').text(0);
+        //   $('.posY').text(0);
+        // });
+
+        $('.draggable').draggable({
 
 
+       		drag: function(){
 
-    var drag = (function() {
+     				$('[type=radio]').removeAttr("checked");
 
-      var start = function() {
-          _setUpListeners();
-        },
-        _setUpListeners = function() {
-          _onDrag();
-        },
-        _onDrag = function() {
-          var cont,
-              left,
-              top,
-              posLeft,
-              posTop;
+      		 	left = $(this).css('left');
+      	    top = $(this).css('top');
+      	    posLeft = parseInt(left.slice(0, -2), 10);
+      	    posTop = parseInt(top.substring(0, top.length - 2), 10);
 
-          // $('.btn').on('click', function() {
-          //   cont = false;
-          //   $('.draggable').draggable({
-          //     containment: cont
-          //   });
-          //   elem.addClass('repeat');
-          // });
+      	    $('.posX').val(posLeft);
+      			$('.posY').val(posTop);
 
-          // $('.btn2').on('click', function() {
-          //   cont = '.js-container';
-          //   $('.draggable').draggable({
-          //     containment: cont
-          //   });
-          //   elem.removeClass('repeat')
-          //       .css({
-          //         'top': 0,
-          //         'left': 0
-          //       });
-          //   $('.posX').text(0);
-          //   $('.posY').text(0);
-          // });
+            addRed(posLeft, posTop);
 
-          $('.draggable').draggable({
+      	  },
+          containment: options.container
 
-
-         		drag: function(){
-
-       				$('[type=radio]').removeAttr("checked");
-
-        		 	left = $(this).css('left');
-        	    top = $(this).css('top');
-        	    posLeft = parseInt(left.slice(0, -2), 10);
-        	    posTop = parseInt(top.substring(0, top.length - 2), 10);
-
-        	    $('.posX').text(posLeft);
-        			$('.posY').text(posTop);
-
-              addRed(posLeft, posTop);
-
-        	  },
-            containment: options.container
-
-         	});
-        }
-
-      return {
-        init: start()
+       	});
       }
 
-    }());
+    return {
+      init: start()
+    }
 
-    function addRed(left, top) {
-      for(var key in objPos) {
-        if(left == objPos[key].left && top == objPos[key].top) {
-          $('[data-pos = ' + key + ']').attr("checked", 'checked');
-        }
+  }());
+
+  function addRed(left, top) {
+    for(var key in objPos) {
+      if(left == objPos[key].left && top == objPos[key].top) {
+        $('[data-pos = ' + key + ']').attr("checked", 'checked');
       }
     }
+  }
 
 }
 
-var inputs = (function() {
+var addArrows = (function() {
+	var coordinatesButtons = '<div class="noselect coordinates__input_loc coordinates__input_loc-up"></div><div class="noselect coordinates__input_loc coordinates__input_loc-bottom"></div>';
+
+  var start = function() {
+    _setUpListeners();
+  },
+  _setUpListeners = function() {
+		$('.coordinates__block').append(coordinatesButtons);
+  }
+
+  return {
+    init: start()
+  }
+
+}());
+
+var addInputs = (function() {
 	var objPosArray = [
 	      'top-left',
 	      'top-middle',

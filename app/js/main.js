@@ -4,18 +4,12 @@ $(document).ready(function() {
 
 	opacity.init;
 	// запуск плагина drag and coordinates
-	inputs.init;
+	addInputs.init;
 
-	startDraga(false);
-
+	addArrows.init;
+	//startDraga(false);
+	$('form').on('submit', function(e) {
+		e.preventDefault();
+	});
 
 }); // end ready
-
-function startDraga(startRadioButtons) {
-  $('.radio_position').draga({
-      container: '.main-img-container',
-      arrows: true,
-      startRadio: startRadioButtons
-
-  });
-}
