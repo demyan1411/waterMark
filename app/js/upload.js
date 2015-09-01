@@ -19,6 +19,7 @@
 
 var btn;
 
+
 // установить обработчик событий на кнопки загрузки файлов
 $('.settings__input-hide').on('change', function(event) {
     event.preventDefault();
@@ -36,6 +37,7 @@ $('.settings__input-hide').on('change', function(event) {
 
             // изменить текст фэйкового инпута на имя сохраненного файла
             $(answer.datafakeinput).text(answer.filename);
+
 
             $('.radio_position').draga({
     					container: '.main-img-container',

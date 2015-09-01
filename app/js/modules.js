@@ -35,7 +35,7 @@ var containerWidth,
 			}
 
 		return {
-	        init: start()
+	        init: start
 		}
 
 	}());
@@ -65,7 +65,7 @@ $.fn.draga = function(options) {
 		  posX,
 		  posY;
 
-
+ // если была загружена основная картинка
 	if(input === '#picture') {
 		containerWidth = options.containerWidth;
 		containerHeight = options.containerHeight;
@@ -75,7 +75,7 @@ $.fn.draga = function(options) {
 			'height': containerHeight + 'px'
 		});
 	}
-
+// если был загружен вотермарк
 	if(input === '#watermark') {
 		elemWidth = options.containerWidth;
 	 	elemHeight = options.containerHeight;
@@ -87,11 +87,15 @@ $.fn.draga = function(options) {
 		$('#watermark').addClass('buttons');
 	}
 
+
+
 	var elemRightPosition = containerWidth - elemWidth,
 			elemBottomPosition = containerHeight - elemHeight,
 
 			elemMiddlePositonWidth = (containerWidth / 2) - (elemWidth / 2),
 			elemMiddlePositonHeight = (containerHeight / 2) - (elemHeight / 2);
+
+	console.log(elemRightPosition);
 
 	var objPos = {
     'top-left': {
@@ -132,6 +136,8 @@ $.fn.draga = function(options) {
     }
   };
 
+
+
 // method for 9 radio buttons for change coordinates
   var buttons = (function() {
 
@@ -163,7 +169,7 @@ $.fn.draga = function(options) {
      		var position = $(this).data('pos');
 
 
-        posLeft = objPos[position].left,
+        posLeft = objPos[position].left;
         posTop = objPos[position].top;
 
 
@@ -176,7 +182,7 @@ $.fn.draga = function(options) {
     }
 
     return {
-      init: start()
+      init: start
     }
 
   }());
@@ -195,24 +201,54 @@ $.fn.draga = function(options) {
     },
     _setUpListeners = function() {
 
-
       $('.coordinates__input_loc')
           .on('click', function() {
         arrow = $(this);
         _moveElem();
       });
       _mousePress();
+			_moveByText();
 
-			$('.coordinates__input').on('change', function(e) {
-				e.preventDefault();
-				console.log('qwe');
+    },
+		_moveByText = function() {
+
+			$('.coordinates__input').on('focus', function() {
+				$(this).val('');
+			}).on('keyup', function() {
+				$this = $(this);
+				//$this.val('');
+				thisText = $this.val();
+				var regExp = /[0-9]/,
+					isInSize = regExp.test($this.val());
+				if(!isInSize){
+					$this.val('');
+				} else {
+					if($this.hasClass('posX') && $this.val() > elemRightPosition) {
+						console.log(elemRightPosition);
+					 $('.posX').val(elemRightPosition);
+					} else if($this.hasClass('posY') && $this.val() > elemBottomPosition) {
+						$('.posY').val(elemBottomPosition);
+					}
+				}
+
 				elem.css({
 					'left': $('.posX').val() + 'px',
 					'top': $('.posY').val() + 'px'
 				});
-			});
-    },
+				_addRed();
+			})
+			.on('blur', function() {
+				if($(this).val() === '') {
+					$(this).val('0');
 
+					elem.css({
+						'left': $('.posX').val() + 'px',
+						'top': $('.posY').val() + 'px'
+					});
+					_addRed();
+				}
+			});
+		},
     _moveElem = function() {
 
       var up = 'coordinates__input_loc-up',
@@ -248,18 +284,10 @@ $.fn.draga = function(options) {
         }
       }
 
-      elemCssLeft = elem.css('left');
-      elemCssTop = elem.css('top');
-      elemCssLeftNumber = parseInt(elemCssLeft.substring(0, elemCssLeft.length - 2), 10) || 0;
-      elemCssTopNumber = parseInt(elemCssTop.substring(0, elemCssTop.length - 2), 10) || 0;
-
-      if(posLeft !== elemCssLeftNumber || posTop !== elemCssTopNumber) {
-        $('[type=radio]').removeAttr("checked");
-      }
-
-      addRed(elemCssLeftNumber, elemCssTopNumber);
+      _addRed();
 
     },
+
     _mousePress = function() {
       var mousedown = false;
       var mousedown_timer = '';
@@ -278,10 +306,19 @@ $.fn.draga = function(options) {
           mousedown = false;
           clearInterval(mousedown_timer);
       });
-    }
+    },
+
+		_addRed = function() {
+			elemCssLeft = elem.css('left');
+			elemCssTop = elem.css('top');
+			elemCssLeftNumber = parseInt(elemCssLeft.substring(0, elemCssLeft.length - 2), 10) || 0;
+			elemCssTopNumber = parseInt(elemCssTop.substring(0, elemCssTop.length - 2), 10) || 0;
+
+			addRed(elemCssLeftNumber, elemCssTopNumber);
+		}
 
     return {
-      init: start()
+      init: start
     }
 
   }());
@@ -348,12 +385,13 @@ $.fn.draga = function(options) {
       }
 
     return {
-      init: start()
+      init: start
     }
 
   }());
 
   function addRed(left, top) {
+		$('[type=radio]').removeAttr("checked");
     for(var key in objPos) {
       if(left == objPos[key].left && top == objPos[key].top) {
         $('[data-pos = ' + key + ']').attr("checked", 'checked');
@@ -361,8 +399,14 @@ $.fn.draga = function(options) {
     }
   }
 
+	buttons.init();
+
+	drag.init();
+	arrows.init();
+
 }
 
+// добавить стрелочки к координатам
 var addArrows = (function() {
 	var coordinatesButtons = '<div class="noselect coordinates__input_loc coordinates__input_loc-up"></div><div class="noselect coordinates__input_loc coordinates__input_loc-bottom"></div>';
 
@@ -374,11 +418,12 @@ var addArrows = (function() {
   }
 
   return {
-    init: start()
+    init: start
   }
 
 }());
 
+// добавить радиокнопки
 var addInputs = (function() {
 	var objPosArray = [
 	      'top-left',
@@ -408,7 +453,7 @@ var addInputs = (function() {
       }
 
     return {
-          init: start()
+          init: start
     }
 
   }());

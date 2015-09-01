@@ -27,6 +27,7 @@
 .draggable {
   position: absolute;
   z-index: 2;
+  //transition: all linear .3s;
 }
 .location {
   position: relative;
@@ -70,6 +71,7 @@
 .coordinates__blockX {
   top: 0;
 }
+
 .coordinates__blockY {
   bottom: 0;
 }
