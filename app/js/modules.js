@@ -209,38 +209,39 @@ $.fn.draga = function(options) {
         arrow = $(this);
         _moveElem();
       });
-      _mousePress();
+      //_mousePress();
 			_moveByText();
 
 
     },
 		_moveByText = function() {
 
-			// $('.coordinates__input').on('focus', function() {
-			// 	$(this).val('');
-      //
-			// });
-      $('.coordinates__input').on('keyup', function() {
+			$('.coordinates__input').on('focus', function() {
+				$(this).val('');
 
+			})
+      .on('keyup', function() {
 				$this = $(this);
 				//$this.val('');
 				//thisText = parseInt($this.val(), 10);
 
-				// var regExp = /[0-9]/,
-				// 	isInSize = regExp.test($this.val());
-				// if(!isInSize){
-				// 	$this.val('');
-				// } else {
+				var regExp = /[0-9]/,
+					isInSize = regExp.test($this.val());
+				if(!isInSize){
+					$this.val('');
+				} else {
 					if($this.hasClass('posX') && $('.posX').val() > elemRightPosition) {
 
 
 					 $('.posX').val(elemRightPosition);
+           //$('.coordinates__input').off('keyup');
 
 					} else if($this.hasClass('posY') && $('.posY').val() > elemBottomPosition) {
 
 						$('.posY').val(elemBottomPosition);
-					}
 
+					}
+        }
 
 				elem.css({
 					'left': $('.posX').val() + 'px',
@@ -250,6 +251,7 @@ $.fn.draga = function(options) {
 
 			})
 			.on('blur', function() {
+
 				if($(this).val() === '') {
 					$(this).val('0');
 
@@ -259,6 +261,13 @@ $.fn.draga = function(options) {
 					});
 					_addRed();
 				}
+
+        if($this.hasClass('posX')) {
+          $('.posX').off('keyup');
+        } else if($this.hasClass('posY')) {
+          $('.posY').off('keyup');
+        }
+
 			});
 		},
 
