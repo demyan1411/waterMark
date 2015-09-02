@@ -84,7 +84,11 @@
 .icons__socials{
 	position: absolute;
 	left: -44px;
-	@include transition(left linear .5s);
+	-webkit-transition: left 500ms cubic-bezier(0.140, 0.050, 0.230, 0.970); 
+   	-moz-transition: left 500ms cubic-bezier(0.140, 0.050, 0.230, 0.970); 
+    -o-transition: left 500ms cubic-bezier(0.140, 0.050, 0.230, 0.970); 
+    transition: left 500ms cubic-bezier(0.140, 0.050, 0.230, 0.970); /* custom */
+
 	&:hover {
 		left:0;
 	}

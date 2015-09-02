@@ -62,11 +62,11 @@ $(function () {
             $(answer.datafakeinput).text(answer.filename);
 
             $('.radio_position').draga({
-       				container: '.main-img-container',
-       				containerWidth: answer.width,
-       				containerHeight: answer.height,
-               inputPush: btn.data('img')
-         	   });
+   				container: '.main-img-container',
+   				containerWidth: answer.width,
+   				containerHeight: answer.height,
+                inputPush: btn.data('img')
+     	   });
 
         };
         btn.removeAttr('disabled'); // разблокировать кнопку

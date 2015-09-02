@@ -17,12 +17,12 @@ block content
 							.settings__form-wrap
 									label.settings__label(for='original-img') Исходное изображение
 
-										input.settings__input-hide(id='original-img', type= 'file')
-										div.settings__input Image.jpg
+										input.settings__input-hide(id='original-img', type= 'file', data-img="#picture", data-fakeinput="#picture-fakeinput")
+										div#picture-fakeinput.settings__input Выберите файл
 							.settings__form-wrap
 									label.settings__label(for='water-mark') Водяной знак
-										input.settings__input-hide(id='water-mark', type= 'file')
-										div.settings__input Image.png
+										input.settings__input-hide(id='water-mark', type= 'file', data-img="#watermark", data-fakeinput="#watermark-fakeinput")
+										div#watermark-fakeinput.settings__input Выберите файл
 
 						.settings__position.line-top
 							.settings__position-title Положение
