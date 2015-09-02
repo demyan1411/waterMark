@@ -48,6 +48,13 @@ var containerWidth,
 
 
 $.fn.draga = function(options) {
+
+	$('[data-pos]').off('click');
+	$('.coordinates__input').off('change keyup input click')
+													.off('blur');
+	$('.coordinates__input_loc').off('click')
+															.off('mousedown');
+
   //console.log('qwe');
  	options = {
 		container: options.container || '.main-img-container',
@@ -55,8 +62,6 @@ $.fn.draga = function(options) {
 		containerHeight: options.containerHeight,
 		inputPush: options.inputPush
  	}
-
-
 
  	var elem = this,
 			input = options.inputPush,
@@ -165,6 +170,7 @@ $.fn.draga = function(options) {
 
     _clickInput = function() {
       $('[data-pos]').on('click', function() {
+				console.log(elemRightPosition);
         $('[type=radio]').removeAttr("checked");
         $(this).attr("checked", "checked");
 
@@ -209,66 +215,59 @@ $.fn.draga = function(options) {
         arrow = $(this);
         _moveElem();
       });
-      //_mousePress();
+      _mousePress();
 			_moveByText();
 
 
     },
 		_moveByText = function() {
 
-			$('.coordinates__input').on('focus', function() {
-				$(this).val('');
+			$('.coordinates__input')
+				.on('focus', function() {
+					$(this).val('');
+				})
+	      .on('change keyup input click', function() {
+					$this = $(this);
 
-			})
-      .on('keyup', function() {
-				$this = $(this);
-				//$this.val('');
-				//thisText = parseInt($this.val(), 10);
+					if (this.value.match(/[^0-9]/g)) {
+			      this.value = this.value.replace(/[^0-9]/g, '');
+			    }
 
-				var regExp = /[0-9]/,
-					isInSize = regExp.test($this.val());
-				if(!isInSize){
-					$this.val('');
-				} else {
 					if($this.hasClass('posX') && $('.posX').val() > elemRightPosition) {
 
-
 					 $('.posX').val(elemRightPosition);
-           //$('.coordinates__input').off('keyup');
 
 					} else if($this.hasClass('posY') && $('.posY').val() > elemBottomPosition) {
 
 						$('.posY').val(elemBottomPosition);
 
 					}
-        }
-
-				elem.css({
-					'left': $('.posX').val() + 'px',
-					'top': $('.posY').val() + 'px'
-				});
-				_addRed();
-
-			})
-			.on('blur', function() {
-
-				if($(this).val() === '') {
-					$(this).val('0');
 
 					elem.css({
 						'left': $('.posX').val() + 'px',
 						'top': $('.posY').val() + 'px'
 					});
 					_addRed();
-				}
 
-        if($this.hasClass('posX')) {
-          $('.posX').off('keyup');
-        } else if($this.hasClass('posY')) {
-          $('.posY').off('keyup');
-        }
+				})
+				.on('blur', function() {
 
-			});
+					if($(this).val() === '') {
+						var leftCss = 	parseInt(elem.css('left').slice(0, -2), 10),
+								topCss = 	parseInt(elem.css('top').slice(0, -2), 10);
+
+
+						$('.posX').val(leftCss);
+						$('.posY').val(topCss);
+
+						elem.css({
+							'left': $('.posX').val() + 'px',
+							'top': $('.posY').val() + 'px'
+						});
+						_addRed();
+					}
+
+				});
 		},
 
     _moveElem = function() {
@@ -314,7 +313,7 @@ $.fn.draga = function(options) {
 
       var mousedown = false;
       var mousedown_timer = '';
-      $('.coordinates__input_loc').mousedown(function() {
+      $('.coordinates__input_loc').on('mousedown', function() {
 
           arrow = $(this);
           mousedown = true;
