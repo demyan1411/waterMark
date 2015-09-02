@@ -5,19 +5,22 @@ var containerWidth,
 		elemHeight;
 
 // module for opacity and ui-slider
- 	var opacity = (function() {
 
+var opacity = (function() {
 		var start = function() {
 				_setUpListeners();
 			},
 			_setUpListeners = function() {
 				_origin();
 				_sliderUi();
+				if($('#watermark').hasClass('buttons')) {
+					$('.slider').removeClass('not_work');
+				}
 			},
 			_origin = function() {
 				$('.opacity_block').css({
-		          'opacity': .8
-		        });
+		        'opacity': .8
+		    });
 			},
 			_sliderUi = function() {
 				$( ".ui-slider" ).slider({
@@ -26,9 +29,13 @@ var containerWidth,
 					max: 100,
 					value: 80,
 					slide: function( event, ui ) {
-						$('.opacity_block').css({
-						  'opacity': ui.value / 100
-						});
+						$('.draggable').removeClass('transition');
+						if($('#watermark').hasClass('buttons')) {
+							$('.opacity_block').css({
+							  'opacity': ui.value / 100
+							});
+
+						} else{ return false }
 
 					}
 				});
@@ -37,12 +44,7 @@ var containerWidth,
 		return {
 	        init: start
 		}
-
-	}());
-
-
-
-
+}());
 
 //////////// plugin for drag and coordinates
 
@@ -50,12 +52,10 @@ var containerWidth,
 $.fn.draga = function(options) {
 
 	$('[data-pos]').off('click');
-	$('.coordinates__input').off('change keyup input click')
-													.off('blur');
-	$('.coordinates__input_loc').off('click')
-															.off('mousedown');
+	$('.coordinates__input').off('change keyup input click blur');
+	$('.coordinates__input_loc').off('click mousedown');
 
-  //console.log('qwe');
+
  	options = {
 		container: options.container || '.main-img-container',
 		containerWidth: options.containerWidth,
@@ -158,6 +158,9 @@ $.fn.draga = function(options) {
 			elem.css(objPos['top-left']);
 			$('[type=radio]').removeAttr("checked")
 											 .addClass('click');
+			$('.radio__label').css({
+			 'cursor': 'pointer'
+		 });
 
 			_clickInput();
 
@@ -170,18 +173,17 @@ $.fn.draga = function(options) {
 
     _clickInput = function() {
       $('[data-pos]').on('click', function() {
-				console.log(elemRightPosition);
+				$('.draggable').addClass('transition');
         $('[type=radio]').removeAttr("checked");
         $(this).attr("checked", "checked");
 
      		var position = $(this).data('pos');
 
 
-        posLeft = objPos[position].left;
-        posTop = objPos[position].top;
+        posLeft = Math.round(objPos[position].left);
+        posTop = Math.round(objPos[position].top);
 
-
-      	elem.css(objPos[position]);
+				elem.css(objPos[position]);
 
       	$('.posX').val(posLeft);
     	  $('.posY').val(posTop);
@@ -210,24 +212,32 @@ $.fn.draga = function(options) {
     _setUpListeners = function() {
 
       $('.coordinates__input_loc')
-          .on('click', function() {
+        	.on('click', function() {
 
-        arrow = $(this);
-        _moveElem();
-      });
+		        arrow = $(this);
+		        _moveElem();
+      		})
+					.addClass('js-hover');
+			$('.coordinates__input').css({
+					'cursor': 'pointer'
+			});
+
       _mousePress();
 			_moveByText();
-
 
     },
 		_moveByText = function() {
 
 			$('.coordinates__input')
 				.on('focus', function() {
-					$(this).val('');
+					$this = $(this);
+
+					$this.val('')
+							 .removeAttr('readonly');
+
 				})
 	      .on('change keyup input click', function() {
-					$this = $(this);
+					$('.draggable').addClass('transition');
 
 					if (this.value.match(/[^0-9]/g)) {
 			      this.value = this.value.replace(/[^0-9]/g, '');
@@ -252,7 +262,7 @@ $.fn.draga = function(options) {
 				})
 				.on('blur', function() {
 
-					if($(this).val() === '') {
+					if($this.val() === '') {
 						var leftCss = 	parseInt(elem.css('left').slice(0, -2), 10),
 								topCss = 	parseInt(elem.css('top').slice(0, -2), 10);
 
@@ -390,7 +400,7 @@ $.fn.draga = function(options) {
        		drag: function(){
 
      				$('[type=radio]').removeAttr("checked");
-
+						$('.draggable').removeClass('transition');
       		 	left = $(this).css('left');
       	    top = $(this).css('top');
       	    posLeft = parseInt(left.slice(0, -2), 10);
@@ -423,10 +433,12 @@ $.fn.draga = function(options) {
   }
 
 
-  	buttons.init();
 
+
+  	buttons.init();
   	drag.init();
   	arrows.init();
+		//opacity.init();
 
 }
 

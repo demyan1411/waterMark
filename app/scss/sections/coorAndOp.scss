@@ -27,7 +27,9 @@
 .draggable {
   position: absolute;
   z-index: 2;
-  //transition: all linear .3s;
+}
+.draggable.transition {
+  transition: all ease .3s;
 }
 .location {
   position: relative;
@@ -81,10 +83,10 @@
   width: 13px;
   height: 8px;
   right: -21px;
-  cursor: pointer;
 }
-.coordinates__input_loc:hover {
+.coordinates__input_loc.js-hover:hover {
   background-position: -14px 0;
+  cursor: pointer;
 }
 .coordinates__input_loc-up {
   top: 5px;
@@ -131,4 +133,15 @@
 }
 .click:checked + .radio__label, .click[checked="checked"] + .radio__label {
     background: #f97e76;
+    cursor: default !important;
 }
+
+.slider.not_work {
+  opacity: .5;
+}
+.slider.not_work .ui-state-default:active:after {
+	background: #9eb2c0;
+}
+// .slider.not_work .ui-state-default:hover {
+//   cursor: default;
+// }

@@ -67,6 +67,7 @@ $(function () {
    				containerHeight: answer.height,
                 inputPush: btn.data('img')
      	   });
+         opacity.init();
 
         };
         btn.removeAttr('disabled'); // разблокировать кнопку
