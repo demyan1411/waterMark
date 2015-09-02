@@ -2,9 +2,9 @@
 	width: 100% ;
 	min-width: 1000px;
 	height: 50px;
-	margin-top: -50px;
 	text-align: center;
 	padding: 7px 0px;
+	margin-top: -50px;
 	box-sizing: border-box;
 		&__text {
 			font-family: 'fira_sanslight';
@@ -13,11 +13,4 @@
 		}
 }
 
-/*.footer {
-position: absolute;
-    bottom: 0;
-    width: 100%;
-    height: 70px;
-    text-align: center;
-}
-*/
+

@@ -37,12 +37,13 @@
             <li class="icons__language-item"><a href="#" class="icons__language-link">РУС</a></li>
             <li class="icons__language-item"><a href="#" class="icons__language-link">ENG</a></li>
           </ul>
-          <ul class="icons__share">
-            <li class="icons__share-item icons__share-item--like"><a href="#" class="icons__share-link icons__share-link--like">like</a></li>
-            <li class="icons__share-item--socials"><a href="#" class="icons__share-link icons__share-link--vk">vkontakte</a></li>
-            <li class="icons__share-item--socials"><a href="#" class="icons__share-link icons__share-link--fb">facebook</a></li>
-            <li class="icons__share-item--socials"><a href="#" class="icons__share-link icons__share-link--tw">twitter</a></li>
-          </ul>
+          <div class="icons__socials"><a href="#" class="icons__share-link icons__share-link--like">like</a>
+            <ul class="icons__share">
+              <li class="icons__share-item--socials"><a href="#" class="icons__share-link icons__share-link--fb">facebook</a></li>
+              <li class="icons__share-item--socials"><a href="#" class="icons__share-link icons__share-link--tw">twitter</a></li>
+              <li class="icons__share-item--socials"><a href="#" class="icons__share-link icons__share-link--vk">vkontakte</a></li>
+            </ul>
+          </div>
         </aside>
         <div class="main-content__wrapper">
           <div class="container">
@@ -58,14 +59,14 @@
                 <div class="settings__form">
                   <div class="settings__form-wrap">
                     <label for="original-img" class="settings__label">Исходное изображение
-                      <input id="original-img" type="file" data-img="#picture" data-fakeinput="#picture-fakeinput" class="settings__input-hide">
-                      <div id="picture-fakeinput" class="settings__input">Выберите файл</div>
+                      <input id="original-img" type="file" class="settings__input-hide">
+                      <div class="settings__input">Image.jpg</div>
                     </label>
                   </div>
                   <div class="settings__form-wrap">
                     <label for="water-mark" class="settings__label">Водяной знак
-                      <input id="water-mark" type="file" data-img="#watermark" data-fakeinput="#watermark-fakeinput" class="settings__input-hide">
-                      <div id="watermark-fakeinput" class="settings__input">Выберите файл</div>
+                      <input id="water-mark" type="file" class="settings__input-hide">
+                      <div class="settings__input">Image.png</div>
                     </label>
                   </div>
                 </div>

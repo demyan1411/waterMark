@@ -1,13 +1,15 @@
 ﻿/* главный контейнер */
 
 .container {
-  @include clearfix();
-  //overflow: hidden;
-  //position: relative;
-  //margin: 60px auto 20px;
-  min-width: 960px;
-  display: inline-block;
-  vertical-align: middle;
+
+	@include clearfix();
+	//overflow: hidden;
+	//position: relative;
+	//margin: 60px auto 20px;
+	min-width: 960px;
+	display: inline-block;
+	vertical-align: middle;
+
 }
 
 .generator {
