@@ -5,16 +5,17 @@
 */
 
 $img_path = "../uploads/";
+
 //Входные параметры
-$img_main = $img_path . $_POST['imgmain'];
-$img_wmark = $img_path . $_POST['imgwmark'];
-$img_result = "result.png";
-$coordx = $_POST['coordx'];
-$coordy = $_POST['coordy'];
-$marginx = $_POST['marginx'];
-$marginy = $_POST['marginy'];
-$opacity = $_POST['opacity'] * 100;
-$mode = $_POST['mode']; // single/tile
+$img_main = $img_path . filter_input(INPUT_POST, 'imgmain');
+$img_wmark = $img_path . filter_input(INPUT_POST, 'imgwmark');
+$img_result = filter_input(INPUT_POST, 'imgresult');
+$coordx = filter_input(INPUT_POST, 'coordx');
+$coordy = filter_input(INPUT_POST, 'coordy');
+$marginx = filter_input(INPUT_POST, 'marginx');
+$marginy = filter_input(INPUT_POST, 'marginy');
+$opacity = filter_input(INPUT_POST, 'opacity') * 100;
+$mode = filter_input(INPUT_POST, 'mode'); // tile or not
 
 // открываем картинки
 $bgpic = createImgObj($img_main);
@@ -52,10 +53,6 @@ if ($mode == 'tile') {
 
 	imagecopymerge_alpha($bgpic, $tiles, $coordx, $coordy, 0,0 , $bgpic_width+$wmpic_width, $bgpic_height+$wmpic_height, $opacity );
 
-	// !первоначальный вариант без прозрачности, можно удалить
-	// наложить слой tiles на исходную картинку с нужным смещением
-	// imagecopy($bgpic, $tiles, 0, 0, $coordx, $coordy, $bgpic_width, $bgpic_height);
-
 	// освобождаем память
 	imagedestroy($tiles);
 	imagedestroy($idest);
@@ -64,15 +61,11 @@ else {
 	// простое наложение одиночного ватермарка
 	imagecopymerge_alpha($bgpic, $wmpic, $coordx, $coordy, 0, 0, imagesx($wmpic), imagesy($wmpic), $opacity );
 
-	// !первоначальный вариант без прозрачности, можно удалить
-	// imagecopy($bgpic, $wmpic, $coordx, $coordy, 0, 0, imagesx($wmpic), imagesy($wmpic));
 }
 
 
-// header('content-type: image/png');
-// imagepng($bgpic);
-imagepng($bgpic, $img_result, 6);
-// file_force_download2 ($img_result);
+// сохраняем картинку-результат
+imagepng($bgpic, $img_path . $img_result, 6);
 
 // уничтожаем объекты картинок
 imagedestroy($bgpic);
@@ -116,5 +109,31 @@ function createImgObj($imagesrc) {
 				 $image = null;
 	}
 	return $image;
+}
+function file_force_download($file) {
+  if (file_exists($file)) {
+    // сбрасываем буфер вывода PHP, чтобы избежать переполнения памяти выделенной под скрипт
+    // если этого не сделать файл будет читаться в память полностью!
+    if (ob_get_level()) {
+      ob_end_clean();
+    }
+    // заставляем браузер показать окно сохранения файла
+    header('Content-Description: File Transfer');
+    header('Content-Type: image/png');
+    header('Content-Disposition: attachment; filename=' . basename($file));
+    header('Content-Transfer-Encoding: binary');
+    header('Expires: 0');
+    header('Cache-Control: must-revalidate');
+    header('Pragma: public');
+    header('Content-Length: ' . filesize($file));
+    // читаем файл и отправляем его пользователю
+    if ($fd = fopen($file, 'rb')) {
+      while (!feof($fd)) {
+        print fread($fd, 1024);
+      }
+      fclose($fd);
+    }
+    exit;
+  }
 }
 ?>

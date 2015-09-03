@@ -1,8 +1,7 @@
 <?php
-
-$img_result = $_GET['fname'];
-echo $img_result;
-file_force_download ($img_result);
+$img_path = "../uploads/";
+$filename = $img_path . filter_input(INPUT_GET, 'fname');
+file_force_download ($filename);
 exit;
 
 function file_force_download($file) {
@@ -14,7 +13,7 @@ function file_force_download($file) {
     }
     // заставляем браузер показать окно сохранения файла
     header('Content-Description: File Transfer');
-    header('Content-Type: application/octet-stream');
+    header('Content-Type: image/png');
     header('Content-Disposition: attachment; filename=' . basename($file));
     header('Content-Transfer-Encoding: binary');
     header('Expires: 0');
