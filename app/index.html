@@ -58,15 +58,15 @@
               <form action="" method="get">
                 <div class="settings__form">
                   <div class="settings__form-wrap">
-                    <label for="original-img" class="settings__label">Исходное изображение
-                      <input id="original-img" type="file" data-img="#picture" data-fakeinput="#picture-fakeinput" class="settings__input-hide">
-                      <div id="picture-fakeinput" class="settings__input">Выберите файл</div>
+                    <label for="input-picture" class="settings__label">Исходное изображение
+                      <input id="input-picture" type="file" data-img="picture" data-fakeinput="fakeinput-picture" class="settings__input-hide">
+                      <div id="fakeinput-picture" class="settings__input">Выберите файл</div>
                     </label>
                   </div>
                   <div class="settings__form-wrap">
-                    <label for="water-mark" class="settings__label">Водяной знак
-                      <input id="water-mark" type="file" data-img="#watermark" data-fakeinput="#watermark-fakeinput" class="settings__input-hide">
-                      <div id="watermark-fakeinput" class="settings__input">Выберите файл</div>
+                    <label for="input-watermark" class="settings__label">Водяной знак
+                      <input id="input-watermark" type="file" data-img="watermark" data-fakeinput="fakeinput-watermark" disabled="disabled" class="settings__input-hide">
+                      <div id="fakeinput-watermark" class="settings__input">Выберите файл</div>
                     </label>
                   </div>
                 </div>
@@ -114,6 +114,7 @@
     
     
     <!-- build:js js/main.min.js-->
+    <script src="js/app.js"></script>
     <script src="js/modules.js"></script>
     <script src="js/main.js"></script>
     <!-- endbuild-->
