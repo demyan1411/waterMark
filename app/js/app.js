@@ -36,9 +36,12 @@ var app = {
                   'width': 0,
                   'height': 0,
                   'container': {}
-                }
+                },
+
 
 };
+
+
 
 
 
@@ -56,6 +59,9 @@ var containerWidth = app.picture.width,
     elemBottomPosition = containerHeight - elemHeight,
 
     elemMiddlePositonWidth = (containerWidth / 2) - (elemWidth / 2),
-    elemMiddlePositonHeight = (containerHeight / 2) - (elemHeight / 2);
+    elemMiddlePositonHeight = (containerHeight / 2) - (elemHeight / 2),
+
+    pictureS,
+    watermarkS;
 
 var objPos = {};

@@ -57,7 +57,6 @@
 .repeatBlock {
   position: absolute;
   top: 0px;
-  left: 0px;
   z-index: 2;
   width: 120%;
   height: 120%;
