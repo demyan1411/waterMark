@@ -5,20 +5,17 @@
       -- файл является изображением
       -- максимальный размер не превышает $maxSize
     - файл сохраняется в каталоге $target_dir
-    - если изображение превышает константные размеры, то оно пропорционально уменьшается
+    - если изображение превышает размеры контейнера, то оно пропорционально уменьшается
     - возвращается ответ с информацией о том, каким элементам и какие значения нужно изменить
 */
 
 // подключим функцию для ресайзинга изображения при сохранении
 require_once('resize.php');
 
-// константы
-$target_dir = "uploads/"; // каталог для загрузки файлов (относительно основной директории)
-$maxSize = 1000000;       // максимальный размер файла
-$maxWidth = 650;          // ширина контейнера для картинки
-$maxHeight = 537;         // высота контейнера для картинки
-
-
+$target_dir = $_POST['uploadDir'];  // каталог для загрузки файлов
+$maxSize = $_POST['maxSize'];       // максимальный размер файла
+$maxWidth = $_POST['maxWidth'];     // ширина контейнера для картинки
+$maxHeight = $_POST['maxHeight'];   // высота контейнера для картинки
 $filename = basename($_FILES[0]["name"]);
 $tmp_file = $_FILES[0]["tmp_name"];  // временный файл
 $target_file = "../" . $target_dir . $filename; // путь и имя будущего файла
@@ -54,8 +51,6 @@ else if (!move_uploaded_file($tmp_file, $target_file)) {
         $answer['text'] = 'Файл сохранен: ' . $target_url . ' ('. $newSize['width'] . ' x ' . $newSize['height'] .')';
         $answer['url'] = $target_url;
         $answer['filename'] = $filename;
-        $answer['dataimg'] = $_POST['dataimg'];
-        $answer['datafakeinput'] = $_POST['datafakeinput'];
         $answer['width'] = $newSize['width'];
         $answer['height'] = $newSize['height'];
     };

@@ -1,34 +1,39 @@
 
-var containerWidth,
-		containerHeight,
-		elemWidth,
-		elemHeight;
 
 // module for opacity and ui-slider
- 	var opacity = (function() {
 
+var opacity = (function() {
 		var start = function() {
 				_setUpListeners();
 			},
 			_setUpListeners = function() {
 				_origin();
 				_sliderUi();
+				if($('#watermark').hasClass('buttons')) {
+					$('.slider').removeClass('not_work');
+				}
 			},
 			_origin = function() {
-				$('.opacity_block').css({
-		          'opacity': .8
-		        });
+
+				$('.draggable').css({
+		        'opacity': app.uiSliderVal / 100
+		    });
 			},
 			_sliderUi = function() {
 				$( ".ui-slider" ).slider({
 					range: "min",
 					min: 1,
 					max: 100,
-					value: 80,
+					value: app.uiSliderVal,
 					slide: function( event, ui ) {
-						$('.opacity_block').css({
-						  'opacity': ui.value / 100
-						});
+						app.uiSliderVal = ui.value;
+						$('.draggable').removeClass('transition');
+						if($('#watermark').hasClass('buttons')) {
+							$('.draggable').css({
+							  'opacity': app.uiSliderVal / 100
+							});
+
+						} else{ return false }
 
 					}
 				});
@@ -37,29 +42,29 @@ var containerWidth,
 		return {
 	        init: start
 		}
-
-	}());
-
-
-
-
+}());
 
 //////////// plugin for drag and coordinates
 
 
+
+
+
+
+
+
+
 $.fn.draga = function(options) {
 
-	$('[data-pos]').off('click');
-	$('.coordinates__input').off('change keyup input click')
-													.off('blur');
-	$('.coordinates__input_loc').off('click')
-															.off('mousedown');
+	//console.log(app.containerWidth);
 
-  //console.log('qwe');
+	$('[data-pos]').off('click');
+	$('.coordinates__input').off('change keyup input click blur');
+	$('.coordinates__input_loc').off('click mousedown');
+
+
  	options = {
 		container: options.container || '.main-img-container',
-		containerWidth: options.containerWidth,
-		containerHeight: options.containerHeight,
 		inputPush: options.inputPush
  	}
 
@@ -70,78 +75,24 @@ $.fn.draga = function(options) {
 		  posX,
 		  posY;
 
-
- // если была загружена основная картинка
-	if(input === '#picture') {
-		containerWidth = options.containerWidth;
-		containerHeight = options.containerHeight;
-
-		$(options.container).css({
-			'width': containerWidth + 'px',
-			'height': containerHeight + 'px'
-		});
-	}
 // если был загружен вотермарк
 	if(input === '#watermark') {
-		elemWidth = options.containerWidth;
-	 	elemHeight = options.containerHeight;
-
 		$('.location').css({
 			'opacity': 1
 		});
-
 		$('#watermark').addClass('buttons');
 	}
 
 
 
 
-	  var elemRightPosition = containerWidth - elemWidth,
-		    elemBottomPosition = containerHeight - elemHeight,
-
-			  elemMiddlePositonWidth = (containerWidth / 2) - (elemWidth / 2),
-			  elemMiddlePositonHeight = (containerHeight / 2) - (elemHeight / 2);
-
+	$(options.container).css({
+		'width': containerWidth + 'px',
+		'height': containerHeight + 'px'
+	});
 
 
-	var objPos = {
-    'top-left': {
-      'left': 0,
-      'top': 0
-    },
-    'top-middle': {
-      'left': elemMiddlePositonWidth,
-      'top': 0
-    },
-    'top-right': {
-      'left': elemRightPosition,
-      'top': 0
-    },
-    'middle-left': {
-      'left': 0,
-      'top': elemMiddlePositonHeight
-    },
-    'middle-middle': {
-      'left': elemMiddlePositonWidth,
-      'top': elemMiddlePositonHeight
-    },
-    'middle-right': {
-      'left': elemRightPosition,
-      'top': elemMiddlePositonHeight
-    },
-    'bottom-left': {
-      'left': 0,
-      'top': elemBottomPosition
-    },
-    'bottom-middle': {
-      'left': elemMiddlePositonWidth,
-      'top': elemBottomPosition
-    },
-    'bottom-right': {
-      'left': elemRightPosition,
-      'top': elemBottomPosition
-    }
-  };
+
 
 
 
@@ -158,6 +109,9 @@ $.fn.draga = function(options) {
 			elem.css(objPos['top-left']);
 			$('[type=radio]').removeAttr("checked")
 											 .addClass('click');
+			$('.radio__label').css({
+			 'cursor': 'pointer'
+		 });
 
 			_clickInput();
 
@@ -170,18 +124,17 @@ $.fn.draga = function(options) {
 
     _clickInput = function() {
       $('[data-pos]').on('click', function() {
-				console.log(elemRightPosition);
+				$('.draggable').addClass('transition');
         $('[type=radio]').removeAttr("checked");
         $(this).attr("checked", "checked");
 
      		var position = $(this).data('pos');
 
 
-        posLeft = objPos[position].left;
-        posTop = objPos[position].top;
+        posLeft = Math.round(objPos[position].left);
+        posTop = Math.round(objPos[position].top);
 
-
-      	elem.css(objPos[position]);
+				elem.css(objPos[position]);
 
       	$('.posX').val(posLeft);
     	  $('.posY').val(posTop);
@@ -210,24 +163,32 @@ $.fn.draga = function(options) {
     _setUpListeners = function() {
 
       $('.coordinates__input_loc')
-          .on('click', function() {
+        	.on('click', function() {
 
-        arrow = $(this);
-        _moveElem();
-      });
+		        arrow = $(this);
+		        _moveElem();
+      		})
+					.addClass('js-hover');
+			$('.coordinates__input').css({
+					'cursor': 'pointer'
+			});
+
       _mousePress();
 			_moveByText();
-
 
     },
 		_moveByText = function() {
 
 			$('.coordinates__input')
 				.on('focus', function() {
-					$(this).val('');
+					$this = $(this);
+
+					$this.val('')
+							 .removeAttr('readonly');
+
 				})
 	      .on('change keyup input click', function() {
-					$this = $(this);
+					$('.draggable').addClass('transition');
 
 					if (this.value.match(/[^0-9]/g)) {
 			      this.value = this.value.replace(/[^0-9]/g, '');
@@ -252,7 +213,7 @@ $.fn.draga = function(options) {
 				})
 				.on('blur', function() {
 
-					if($(this).val() === '') {
+					if($this.val() === '') {
 						var leftCss = 	parseInt(elem.css('left').slice(0, -2), 10),
 								topCss = 	parseInt(elem.css('top').slice(0, -2), 10);
 
@@ -346,89 +307,184 @@ $.fn.draga = function(options) {
 
   }());
 
-  // method for drag elem
-  var drag = (function() {
-
-    var start = function() {
-        _setUpListeners();
-      },
-      _setUpListeners = function() {
-        _onDrag();
-      },
-      _onDrag = function() {
-        var cont,
-            left,
-            top,
-            posLeft,
-            posTop;
-
-        // $('.btn').on('click', function() {
-        //   cont = false;
-        //   $('.draggable').draggable({
-        //     containment: cont
-        //   });
-        //   elem.addClass('repeat');
-        // });
-
-        // $('.btn2').on('click', function() {
-        //   cont = '.js-container';
-        //   $('.draggable').draggable({
-        //     containment: cont
-        //   });
-        //   elem.removeClass('repeat')
-        //       .css({
-        //         'top': 0,
-        //         'left': 0
-        //       });
-        //   $('.posX').text(0);
-        //   $('.posY').text(0);
-        // });
-
-        $('.draggable').draggable({
-
-
-       		drag: function(){
-
-     				$('[type=radio]').removeAttr("checked");
-
-      		 	left = $(this).css('left');
-      	    top = $(this).css('top');
-      	    posLeft = parseInt(left.slice(0, -2), 10);
-      	    posTop = parseInt(top.substring(0, top.length - 2), 10);
-
-      	    $('.posX').val(posLeft);
-      			$('.posY').val(posTop);
-
-            addRed(posLeft, posTop);
-
-      	  },
-          containment: options.container
-
-       	});
-      }
-
-    return {
-      init: start
-    }
-
-  }());
-
-  function addRed(left, top) {
-		$('[type=radio]').removeAttr("checked");
-    for(var key in objPos) {
-      if(left == objPos[key].left && top == objPos[key].top) {
-        $('[data-pos = ' + key + ']').attr("checked", 'checked');
-      }
-    }
-  }
-
 
   	buttons.init();
-
-  	drag.init();
   	arrows.init();
+		//opacity.init();
 
 }
+
+function addRed(left, top) {
+	$('[type=radio]').removeAttr("checked");
+	for(var key in objPos) {
+		if(left == objPos[key].left && top == objPos[key].top) {
+			$('[data-pos = ' + key + ']').attr("checked", 'checked');
+		}
+	}
+}
+// method for drag elem
+var drag = (function() {
+
+	var start = function() {
+			_setUpListeners();
+		},
+		_setUpListeners = function() {
+			_onDrag();
+		},
+		_onDrag = function() {
+			var cont,
+					left,
+					top,
+					posLeft,
+					posTop;
+
+
+
+			$('.draggable').draggable({
+
+
+				drag: function(){
+
+					$('[type=radio]').removeAttr("checked");
+					$('.draggable').removeClass('transition');
+					left = $(this).css('left');
+					top = $(this).css('top');
+					posLeft = parseInt(left.slice(0, -2), 10);
+					posTop = parseInt(top.substring(0, top.length - 2), 10);
+
+					$('.posX').val(posLeft);
+					$('.posY').val(posTop);
+
+					addRed(posLeft, posTop);
+
+				},
+				containment: app.imgConteiner
+
+			});
+		}
+
+	return {
+		init: start
+	}
+
+}());
+
+
+var multiplyElem = (function() {
+
+	var elem = $('.draggable');
+
+	var start = function() {
+		_setUpListeners();
+	},
+	_setUpListeners = function() {
+
+		_loadRemove();
+
+		$('.settings__position-btn_many').on('click', function() {
+			_multiply();
+
+		});
+
+		$('.settings__position-btn_one').on('click', function() {
+			_doOneElem();
+
+		});
+		//console.log(app.picture.width);
+
+
+	},
+	_multiply = function() {
+		if(app.flag === true) {
+
+			app.flag = false;
+
+			$('#watermark')
+
+			elem.wrap('<div class="repeatBlock"></div>')
+					.addClass('repeatElem')
+					.css({
+						'left': 0,
+						'top': 0
+					});
+			$(".draggable").draggable({ disabled: true });
+
+			_dragImages();
+
+			_addImages();
+
+			$('.settings__position-btn').removeClass('btn-active');
+			$('.settings__position-btn_many').addClass('btn-active');
+		}
+
+	},
+	_doOneElem = function() {
+		if(app.flag === false) {
+			_removeAll();
+		}
+	},
+	_addImages = function() {
+		for(var i = 0; i < 30 ; i++) {
+			$('.repeatBlock').append('<img src="' + app.watermark.url + '" class="draggable appendedImg">');
+		}
+		$('.draggable').css({
+				'opacity': app.uiSliderVal / 100
+		});
+	},
+	_removeImages = function() {
+		$('.appendedImg').remove();
+	},
+	_dragImages = function() {
+		$('.repeatBlock').draggable({
+			drag: function(){
+				var repeatWidth = $('.repeatBlock').width();
+
+				var left = $(this).css('left'),
+						top = $(this).css('top'),
+						posLeft = parseInt(left.slice(0, -2), 10),
+						posTop = parseInt(top.substring(0, top.length - 2), 10),
+						_c = -(repeatWidth - containerWidth) / 2;
+
+				console.log(_c);
+
+				if(posLeft < _c) {
+					$('.repeatBlock').css({
+						'width': (repeatWidth + 10) + 'px'
+					});
+				}
+
+			}
+		});
+	},
+	_removeAll = function() {
+		app.flag = true;
+		$(".draggable").removeClass('repeatElem')
+				.unwrap()
+				.css({
+					'top': 0,
+					'left': 0
+				});
+		$('.posX').text(0);
+		$('.posY').text(0);
+
+		_removeImages();
+
+		$(".draggable").draggable({ disabled: false });
+		$('.settings__position-btn').removeClass('btn-active');
+		$('.settings__position-btn_one').addClass('btn-active');
+	},
+	_loadRemove = function() {
+		if($("div").is(".repeatBlock")) {
+			_removeAll();
+		}
+	}
+
+
+	return {
+		init: start
+	}
+
+}());
 
 // добавить стрелочки к координатам
 var addArrows = (function() {

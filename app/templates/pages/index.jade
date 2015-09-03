@@ -15,27 +15,32 @@ block content
 					form(action='' , method='get')
 						.settings__form
 							.settings__form-wrap
-									label.settings__label(for='original-img') Исходное изображение
-
-										input.settings__input-hide(id='original-img', type= 'file', data-img="#picture", data-fakeinput="#picture-fakeinput")
-										div#picture-fakeinput.settings__input Выберите файл
+								label.settings__label(for='input-picture') Исходное изображение
+									input#input-picture.settings__input-hide(type= 'file', data-img="picture", data-fakeinput="fakeinput-picture")
+									div#fakeinput-picture.settings__input Выберите файл
 							.settings__form-wrap
-									label.settings__label(for='water-mark') Водяной знак
-										input.settings__input-hide(id='water-mark', type= 'file', data-img="#watermark", data-fakeinput="#watermark-fakeinput")
-										div#watermark-fakeinput.settings__input Выберите файл
-
+								label.settings__label(for='input-watermark') Водяной знак
+									input#input-watermark.settings__input-hide(type= 'file', data-img="watermark", data-fakeinput="fakeinput-watermark", disabled="disabled")
+									div#fakeinput-watermark.settings__input Выберите файл
 						.settings__position.line-top
 							.settings__position-title Положение
+								.settings__position-buttons
+									.settings__position-btn.settings__position-btn_many
+										.settings__position-btn_min
+										.settings__position-btn_min
+									.settings__position-btn.settings__position-btn_one.btn-active
 							.location
 								.coordinates
 									.coordinates__block.coordinates__blockX
-										input.coordinates__input.posX(value="0")
+										span.coordinates__block_name X
+										input.coordinates__input.posX(value="", readonly="readonly")
 									.coordinates__block.coordinates__blockY
-										input.coordinates__input.posY(value="0")
+										span.coordinates__block_name Y
+										input.coordinates__input.posY(value="", readonly="readonly")
 
 						.settings__opacity.line-top
 							.settings__opacity-title Прозрачность
-							.slider
+							.slider.not_work
 								.ui-slider
 
 						.settings__btn.line-top

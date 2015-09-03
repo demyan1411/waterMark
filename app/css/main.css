@@ -54,6 +54,22 @@
   position: absolute;
   z-index: 2; }
 
+.repeatBlock {
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  z-index: 2;
+  width: 120%;
+  height: 120%;
+  overflow: hidden; }
+  .repeatBlock .draggable {
+    position: relative;
+    display: block;
+    float: left; }
+
+.draggable.transition {
+  transition: all ease 0.3s; }
+
 .location {
   position: relative;
   height: 100px;
@@ -73,13 +89,13 @@
 .coordinates {
   display: inline-block;
   vertical-align: top;
-  margin-left: 10px;
-  position: relative;
+  position: absolute;
   height: inherit;
+  right: 20px;
   display: inline-block; }
 
 .coordinates__input {
-  display: block;
+  display: inline-block;
   width: 45px;
   height: 45px;
   border: 1px solid #9eb2c0;
@@ -87,27 +103,28 @@
   box-sizing: border-box;
   text-align: center;
   line-height: 45px;
-  background: #dbe1e8; }
+  background: #dbe1e8;
+  margin-left: 5px; }
 
 .coordinates__block {
-  position: absolute; }
+  position: relative; }
 
 .coordinates__blockX {
   top: 0; }
 
 .coordinates__blockY {
-  bottom: 0; }
+  bottom: -10px; }
 
 .coordinates__input_loc {
   position: absolute;
   background: url(../img/st1.png) 0 0 no-repeat;
   width: 13px;
   height: 8px;
-  right: -21px;
-  cursor: pointer; }
+  right: -21px; }
 
-.coordinates__input_loc:hover {
-  background-position: -14px 0; }
+.coordinates__input_loc.js-hover:hover {
+  background-position: -14px 0;
+  cursor: pointer; }
 
 .coordinates__input_loc-up {
   top: 5px; }
@@ -150,7 +167,14 @@
   cursor: pointer; }
 
 .click:checked + .radio__label, .click[checked="checked"] + .radio__label {
-  background: #f97e76; }
+  background: #f97e76;
+  cursor: default !important; }
+
+.slider.not_work {
+  opacity: .5; }
+
+.slider.not_work .ui-state-default:active:after {
+  background: #9eb2c0; }
 
 /*! jQuery UI - v1.11.4 - 2015-08-27
 * http://jqueryui.com
@@ -337,7 +361,7 @@
   top: 50%;
   margin-top: -10px;
   height: 20px;
-  cursor: pointer;
+  cursor: default;
   box-shadow: 0px 1px 2px 0px rgba(0, 0, 0, 0.7);
   border-radius: 50%; }
 
@@ -670,7 +694,57 @@ body {
   .settings__position-title {
     font-size: 14px;
     font-family: 'robotolight';
-    margin-bottom: 38px; }
+    margin-bottom: 38px;
+    position: relative; }
+  .settings__position-buttons {
+    float: right; }
+  .settings__position-btn {
+    width: 18px;
+    height: 18px;
+    box-sizing: border-box;
+    border: 1px solid #a1b3c1;
+    position: relative;
+    display: inline-block;
+    top: 5px;
+    margin-left: 6px;
+    cursor: pointer; }
+    .settings__position-btn:after {
+      content: '';
+      width: 12px;
+      height: 12px;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      margin-left: -6px;
+      margin-top: -6px;
+      background: #a1b3c1;
+      border-radius: 2px; }
+    .settings__position-btn_many:after {
+      display: none; }
+    .settings__position-btn_min {
+      position: relative;
+      width: 100%;
+      height: 7px; }
+      .settings__position-btn_min:after, .settings__position-btn_min:before {
+        content: '';
+        width: 5px;
+        height: 5px;
+        position: absolute;
+        background: #a1b3c1;
+        border-radius: 2px; }
+      .settings__position-btn_min:after {
+        top: 2px;
+        left: 2px; }
+      .settings__position-btn_min:before {
+        top: 2px;
+        right: 2px; }
+
+.settings__position-btn.btn-active {
+  border: 1px solid #fd8670; }
+  .settings__position-btn.btn-active:after {
+    background: #fd8670; }
+  .settings__position-btn.btn-active .settings__position-btn_min:after, .settings__position-btn.btn-active .settings__position-btn_min:before {
+    background: #fd8670; }
 
 /* прозрачность */
 .settings__opacity {

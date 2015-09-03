@@ -58,34 +58,42 @@
               <form action="" method="get">
                 <div class="settings__form">
                   <div class="settings__form-wrap">
-                    <label for="original-img" class="settings__label">Исходное изображение
-                      <input id="original-img" type="file" data-img="#picture" data-fakeinput="#picture-fakeinput" class="settings__input-hide">
-                      <div id="picture-fakeinput" class="settings__input">Выберите файл</div>
+                    <label for="input-picture" class="settings__label">Исходное изображение
+                      <input id="input-picture" type="file" data-img="picture" data-fakeinput="fakeinput-picture" class="settings__input-hide">
+                      <div id="fakeinput-picture" class="settings__input">Выберите файл</div>
                     </label>
                   </div>
                   <div class="settings__form-wrap">
-                    <label for="water-mark" class="settings__label">Водяной знак
-                      <input id="water-mark" type="file" data-img="#watermark" data-fakeinput="#watermark-fakeinput" class="settings__input-hide">
-                      <div id="watermark-fakeinput" class="settings__input">Выберите файл</div>
+                    <label for="input-watermark" class="settings__label">Водяной знак
+                      <input id="input-watermark" type="file" data-img="watermark" data-fakeinput="fakeinput-watermark" disabled="disabled" class="settings__input-hide">
+                      <div id="fakeinput-watermark" class="settings__input">Выберите файл</div>
                     </label>
                   </div>
                 </div>
                 <div class="settings__position line-top">
-                  <div class="settings__position-title">Положение</div>
+                  <div class="settings__position-title">Положение
+                    <div class="settings__position-buttons">
+                      <div class="settings__position-btn settings__position-btn_many">
+                        <div class="settings__position-btn_min"></div>
+                        <div class="settings__position-btn_min"></div>
+                      </div>
+                      <div class="settings__position-btn settings__position-btn_one btn-active"></div>
+                    </div>
+                  </div>
                   <div class="location">
                     <div class="coordinates">
-                      <div class="coordinates__block coordinates__blockX">
-                        <input value="0" class="coordinates__input posX">
+                      <div class="coordinates__block coordinates__blockX"><span class="coordinates__block_name">X</span>
+                        <input value="" readonly="readonly" class="coordinates__input posX">
                       </div>
-                      <div class="coordinates__block coordinates__blockY">
-                        <input value="0" class="coordinates__input posY">
+                      <div class="coordinates__block coordinates__blockY"><span class="coordinates__block_name">Y</span>
+                        <input value="" readonly="readonly" class="coordinates__input posY">
                       </div>
                     </div>
                   </div>
                 </div>
                 <div class="settings__opacity line-top">
                   <div class="settings__opacity-title">Прозрачность</div>
-                  <div class="slider">
+                  <div class="slider not_work">
                     <div class="ui-slider"></div>
                   </div>
                 </div>
@@ -114,6 +122,7 @@
 
 
     <!-- build:js js/main.min.js-->
+    <script src="js/app.js"></script>
     <script src="js/modules.js"></script>
     <script src="js/main.js"></script>
     <script src="js/imgsubmit.js"></script>
