@@ -13,6 +13,8 @@
 
 'use strict';
 
+var imgID;
+
 $(document).ready(function() {
 
     // установить обработчик событий на кнопки загрузки файлов
@@ -26,10 +28,11 @@ $(document).ready(function() {
 
         var
             input = this,    // текущий инпут
-            imgID = this.dataset['img'],  // id изображения, соответствующего инпуту
             fakeinputID = this.dataset['fakeinput'], // id фэйкового инпута, соответствующего текщему
             btn = $(this),   // нажатая кнопка для выбора файла
             data = new FormData();  // данные для запроса
+
+        imgID = this.dataset['img'];  // id изображения, соответствующего инпуту
 
         // заблокировать кнопку на время загрузки файла
         btn.attr('disabled', 'disabled');
@@ -89,75 +92,7 @@ $(document).ready(function() {
                     };
                 };
 
-
-
-
-                containerWidth = app.picture.width;
-                containerHeight = app.picture.height;
-
-                elemWidth = app.watermark.width;
-                elemHeight = app.watermark.height;
-
-                elemRightPosition = containerWidth - elemWidth;
-                elemBottomPosition = containerHeight - elemHeight;
-
-                elemMiddlePositonWidth = (containerWidth / 2) - (elemWidth / 2);
-                elemMiddlePositonHeight = (containerHeight / 2) - (elemHeight / 2);
-
-                objPos = {
-                	'top-left': {
-                		'left': 0,
-                		'top': 0
-                	},
-                	'top-middle': {
-                		'left': elemMiddlePositonWidth,
-                		'top': 0
-                	},
-                	'top-right': {
-                		'left': elemRightPosition,
-                		'top': 0
-                	},
-                	'middle-left': {
-                		'left': 0,
-                		'top': elemMiddlePositonHeight
-                	},
-                	'middle-middle': {
-                		'left': elemMiddlePositonWidth,
-                		'top': elemMiddlePositonHeight
-                	},
-                	'middle-right': {
-                		'left': elemRightPosition,
-                		'top': elemMiddlePositonHeight
-                	},
-                	'bottom-left': {
-                		'left': 0,
-                		'top': elemBottomPosition
-                	},
-                	'bottom-middle': {
-                		'left': elemMiddlePositonWidth,
-                		'top': elemBottomPosition
-                	},
-                	'bottom-right': {
-                		'left': elemRightPosition,
-                		'top': elemBottomPosition
-                	}
-                };
-
-
-
-                // вызов функций, необходимых для дополнительных действий после выбора изображения
-                $('.radio_position').draga({
-                    container: app.imgConteiner,
-                    inputPush: '#' + imgID
-                });
-
-
-                multiplyElem.init();
-                opacity.init();
-
-                if($('#watermark').hasClass('buttons')) {
-              		drag.init();
-              	}
+                startModulesAfterUpload();
 
             };
             btn.removeAttr('disabled'); // разблокировать кнопку
