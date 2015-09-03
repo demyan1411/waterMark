@@ -12,24 +12,23 @@ var picModule = (function() {
 	};
 
 	var _makePicture = function(ev) {
-		var imgmain = "1.jpg",
-			imgwmark = "w1.png",
-			imgresult = "result.png",
-			coordx = "-100",
-			coordy = "-50",
-			marginx = "40",
-			marginy = "50",
-			opacity = "0.65",
-			mode = "tile",
-			url = '../php/watermark.php';
 		ev.preventDefault();
 		$.ajax({
-				url: url,
+				url: app.URL_WATERMARK_REQUEST,
 				type: "POST",
-				data: {imgmain:imgmain,imgwmark:imgwmark,imgresult:imgresult,coordx:coordx,coordy:coordy,marginx:marginx,marginy:marginy,opacity:opacity,mode:mode},
+				data: {
+					imgmain:app.picture.filename,
+					imgwmark:app.watermark.filename,
+					imgresult:app.FILENAME_RESULT,
+					coordx:app.watermark.coordx,
+					coordy:app.watermark.coordy,
+					marginx:app.watermark.marginx,
+					marginy:app.watermark.marginy,
+					opacity:app.watermark.opacity,
+					mode:app.watermark.mode },
 				})
 			.done (function(answer) {
-				_imgDownload(imgresult);
+				_imgDownload(app.FILENAME_RESULT);
 				})
 			.fail (function(answer) {
 				console.log('fail');
@@ -39,7 +38,7 @@ var picModule = (function() {
 	};
 
 	var	_imgDownload = function(fname) {
-		var href = '../php/imgsave.php?fname=' + fname;
+		var href = app.URL_IMGSAVE_REQUEST + '?fname=' + fname;
 		window.open(href, '_self');
 	};
 
