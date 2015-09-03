@@ -6,16 +6,17 @@
 
 $img_path = "../uploads/";
 //Входные параметры
-$img_main = $img_path . $_GET['imgmain'];
-$img_wmark = $img_path . $_GET['imgwmark'];
+$img_main = $img_path . $_POST['imgmain'];
+$img_wmark = $img_path . $_POST['imgwmark'];
 $img_result = "result.png";
-$coordx = $_GET['coordx'];
-$coordy = $_GET['coordy'];
-$marginx = $_GET['marginx'];
-$marginy = $_GET['marginy'];
-$opacity = $_GET['opacity'] * 100;
-$mode = $_GET['mode']; // single/tile
+$coordx = $_POST['coordx'];
+$coordy = $_POST['coordy'];
+$marginx = $_POST['marginx'];
+$marginy = $_POST['marginy'];
+$opacity = $_POST['opacity'] * 100;
+$mode = $_POST['mode']; // single/tile
 
+// открываем картинки
 $bgpic = createImgObj($img_main);
 $wmpic = createImgObj($img_wmark);
 
@@ -68,23 +69,23 @@ else {
 }
 
 
-header('content-type: image/png');
+// header('content-type: image/png');
 // imagepng($bgpic);
 imagepng($bgpic, $img_result, 6);
+// file_force_download2 ($img_result);
 
 // уничтожаем объекты картинок
 imagedestroy($bgpic);
 imagedestroy($wmpic);
 
-exit();
+exit;
 
 /**
  * PNG ALPHA CHANNEL SUPPORT for imagecopymerge();
  * This is a function like imagecopymerge but it handle alpha channel well!!!
  * http://sina.salek.ws/content/alpha-support-phps-imagecopymerge-function
  **/
-function imagecopymerge_alpha($dst_im, $src_im, $dst_x, $dst_y, $src_x, $src_y, $src_w, $src_h, $opacity){
-
+function imagecopymerge_alpha($dst_im, $src_im, $dst_x, $dst_y, $src_x, $src_y, $src_w, $src_h, $opacity) {
 	// creating a cut resource
 	$cut = imagecreatetruecolor($src_w, $src_h);
 
@@ -95,13 +96,11 @@ function imagecopymerge_alpha($dst_im, $src_im, $dst_x, $dst_y, $src_x, $src_y, 
 	imagecopy($cut, $src_im, 0, 0, $src_x, $src_y, $src_w, $src_h);
 	imagecopymerge($dst_im, $cut, $dst_x, $dst_y, $src_x, $src_y, $src_w, $src_h, $opacity);
 	imagedestroy($cut);
-
 }
 
 // функция создания объёкта картинки в соответствии с типом
 // входной параметр - имя файла картинки с путём
-function createImgObj($imagesrc)
-{
+function createImgObj($imagesrc) {
 	$type = mime_content_type($imagesrc);
 	switch($type){
 		 case 'image/jpeg':
