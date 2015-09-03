@@ -28,6 +28,22 @@
   position: absolute;
   z-index: 2;
 }
+.repeatBlock {
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  //transform: translate(-50%, -50%);
+  z-index: 2;
+  width: 120%;
+  height: 120%;
+  overflow: hidden;
+
+  .draggable {
+    position: relative;
+    display: block;
+    float: left;
+  }
+}
 .draggable.transition {
   transition: all ease .3s;
 }
@@ -51,13 +67,13 @@
 .coordinates {
   display: inline-block;
   vertical-align: top;
-  margin-left: 10px;
-  position: relative;
+  position: absolute;
   height: inherit;
+  right: 20px;
   display: inline-block;
 }
 .coordinates__input {
-  display: block;
+  display: inline-block;
   width: 45px;
   height: 45px;
   border: 1px solid #9eb2c0;
@@ -66,16 +82,17 @@
   text-align: center;
   line-height: 45px;
   background: #dbe1e8;
+  margin-left: 5px;
 }
 .coordinates__block {
-  position: absolute;
+  position: relative;
 }
 .coordinates__blockX {
   top: 0;
 }
 
 .coordinates__blockY {
-  bottom: 0;
+  bottom: -10px;
 }
 .coordinates__input_loc {
   position: absolute;

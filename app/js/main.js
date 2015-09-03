@@ -8,6 +8,8 @@ $(document).ready(function() {
 
 	addArrows.init();
 
+	
+
 	//startDraga(false);
 	$('form').on('submit', function(e) {
 		e.preventDefault();

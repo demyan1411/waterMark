@@ -17,6 +17,12 @@ var app = {
                   'height': 538
                 },
 
+    // название контейнера для вотермарка
+    imgConteiner : '.main-img-container',
+    flag : true,
+    uiSliderVal : 80,
+
+
     // данные по изображениям (их ключи должны совпадать с их id в html)
     // основная картинка
     picture : { 'url': '',
@@ -31,8 +37,25 @@ var app = {
                   'height': 0,
                   'container': {}
                 }
+
 };
+
+
 
 // задаем родительские контейнеры, чтобы вписываться в их размеры
 app.picture.container = app.CONTAINER;  // <- для основной картинки размеры контейнера будут браться из константы
 app.watermark.container = app.picture;  // <- а это поможет сжимать вотермарк по размерам основной картинки
+
+var containerWidth = app.picture.width,
+    containerHeight = app.picture.height,
+
+    elemWidth = app.watermark.width,
+    elemHeight = app.watermark.height,
+
+    elemRightPosition = containerWidth - elemWidth,
+    elemBottomPosition = containerHeight - elemHeight,
+
+    elemMiddlePositonWidth = (containerWidth / 2) - (elemWidth / 2),
+    elemMiddlePositonHeight = (containerHeight / 2) - (elemHeight / 2);
+
+var objPos = {};
