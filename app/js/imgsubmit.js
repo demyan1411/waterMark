@@ -1,8 +1,8 @@
-// /* imgsubmit.js
-//    модуль устанавливает обработчик события на кнопку Скачать
-//    и делает запрос с параметрами к watemark.php
-//    после чего вызывает imgsave.php для сохранения картинки у юзера
-// */
+/* imgsubmit.js
+   модуль устанавливает обработчик события на кнопку Скачать
+   и делает запрос с параметрами к watemark.php
+   после чего вызывает imgsave.php для сохранения картинки у юзера
+*/
 'use strict'
 
 var picModule = (function() {
@@ -16,6 +16,7 @@ var picModule = (function() {
 		$('.settings__btn-download').on('click', _makePicture);
 	};
 
+	// ajax запрос на обработчик картинок watermark
 	var _makePicture = function(ev) {
 		ev.preventDefault();
 		$.ajax({
@@ -24,7 +25,7 @@ var picModule = (function() {
 				data: {
 					imgmain:app.picture.url,
 					imgwmark:app.watermark.url,
-					imgresult:app.FILENAME_RESULT,
+					imgresult: app.UPLOAD_DIR + app.FILENAME_RESULT,
 					coordx:app.watermark.coordx,
 					coordy:app.watermark.coordy,
 					marginx:app.watermark.marginx,
@@ -33,8 +34,7 @@ var picModule = (function() {
 					mode:app.watermark.mode },
 				})
 			.done (function(answer) {
-				// console.log(answer);
-				_imgDownload(app.FILENAME_RESULT);
+				_imgDownload(app.UPLOAD_DIR + app.FILENAME_RESULT);
 				})
 			.fail (function(answer) {
 				console.log('fail');

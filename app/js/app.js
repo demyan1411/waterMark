@@ -15,7 +15,7 @@ var app = {
     URL_UPLOAD_REQUEST : "php/upload.php",  // обработчик запроса на загрузку картинок
     URL_WATERMARK_REQUEST : "../php/watermark.php",  // обработчик наложения вотермарка
     URL_IMGSAVE_REQUEST : "../php/imgsave.php",  // обработчик скачивания результирующей картинки
-    FILENAME_RESULT : "../uploads/result.png",  // имя файла результирующей картинки
+    FILENAME_RESULT : "result.png",  // имя файла результирующей картинки
     CONTAINER : { 'width': 650,      // размеры основного контейнера
                   'height': 538
                 },

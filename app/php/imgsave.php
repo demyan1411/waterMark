@@ -1,5 +1,9 @@
 <?php
-$filename = filter_input(INPUT_GET, 'fname');
+/* imgsave.php
+	 модуль содержит функцию file_force_download для сохранения файла формата png на стороне клиента
+	 входной параметр - путь к файлу на сервере
+*/
+$filename = "../" . filter_input(INPUT_GET, 'fname');
 file_force_download ($filename);
 exit;
 

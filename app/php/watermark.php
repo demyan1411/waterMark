@@ -7,7 +7,7 @@
 //Входные параметры
 $img_main = "../" . filter_input(INPUT_POST, 'imgmain');
 $img_wmark = "../" . filter_input(INPUT_POST, 'imgwmark');
-$img_result = filter_input(INPUT_POST, 'imgresult');
+$img_result = "../" . filter_input(INPUT_POST, 'imgresult');
 $coordx = filter_input(INPUT_POST, 'coordx');
 $coordy = filter_input(INPUT_POST, 'coordy');
 $marginx = filter_input(INPUT_POST, 'marginx');
@@ -58,11 +58,9 @@ if ($mode == 'tile') {
 else {
 	// простое наложение одиночного ватермарка
 	imagecopymerge_alpha($bgpic, $wmpic, $coordx, $coordy, 0, 0, imagesx($wmpic), imagesy($wmpic), $opacity );
-
 }
 
-
-// сохраняем картинку-результат
+// сохраняем картинку-результат на сервере
 imagepng($bgpic, $img_result, 6);
 
 // уничтожаем объекты картинок
@@ -72,8 +70,7 @@ imagedestroy($wmpic);
 exit;
 
 /**
- * PNG ALPHA CHANNEL SUPPORT for imagecopymerge();
- * This is a function like imagecopymerge but it handle alpha channel well!!!
+ * imagecopymerge() с поддержкой альфа-канала;
  * http://sina.salek.ws/content/alpha-support-phps-imagecopymerge-function
  **/
 function imagecopymerge_alpha($dst_im, $src_im, $dst_x, $dst_y, $src_x, $src_y, $src_w, $src_h, $opacity) {
@@ -89,8 +86,10 @@ function imagecopymerge_alpha($dst_im, $src_im, $dst_x, $dst_y, $src_x, $src_y, 
 	imagedestroy($cut);
 }
 
-// функция создания объёкта картинки в соответствии с типом
-// входной параметр - имя файла картинки с путём
+/**
+ * функция создания объёкта картинки в соответствии с её типом
+ * входной параметр - имя файла картинки с путём
+ **/
 function createImgObj($imagesrc) {
 	$type = mime_content_type($imagesrc);
 	switch($type){
