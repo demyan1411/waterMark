@@ -60,7 +60,8 @@
   z-index: 2;
   width: 120%;
   height: 120%;
-  overflow: hidden; }
+  overflow: hidden;
+  margin-left: 0; }
   .repeatBlock .draggable {
     position: relative;
     display: block;

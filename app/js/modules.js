@@ -377,7 +377,11 @@ var multiplyElem = (function() {
 	    repeatHeight,
 	    repeatS,
 	    imgSum,
-	    _difference;
+	    _difference,
+			_differenceHeight,
+			newImgSum,
+			posLeft,
+			posTop;
 
 	var start = function() {
 		_setUpListeners();
@@ -431,9 +435,10 @@ var multiplyElem = (function() {
 	},
 	_addImages = function() {
 		repeatWidth = $('.repeatBlock').width();
-	    repeatHeight = $('.repeatBlock').height();
-	    repeatS = repeatWidth * repeatHeight;
-	    _difference = (repeatWidth - app.picture.width) / 2;
+    repeatHeight = $('.repeatBlock').height();
+    repeatS = repeatWidth * repeatHeight;
+    _difference = (repeatWidth - app.picture.width) / 2;
+		_differenceHeight = (repeatHeight - app.picture.height) / 2;
 
 
 		imgSum = Math.ceil(repeatS / watermarkS);
@@ -454,49 +459,78 @@ var multiplyElem = (function() {
 
 			//console.log(repeatWidth);
 		$('.repeatBlock').draggable({
+
 			drag: function(){
 
 
 				var left = $(this).css('left'),
 						top = $(this).css('top'),
-						posLeft = parseInt(left.slice(0, -2), 10),
-						posTop = parseInt(top.substring(0, top.length - 2), 10);
+						marginLeft = parseInt($(this).css('margin-left').slice(0, -2), 10);
+
+				posLeft = parseInt(left.slice(0, -2), 10);
+				posTop = parseInt(top.substring(0, top.length - 2), 10);
+
+				newImgSum = Math.ceil(repeatS / watermarkS);
 
 				repeatWidth = $('.repeatBlock').width();
 				repeatHeight = $('.repeatBlock').height();
 				repeatS = repeatWidth * repeatHeight;
 
-				if(posLeft + repeatWidth < app.picture.width + _difference) {
+				$('.draggable').css({
+						'opacity': app.uiSliderVal / 100
+				});
 
-					var newImgSum = Math.ceil(repeatS / watermarkS);
+				_increaseWidthAndHeight();
 
-					if(newImgSum < imgSum * 4) {
-						$('.repeatBlock').css({
-							'width': (repeatWidth + _difference) + 'px'
-						});
-					}
+				console.log(app.picture.width);
+				console.log(repeatWidth);
 
-					for(var i = 0; i < newImgSum - imgSum; i++) {
-						$('.repeatBlock').append('<img src="' + app.watermark.url + '" class="draggable appendedImg">');
-					}
-				} else if(posLeft - _difference > 0) {
+				if (	 (posLeft  >  app.picture.width - app.watermark.width)
+						|| (posTop  >  app.picture.height - app.watermark.height)
+					  || ((posLeft + repeatWidth) < app.watermark.width)
+					 	|| ((posTop + repeatHeight) < app.watermark.height) ) {
 
-					var newImgSum = Math.ceil(repeatS / watermarkS);
+					$('.repeatBlock').draggable({
+						revert: true,
+						revertDuration: 200
+					});
+					//$('.repeatBlock').draggable({ containment: [0, 0, repeatWidth, repeatHeight] });
+				} else {
+					$('.repeatBlock').draggable({ revert: false});
 
-					if(newImgSum < imgSum * 4) {
-						$('.repeatBlock').css({
-							'width': (repeatWidth + _difference) + 'px',
-							'margin-left': -(posLeft +_difference) + 'px'
-						});
-					}
-
-					for(var i = 0; i < newImgSum - imgSum; i++) {
-						$('.repeatBlock').append('<img src="' + app.watermark.url + '" class="draggable appendedImg">');
-					}
 				}
 
 			}
+			//containment: [-app.picture.width, -app.picture.height + app.watermark.width + _differenceHeight, repeatWidth + app.watermark.width - _difference, repeatHeight + app.picture.height - _differenceHeight]
+
 		});
+	},
+	_increaseWidthAndHeight = function(nameBlock, namePic) {
+		if(posLeft + repeatWidth < app.picture.width + _difference) {
+
+			if(repeatWidth < app.picture.width * 2) {
+				$('.repeatBlock').css({
+					'width': (repeatWidth + _difference) + 'px'
+				});
+			}
+
+			for(var i = 0; i < newImgSum - imgSum; i++) {
+				$('.repeatBlock').append('<img src="' + app.watermark.url + '" class="draggable appendedImg">');
+			}
+		};
+
+		if(posTop + repeatHeight < app.picture.height + _differenceHeight) {
+
+			if(repeatHeight < app.picture.height * 2) {
+				$('.repeatBlock').css({
+					'height': (repeatHeight + _differenceHeight) + 'px'
+				});
+			}
+
+			for(var i = 0; i < newImgSum - imgSum; i++) {
+				$('.repeatBlock').append('<img src="' + app.watermark.url + '" class="draggable appendedImg">');
+			}
+		};
 	},
 	_removeAll = function() {
 		app.flag = true;
