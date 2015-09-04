@@ -1,6 +1,5 @@
 <?php
-$img_path = "../uploads/";
-$filename = $img_path . filter_input(INPUT_GET, 'fname');
+$filename = filter_input(INPUT_GET, 'fname');
 file_force_download ($filename);
 exit;
 

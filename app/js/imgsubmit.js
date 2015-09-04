@@ -1,3 +1,8 @@
+// /* imgsubmit.js
+//    модуль устанавливает обработчик события на кнопку Скачать
+//    и делает запрос с параметрами к watemark.php
+//    после чего вызывает imgsave.php для сохранения картинки у юзера
+// */
 'use strict'
 
 var picModule = (function() {
@@ -17,8 +22,8 @@ var picModule = (function() {
 				url: app.URL_WATERMARK_REQUEST,
 				type: "POST",
 				data: {
-					imgmain:app.picture.filename,
-					imgwmark:app.watermark.filename,
+					imgmain:app.picture.url,
+					imgwmark:app.watermark.url,
 					imgresult:app.FILENAME_RESULT,
 					coordx:app.watermark.coordx,
 					coordy:app.watermark.coordy,
@@ -28,6 +33,7 @@ var picModule = (function() {
 					mode:app.watermark.mode },
 				})
 			.done (function(answer) {
+				// console.log(answer);
 				_imgDownload(app.FILENAME_RESULT);
 				})
 			.fail (function(answer) {
@@ -37,6 +43,7 @@ var picModule = (function() {
 		return true;
 	};
 
+// вызывает imgsave.php для сохранения картинки у юзера
 	var	_imgDownload = function(fname) {
 		var href = app.URL_IMGSAVE_REQUEST + '?fname=' + fname;
 		window.open(href, '_self');
