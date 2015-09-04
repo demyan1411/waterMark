@@ -33,6 +33,12 @@ function startModulesAfterUpload() {
     elemMiddlePositonWidth = (containerWidth / 2) - (elemWidth / 2);
     elemMiddlePositonHeight = (containerHeight / 2) - (elemHeight / 2);
 
+    pictureS = app.picture.width * app.picture.height;
+    watermarkS = app.watermark.width * app.watermark.height;
+
+
+
+
     objPos = {
     	'top-left': {
     		'left': 0,

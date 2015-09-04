@@ -61,7 +61,10 @@ $(document).ready(function() {
             console.log(answer.text);
             if (answer.status === 'OK') {
                 // изменить url картинки для элемента, который указан в атрибуте 'data-img'
-                $('#'+imgID).attr("src", answer.url);
+                //$('#'+imgID).attr("src", answer.url);
+                
+                // хак, который позволяет принудительно загрузить картинку, даже если она есть в кэше браузера
+                $('#'+imgID).attr("src", answer.url+'?' + new Date().getTime());
 
                 // изменить текст фэйкового инпута на имя сохраненного файла
                 $('#'+fakeinputID).text(answer.filename);

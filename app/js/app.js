@@ -45,10 +45,10 @@ var app = {
                   'opacity': 1, // прозрачность от 0 до 1
                   'mode': 'notile', // режим наложения: tile или любое другое
                   'container': {}
-                }
+                },
+
 
 };
-
 
 // задаем родительские контейнеры, чтобы вписываться в их размеры
 app.picture.container = app.CONTAINER;  // <- для основной картинки размеры контейнера будут браться из константы
@@ -64,6 +64,9 @@ var containerWidth = app.picture.width,
     elemBottomPosition = containerHeight - elemHeight,
 
     elemMiddlePositonWidth = (containerWidth / 2) - (elemWidth / 2),
-    elemMiddlePositonHeight = (containerHeight / 2) - (elemHeight / 2);
+    elemMiddlePositonHeight = (containerHeight / 2) - (elemHeight / 2),
+
+    pictureS,
+    watermarkS;
 
 var objPos = {};

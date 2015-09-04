@@ -373,6 +373,15 @@ var drag = (function() {
 var multiplyElem = (function() {
 
 	var elem = $('.draggable');
+	var repeatWidth,
+	    repeatHeight,
+	    repeatS,
+	    imgSum,
+	    _difference,
+			_differenceHeight,
+			newImgSum,
+			posLeft,
+			posTop;
 
 	var start = function() {
 		_setUpListeners();
@@ -409,9 +418,10 @@ var multiplyElem = (function() {
 					});
 			$(".draggable").draggable({ disabled: true });
 
-			_dragImages();
+
 
 			_addImages();
+			_dragImages();
 
 			$('.settings__position-btn').removeClass('btn-active');
 			$('.settings__position-btn_many').addClass('btn-active');
@@ -424,9 +434,20 @@ var multiplyElem = (function() {
 		}
 	},
 	_addImages = function() {
-		for(var i = 0; i < 30 ; i++) {
+		repeatWidth = $('.repeatBlock').width();
+    repeatHeight = $('.repeatBlock').height();
+    repeatS = repeatWidth * repeatHeight;
+    _difference = (repeatWidth - app.picture.width) / 2;
+		_differenceHeight = (repeatHeight - app.picture.height) / 2;
+
+
+		imgSum = Math.ceil(repeatS / watermarkS);
+
+		for(var i = 0; i < imgSum; i++) {
 			$('.repeatBlock').append('<img src="' + app.watermark.url + '" class="draggable appendedImg">');
 		}
+		//console.log(imgSum);
+
 		$('.draggable').css({
 				'opacity': app.uiSliderVal / 100
 		});
@@ -435,26 +456,81 @@ var multiplyElem = (function() {
 		$('.appendedImg').remove();
 	},
 	_dragImages = function() {
+
+			//console.log(repeatWidth);
 		$('.repeatBlock').draggable({
+
 			drag: function(){
-				var repeatWidth = $('.repeatBlock').width();
+
 
 				var left = $(this).css('left'),
 						top = $(this).css('top'),
-						posLeft = parseInt(left.slice(0, -2), 10),
-						posTop = parseInt(top.substring(0, top.length - 2), 10),
-						_c = -(repeatWidth - containerWidth) / 2;
+						marginLeft = parseInt($(this).css('margin-left').slice(0, -2), 10);
 
-				console.log(_c);
+				posLeft = parseInt(left.slice(0, -2), 10);
+				posTop = parseInt(top.substring(0, top.length - 2), 10);
 
-				if(posLeft < _c) {
-					$('.repeatBlock').css({
-						'width': (repeatWidth + 10) + 'px'
+				newImgSum = Math.ceil(repeatS / watermarkS);
+
+				repeatWidth = $('.repeatBlock').width();
+				repeatHeight = $('.repeatBlock').height();
+				repeatS = repeatWidth * repeatHeight;
+
+				$('.draggable').css({
+						'opacity': app.uiSliderVal / 100
+				});
+
+				_increaseWidthAndHeight();
+
+				console.log(app.picture.width);
+				console.log(repeatWidth);
+
+				if (	 (posLeft  >  app.picture.width - app.watermark.width)
+						|| (posTop  >  app.picture.height - app.watermark.height)
+					  || ((posLeft + repeatWidth) < app.watermark.width)
+					 	|| ((posTop + repeatHeight) < app.watermark.height) ) {
+
+					$('.repeatBlock').draggable({
+						revert: true,
+						revertDuration: 200
 					});
+					//$('.repeatBlock').draggable({ containment: [0, 0, repeatWidth, repeatHeight] });
+				} else {
+					$('.repeatBlock').draggable({ revert: false});
+
 				}
 
 			}
+			//containment: [-app.picture.width, -app.picture.height + app.watermark.width + _differenceHeight, repeatWidth + app.watermark.width - _difference, repeatHeight + app.picture.height - _differenceHeight]
+
 		});
+	},
+	_increaseWidthAndHeight = function(nameBlock, namePic) {
+		if(posLeft + repeatWidth < app.picture.width + _difference) {
+
+			if(repeatWidth < app.picture.width * 2) {
+				$('.repeatBlock').css({
+					'width': (repeatWidth + _difference) + 'px'
+				});
+			}
+
+			for(var i = 0; i < newImgSum - imgSum; i++) {
+				$('.repeatBlock').append('<img src="' + app.watermark.url + '" class="draggable appendedImg">');
+			}
+		};
+
+		if(posTop + repeatHeight < app.picture.height + _differenceHeight) {
+
+			if(repeatHeight < app.picture.height * 2) {
+				$('.repeatBlock').css({
+					'height': (repeatHeight + _differenceHeight) + 'px'
+				});
+			}
+
+			for(var i = 0; i < newImgSum - imgSum; i++) {
+				$('.repeatBlock').append('<img src="' + app.watermark.url + '" class="draggable appendedImg">');
+			}
+		};
 	},
 	_removeAll = function() {
 		app.flag = true;
