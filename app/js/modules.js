@@ -106,20 +106,14 @@ $.fn.draga = function(options) {
 
     },
     _setUpListeners = function() {
-			elem.css(objPos['top-left']);
-			$('[type=radio]').removeAttr("checked")
-											 .addClass('click');
-			$('.radio__label').css({
-			 'cursor': 'pointer'
-		 });
+			_switchOnButtons();
 
-			_clickInput();
-
-			$('[data-pos=top-left]').attr("checked", "checked");
-
-			$('.posX').val('0');
-			$('.posY').val('0');
-
+			$('.settings__position-btn_many').on('click', function() {
+				_switchOffButtons();
+			});
+			$('.settings__position-btn_one').on('click', function() {
+				_switchOnButtons();
+			});
     },
 
     _clickInput = function() {
@@ -140,7 +134,31 @@ $.fn.draga = function(options) {
     	  $('.posY').val(posTop);
 
      	});
-    }
+    },
+		_switchOffButtons = function() {
+			$('[data-pos]').off('click');
+			$('[type=radio]').removeAttr("checked")
+											 .removeClass('click');
+			$('.radio__label').css({
+				'cursor': 'default'
+			});
+		},
+		_switchOnButtons = function() {
+
+				elem.css(objPos['top-left']);
+				$('[type=radio]').removeAttr("checked")
+												 .addClass('click');
+				$('.radio__label').css({
+				 'cursor': 'pointer'
+			 });
+
+				_clickInput();
+
+				$('[data-pos=top-left]').attr("checked", "checked");
+
+				$('.posX').val('0');
+				$('.posY').val('0');
+		}
 
     return {
       init: start
@@ -157,7 +175,6 @@ $.fn.draga = function(options) {
 			if($('#watermark').hasClass('buttons')) {
         _setUpListeners();
 			}
-
 
     },
     _setUpListeners = function() {
@@ -391,9 +408,9 @@ var multiplyElem = (function() {
 
 		_loadRemove();
 
+
 		$('.settings__position-btn_many').on('click', function() {
 			_multiply();
-
 		});
 
 		$('.settings__position-btn_one').on('click', function() {
@@ -405,27 +422,27 @@ var multiplyElem = (function() {
 
 	},
 	_multiply = function() {
-		if(app.flag === true) {
+		if($('#watermark').hasClass('buttons')) {
+			if(app.flag === true) {
 
-			app.flag = false;
+				app.flag = false;
 
-			$('#watermark')
+				$('#watermark')
 
-			elem.wrap('<div class="repeatBlock"></div>')
-					.addClass('repeatElem')
-					.css({
-						'left': 0,
-						'top': 0
-					});
-			$(".draggable").draggable({ disabled: true });
+				elem.wrap('<div class="repeatBlock"></div>')
+						.addClass('repeatElem')
+						.css({
+							'left': 0,
+							'top': 0
+						});
+				$(".draggable").draggable({ disabled: true });
 
+				_addImages();
+				_dragImages();
 
-
-			_addImages();
-			_dragImages();
-
-			$('.settings__position-btn').removeClass('btn-active');
-			$('.settings__position-btn_many').addClass('btn-active');
+				$('.settings__position-btn').removeClass('btn-active');
+				$('.settings__position-btn_many').addClass('btn-active');
+			}
 		}
 
 	},

@@ -13,8 +13,8 @@ var app = {
     UPLOAD_DIR : "uploads/",  // каталог для загрузки файлов (относительно основной директории)
     FILE_MAX_SIZE : 1000000,  // максимальный размер файла
     URL_UPLOAD_REQUEST : "php/upload.php",  // обработчик запроса на загрузку картинок
-    URL_WATERMARK_REQUEST : "../php/watermark.php",  // обработчик наложения вотермарка
-    URL_IMGSAVE_REQUEST : "../php/imgsave.php",  // обработчик скачивания результирующей картинки
+    URL_WATERMARK_REQUEST : "php/watermark.php",  // обработчик наложения вотермарка
+    URL_IMGSAVE_REQUEST : "php/imgsave.php",  // обработчик скачивания результирующей картинки
     FILENAME_RESULT : "result.png",  // имя файла результирующей картинки
     CONTAINER : { 'width': 650,      // размеры основного контейнера
                   'height': 538
