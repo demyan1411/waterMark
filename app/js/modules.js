@@ -75,7 +75,7 @@ $.fn.draga = function(options) {
 		  posX,
 		  posY;
 
-// если был загружен вотермарк
+			// если был загружен вотермарк
 	if(input === '#watermark') {
 		$('.location').css({
 			'opacity': 1
@@ -96,7 +96,7 @@ $.fn.draga = function(options) {
 
 
 
-// method for 9 radio buttons for change coordinates
+	// method for 9 radio buttons for change coordinates
   var buttons = (function() {
 
     var start = function() {
@@ -148,7 +148,7 @@ $.fn.draga = function(options) {
 
   }());
 
-// method for arrows whitch move elem
+	// method for arrows whitch move elem
   var arrows = (function() {
 
     var arrow;
@@ -309,18 +309,19 @@ $.fn.draga = function(options) {
 
 
   	buttons.init();
+
   	arrows.init();
 		//opacity.init();
 
-}
-
-function addRed(left, top) {
-	$('[type=radio]').removeAttr("checked");
-	for(var key in objPos) {
-		if(left == objPos[key].left && top == objPos[key].top) {
-			$('[data-pos = ' + key + ']').attr("checked", 'checked');
-		}
 	}
+
+	function addRed(left, top) {
+		$('[type=radio]').removeAttr("checked");
+		for(var key in objPos) {
+			if(left == objPos[key].left && top == objPos[key].top) {
+				$('[data-pos = ' + key + ']').attr("checked", 'checked');
+			}
+		}
 }
 // method for drag elem
 var drag = (function() {
@@ -482,8 +483,6 @@ var multiplyElem = (function() {
 
 				_increaseWidthAndHeight();
 
-				console.log(app.picture.width);
-				console.log(repeatWidth);
 
 				if (	 (posLeft  >  app.picture.width - app.watermark.width)
 						|| (posTop  >  app.picture.height - app.watermark.height)
