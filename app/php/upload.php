@@ -8,6 +8,7 @@
     - если изображение превышает размеры контейнера, то оно пропорционально уменьшается
     - возвращается ответ с информацией о том, каким элементам и какие значения нужно изменить
 */
+session_start();
 
 // подключим функцию для ресайзинга изображения при сохранении
 require_once('resize.php');
@@ -16,7 +17,8 @@ $target_dir = $_POST['uploadDir'];  // каталог для загрузки ф
 $maxSize = $_POST['maxSize'];       // максимальный размер файла
 $maxWidth = $_POST['maxWidth'];     // ширина контейнера для картинки
 $maxHeight = $_POST['maxHeight'];   // высота контейнера для картинки
-$filename = basename($_FILES[0]["name"]);
+$filename_user = basename($_FILES[0]["name"]); // имя файла
+$filename = "^" . session_id() . "^" . basename($_FILES[0]["name"]); // уникализированное имя файла
 $tmp_file = $_FILES[0]["tmp_name"];  // временный файл
 $target_file = "../" . $target_dir . $filename; // путь и имя будущего файла
 $target_url = $target_dir . $filename;          // url к будущему файлу
@@ -50,6 +52,7 @@ else if (!move_uploaded_file($tmp_file, $target_file)) {
         $answer['status'] = 'OK';
         $answer['text'] = 'Файл сохранен: ' . $target_url . ' ('. $newSize['width'] . ' x ' . $newSize['height'] .')';
         $answer['url'] = $target_url;
+        $answer['filename_user'] = $filename_user;
         $answer['filename'] = $filename;
         $answer['width'] = $newSize['width'];
         $answer['height'] = $newSize['height'];

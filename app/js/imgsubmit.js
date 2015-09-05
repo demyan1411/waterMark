@@ -23,9 +23,9 @@ var picModule = (function() {
 				url: app.URL_WATERMARK_REQUEST,
 				type: "POST",
 				data: {
-					imgmain:app.picture.url,
-					imgwmark:app.watermark.url,
-					imgresult: app.UPLOAD_DIR + app.FILENAME_RESULT,
+					imgmain:app.picture.filename,
+					imgwmark:app.watermark.filename,
+					uploaddir: app.UPLOAD_DIR,
 					coordx:app.watermark.coordx,
 					coordy:app.watermark.coordy,
 					marginx:app.watermark.marginx,
@@ -34,7 +34,8 @@ var picModule = (function() {
 					mode:app.watermark.mode },
 				})
 			.done (function(answer) {
-				_imgDownload(app.UPLOAD_DIR + app.FILENAME_RESULT);
+				console.log(answer);
+				_imgDownload(encodeURIComponent(answer));
 				})
 			.fail (function(answer) {
 				console.log('fail');

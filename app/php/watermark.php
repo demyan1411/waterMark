@@ -1,13 +1,13 @@
 <?php
 /* watermark.php
-	 модуль содержит функцию watermark для наложения одного изображения поверх другого
-	 по заданным параметрам
+	 функция watermark для наложения одного изображения поверх другого по заданным параметрам
+	 возвращает имя результирующего файла
 */
-
+session_start();
 //Входные параметры
-$img_main = "../" . filter_input(INPUT_POST, 'imgmain');
-$img_wmark = "../" . filter_input(INPUT_POST, 'imgwmark');
-$img_result = "../" . filter_input(INPUT_POST, 'imgresult');
+$img_main = "../" . filter_input(INPUT_POST, 'uploaddir') . filter_input(INPUT_POST, 'imgmain');
+$img_wmark = "../" . filter_input(INPUT_POST, 'uploaddir') . filter_input(INPUT_POST, 'imgwmark');
+$img_result = "../" . filter_input(INPUT_POST, 'uploaddir') . "^" . session_id() . "^" . "result.png";
 $coordx = filter_input(INPUT_POST, 'coordx');
 $coordy = filter_input(INPUT_POST, 'coordy');
 $marginx = filter_input(INPUT_POST, 'marginx');
@@ -67,7 +67,7 @@ imagepng($bgpic, $img_result, 6);
 imagedestroy($bgpic);
 imagedestroy($wmpic);
 
-exit;
+exit($img_result);
 
 /**
  * imagecopymerge() с поддержкой альфа-канала;

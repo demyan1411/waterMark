@@ -15,7 +15,6 @@ var app = {
     URL_UPLOAD_REQUEST : "php/upload.php",  // обработчик запроса на загрузку картинок
     URL_WATERMARK_REQUEST : "../php/watermark.php",  // обработчик наложения вотермарка
     URL_IMGSAVE_REQUEST : "../php/imgsave.php",  // обработчик скачивания результирующей картинки
-    FILENAME_RESULT : "result.png",  // имя файла результирующей картинки
     CONTAINER : { 'width': 650,      // размеры основного контейнера
                   'height': 538
                 },
@@ -29,6 +28,7 @@ var app = {
     // данные по изображениям (их ключи должны совпадать с их id в html)
     // основная картинка
     picture : { 'url': '',
+                'filename': '',
                 'width': 0,
                 'height': 0,
                 'container': {}  // контейнер, в размеры которого необходимо вписываться
@@ -36,6 +36,7 @@ var app = {
 
     // водяной знак
     watermark : { 'url': '',
+                  'filename': '',
                   'width': 0,
                   'height': 0,
                   'coordx': 0, // смещение по оси X

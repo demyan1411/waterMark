@@ -62,15 +62,16 @@ $(document).ready(function() {
             if (answer.status === 'OK') {
                 // изменить url картинки для элемента, который указан в атрибуте 'data-img'
                 //$('#'+imgID).attr("src", answer.url);
-                
+
                 // хак, который позволяет принудительно загрузить картинку, даже если она есть в кэше браузера
                 $('#'+imgID).attr("src", answer.url+'?' + new Date().getTime());
 
                 // изменить текст фэйкового инпута на имя сохраненного файла
-                $('#'+fakeinputID).text(answer.filename);
+                $('#'+fakeinputID).text(answer.filename_user);
 
                 // сохраняем данные картинки в общих переменных
                 app[imgID].url = answer.url;
+                app[imgID].filename = answer.filename;
                 app[imgID].width = answer.width;
                 app[imgID].height = answer.height;
 
