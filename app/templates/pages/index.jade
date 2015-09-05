@@ -15,15 +15,18 @@ block content
 					form(action='' , method='get')
 						.settings__form
 							.settings__form-wrap
-								label.settings__label(for='input-picture') Исходное изображение
+								label.settings__label(for='input-picture')
+									span(data-lang='["Исходное изображение", "Original image"]') Исходное изображение
 									input#input-picture.settings__input-hide(type= 'file', data-img="picture", data-fakeinput="fakeinput-picture")
 									div#fakeinput-picture.settings__input Выберите файл
 							.settings__form-wrap
-								label.settings__label(for='input-watermark') Водяной знак
+								label.settings__label(for='input-watermark')
+									span(data-lang='["Водяной знак", "Watermark"]') Водяной знак
 									input#input-watermark.settings__input-hide(type= 'file', data-img="watermark", data-fakeinput="fakeinput-watermark", disabled="disabled")
 									div#fakeinput-watermark.settings__input Выберите файл
 						.settings__position.line-top
-							.settings__position-title Положение
+							.settings__position-title
+								span(data-lang='["Положение", "Location"]') Положение
 								.settings__position-buttons
 									.settings__position-btn.settings__position-btn_many
 										.settings__position-btn_min
@@ -39,10 +42,10 @@ block content
 										input.coordinates__input.posY(value="", readonly="readonly")
 
 						.settings__opacity.line-top
-							.settings__opacity-title Прозрачность
+							.settings__opacity-title(data-lang='["Прозрачность", "Opacity"]') Прозрачность
 							.slider.not_work
 								.ui-slider
 
 						.settings__btn.line-top
-							button.settings__btn-reset.form__btn(type='reset') Сброс
+							button.settings__btn-reset.form__btn(type='reset', data-lang='["Сброс", "Reset"]') Сброс
 							button.settings__btn-download.form__btn(type='submit', data-lang='["Скачать", "Download"]') Скачать
