@@ -3,20 +3,24 @@
 	position: fixed;
 	top: 100px;
 	left: 0;
-		&__language {
-			margin: 0 0 18px 0;
-			font-family: "SegoeUILight";
-			font-size: 20px;
-				&-link {
-					display: block;
-					//min-width: 43px;
-					padding: 4px 2px;
-					color:$text-icons;
-					margin-bottom: 1px;
-					background:$bg-icons;
-					text-align: center;
-				}
-		}
+	&__language {
+		margin: 0 0 18px 0;
+		font-family: "SegoeUILight";
+		font-size: 20px;
+		&-item &-link {
+			display: block;
+			//min-width: 43px;
+			padding: 4px 2px;
+			margin-bottom: 1px;
+			text-align: center;
+			color: $text-icons;
+			background: $bg-icons;
+		};
+		&-item.active &-link {
+			color: $text-icons-active;
+			background: $bg-icons-active;
+		};
+	};
 }
 .icons {
 		&__share {
@@ -84,9 +88,9 @@
 .icons__socials{
 	position: absolute;
 	left: -44px;
-	-webkit-transition: left 500ms cubic-bezier(0.140, 0.050, 0.230, 0.970); 
-   	-moz-transition: left 500ms cubic-bezier(0.140, 0.050, 0.230, 0.970); 
-    -o-transition: left 500ms cubic-bezier(0.140, 0.050, 0.230, 0.970); 
+	-webkit-transition: left 500ms cubic-bezier(0.140, 0.050, 0.230, 0.970);
+   	-moz-transition: left 500ms cubic-bezier(0.140, 0.050, 0.230, 0.970);
+    -o-transition: left 500ms cubic-bezier(0.140, 0.050, 0.230, 0.970);
     transition: left 500ms cubic-bezier(0.140, 0.050, 0.230, 0.970); /* custom */
 
 	&:hover {

@@ -479,13 +479,16 @@
     margin: 0 0 18px 0;
     font-family: "SegoeUILight";
     font-size: 20px; }
-    .icons__language-link {
+    .icons__language-item .icons__language-link {
       display: block;
       padding: 4px 2px;
-      color: #999ca1;
       margin-bottom: 1px;
-      background: #d7d5d7;
-      text-align: center; }
+      text-align: center;
+      color: #999ca1;
+      background: #d7d5d7; }
+    .icons__language-item.active .icons__language-link {
+      color: #ffffff;
+      background: #b2b0b2; }
 
 .icons__share-link {
   display: block;
