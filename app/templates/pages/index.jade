@@ -5,13 +5,13 @@ block content
 	.main-content__wrapper
 		.container
 			section.generator
-				.generator__title Генератор водяных знаков
+				.generator__title.text(data-ru="Генератор водяных знаков", data-en="Watermark generator") Генератор водяных знаков
 				.generator__img-wrap.cont
 					.main-img-container
 						img#picture.main-img
 						img#watermark.opacity_block.draggable.radio_position
 			section.settings
-					.settings__title Настройки
+					.settings__title.text(data-ru="Настройки", data-en="Settings") Настройки
 					form(action='' , method='get')
 						.settings__form
 							.settings__form-wrap
@@ -45,4 +45,4 @@ block content
 
 						.settings__btn.line-top
 							button.settings__btn-reset.form__btn(type='reset') Сброс
-							button.settings__btn-download.form__btn(type='submit') Скачать
+							button.settings__btn-download.form__btn.text(type='submit', data-ru="Скачать", data-en="Download") Скачать
