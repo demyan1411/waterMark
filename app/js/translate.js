@@ -16,14 +16,14 @@ var translate = (function() {
     //$('.settings__btn-download').on('click', _makePicture);
   };
 
-  // изменить текст элементов с классом ".text"
+  // изменить текст элементов с атрибутом 'lang'
   var changeLang = function() {
 
     //event.preventDefault();
 
-    $('.text').each(function() {
+    $('[data-lang]').each(function() {
       var $this = $(this);
-      $this.text($this.data('en'));
+      $this.text( $this.data('lang')[1] );
     });
   };
 
