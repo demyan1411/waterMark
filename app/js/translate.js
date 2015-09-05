@@ -3,7 +3,7 @@
    и содержит функцию для изменения текста элементов с атрибутом 'data-lang'
 
    Пример:
-   Чтобы изменить язык на английский, набрать в консоли: translate.changeLang(1)
+   чтобы изменить язык на английский, набрать в консоли: translate.changeLang(1)
 */
 'use strict';
 
@@ -22,7 +22,7 @@ var translate = (function() {
   var _setupListeners = function() {
     $('.icons__language-link').on('click', function(event) {
       event.preventDefault();
-      changeLang(this.getAttribute("href"));
+      changeLang( app.LANGS[this.getAttribute("href")] );
     });
   };
 

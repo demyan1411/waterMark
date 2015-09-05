@@ -12,19 +12,17 @@ var app = {
     // константы
     UPLOAD_DIR : "uploads/",  // каталог для загрузки файлов (относительно основной директории)
     FILE_MAX_SIZE : 1000000,  // максимальный размер файла
-    URL_UPLOAD_REQUEST : "php/upload.php",  // обработчик запроса на загрузку картинок
+    URL_UPLOAD_REQUEST : "php/upload.php",        // обработчик запроса на загрузку картинок
     URL_WATERMARK_REQUEST : "php/watermark.php",  // обработчик наложения вотермарка
-    URL_IMGSAVE_REQUEST : "php/imgsave.php",  // обработчик скачивания результирующей картинки
-    FILENAME_RESULT : "result.png",  // имя файла результирующей картинки
-    CONTAINER : { 'width': 650,      // размеры основного контейнера
-                  'height': 538
-                },
+    URL_IMGSAVE_REQUEST : "php/imgsave.php",      // обработчик скачивания результирующей картинки
+    FILENAME_RESULT : "result.png",               // имя файла результирующей картинки
+    CONTAINER : { 'width': 650, 'height': 538 },  // размеры основного контейнера
+    LANGS : { 'ru': 0, 'en': 1 },                 // нумерация языков интерфейса
 
     // название контейнера для вотермарка
     imgConteiner : '.main-img-container',
     flag : true,
     uiSliderVal : 80,
-
 
     // данные по изображениям (их ключи должны совпадать с их id в html)
     // основная картинка
@@ -54,6 +52,7 @@ var app = {
 // задаем родительские контейнеры, чтобы вписываться в их размеры
 app.picture.container = app.CONTAINER;  // <- для основной картинки размеры контейнера будут браться из константы
 app.watermark.container = app.picture;  // <- а это поможет сжимать вотермарк по размерам основной картинки
+
 
 var containerWidth = app.picture.width,
     containerHeight = app.picture.height,
