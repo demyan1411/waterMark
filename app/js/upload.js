@@ -71,6 +71,7 @@ $(document).ready(function() {
 
                 // сохраняем данные картинки в общих переменных
                 app[imgID].url = answer.url;
+                app[imgID].filename = answer.filename;
                 app[imgID].width = answer.width;
                 app[imgID].height = answer.height;
 
