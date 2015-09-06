@@ -8,8 +8,6 @@ $time_cur = time();
 $dir_uploads = '../uploads/';
 $dir_list = scandir($dir_uploads);
 
-var_dump($dir_list);
-
 $i=2; // начинаем с 2 элемента, потому что 0 и 1 это "." и ".."
 while($i < count($dir_list)):
 	$dir_time = filemtime($dir_uploads . $dir_list[$i]);
