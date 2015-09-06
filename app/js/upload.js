@@ -67,7 +67,7 @@ $(document).ready(function() {
                 $('#'+imgID).attr("src", answer.url+'?' + new Date().getTime());
 
                 // изменить текст фэйкового инпута на имя сохраненного файла
-                $('#'+fakeinputID).text(answer.filename_user);
+                $('#'+fakeinputID).text(answer.filename);
 
                 // сохраняем данные картинки в общих переменных
                 app[imgID].url = answer.url;

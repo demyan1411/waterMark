@@ -4,10 +4,12 @@
 	 возвращает имя результирующего файла
 */
 session_start();
+$session_dir = session_id() . "/"; // уникализированное имя директории для файлов юзера
+
 //Входные параметры
-$img_main = "../" . filter_input(INPUT_POST, 'uploaddir') . filter_input(INPUT_POST, 'imgmain');
-$img_wmark = "../" . filter_input(INPUT_POST, 'uploaddir') . filter_input(INPUT_POST, 'imgwmark');
-$img_result = "../" . filter_input(INPUT_POST, 'uploaddir') . "^" . session_id() . "^" . "result.png";
+$img_main = "../" . filter_input(INPUT_POST, 'uploaddir') . $session_dir . filter_input(INPUT_POST, 'imgmain');
+$img_wmark = "../" . filter_input(INPUT_POST, 'uploaddir') . $session_dir . filter_input(INPUT_POST, 'imgwmark');
+$img_result = "../" . filter_input(INPUT_POST, 'uploaddir') . $session_dir . "result.png";
 $coordx = filter_input(INPUT_POST, 'coordx');
 $coordy = filter_input(INPUT_POST, 'coordy');
 $marginx = filter_input(INPUT_POST, 'marginx');

@@ -17,11 +17,15 @@ $target_dir = $_POST['uploadDir'];  // каталог для загрузки ф
 $maxSize = $_POST['maxSize'];       // максимальный размер файла
 $maxWidth = $_POST['maxWidth'];     // ширина контейнера для картинки
 $maxHeight = $_POST['maxHeight'];   // высота контейнера для картинки
-$filename_user = basename($_FILES[0]["name"]); // имя файла
-$filename = "^" . session_id() . "^" . basename($_FILES[0]["name"]); // уникализированное имя файла
+$filename = basename($_FILES[0]["name"]); // имя файла
+$session_dir = session_id() . "/"; // уникализированное имя директории для файлов юзера
 $tmp_file = $_FILES[0]["tmp_name"];  // временный файл
-$target_file = "../" . $target_dir . $filename; // путь и имя будущего файла
-$target_url = $target_dir . $filename;          // url к будущему файлу
+$target_file = "../" . $target_dir . $session_dir . $filename; // путь и имя будущего файла
+$target_url = $target_dir . $session_dir . $filename;          // url к будущему файлу
+
+if (!file_exists("../" . $target_dir . $session_dir)) {
+    mkdir("../" . $target_dir . $session_dir);
+}
 
 $imageFileType = pathinfo($target_file, PATHINFO_EXTENSION);
 $answer =  array();  // ответ от сервера
@@ -52,7 +56,6 @@ else if (!move_uploaded_file($tmp_file, $target_file)) {
         $answer['status'] = 'OK';
         $answer['text'] = 'Файл сохранен: ' . $target_url . ' ('. $newSize['width'] . ' x ' . $newSize['height'] .')';
         $answer['url'] = $target_url;
-        $answer['filename_user'] = $filename_user;
         $answer['filename'] = $filename;
         $answer['width'] = $newSize['width'];
         $answer['height'] = $newSize['height'];
