@@ -88,7 +88,9 @@ $(document).ready(function() {
                     if (app.picture.width < app.watermark.width || app.picture.height < app.watermark.height) {
                         $('#watermark').attr("src", '');
                         $('#input-watermark').val('');
-                        $('#fakeinput-watermark').text('Выберите файл');
+                        //$('#fakeinput-watermark').text('Выберите файл');
+                        var $fakeinput = $('#fakeinput-watermark');
+                        $fakeinput.text( $fakeinput.data('lang')[app.LANGS[app.currentLang]] );
                         app.watermark.url = '';
                         app.watermark.width = 0;
                         app.watermark.height = 0;
