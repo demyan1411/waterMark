@@ -42,7 +42,14 @@ var translate = (function() {
   var changeLang = function(numLang) {
     elemsWithLang.each(function() {
       var $this = $(this);
-      $this.text( $this.data('lang')[numLang] );
+      // для простых элементов достаточно просто изменить текст
+      // $this.text( $this.data('lang')[numLang] );
+
+      // из-за фэйковых инпутов приходится делать проверку, что в них нет имени файла
+      var arrTexts = $this.data('lang');
+      if ($.inArray($this.text(), arrTexts) != -1) {
+        $this.text( arrTexts[numLang] );
+      };
     });
   };
 
