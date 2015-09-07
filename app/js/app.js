@@ -20,6 +20,8 @@ var app = {
     CONTAINER : { 'width': 650, 'height': 538 },  // размеры основного контейнера
     LANGS : { 'ru': 0, 'en': 1 },                 // нумерация языков интерфейса
 
+    // классы элементов, которые нужно блокировать на время работы прелоадера
+    CLASSES_BLOCKING_AT_PRELOADER : '.settings__input-hide, .settings__btn-download, .settings__btn-reset',
 
     // название контейнера для вотермарка
     imgConteiner : '.main-img-container',

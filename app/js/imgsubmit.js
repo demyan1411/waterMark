@@ -17,8 +17,8 @@ var picModule = (function() {
 	};
 
 	// ajax запрос на обработчик картинок watermark
-	var _makePicture = function(ev) {
-		ev.preventDefault();
+	var _makePicture = function(event) {
+		event.preventDefault();
 
 		if(app.watermark.mode === 'tile') {
 			app.watermark.coordx = parseInt($('.repeatBlock').css('left').slice(0, -2), 10);
