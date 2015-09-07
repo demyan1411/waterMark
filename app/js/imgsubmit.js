@@ -19,6 +19,15 @@ var picModule = (function() {
 	// ajax запрос на обработчик картинок watermark
 	var _makePicture = function(ev) {
 		ev.preventDefault();
+
+		if(app.watermark.mode === 'tile') {
+			app.watermark.coordx = parseInt($('.repeatBlock').css('left').slice(0, -2), 10);
+			app.watermark.coordy = parseInt($('.repeatBlock').css('top').slice(0, -2), 10);
+		} else {
+			app.watermark.coordx = $('.posX').val();
+			app.watermark.coordy = $('.posY').val();
+		}
+
 		$.ajax({
 				url: app.URL_WATERMARK_REQUEST,
 				type: "POST",
@@ -55,5 +64,3 @@ var picModule = (function() {
 	};
 
 })();
-
-picModule.init();

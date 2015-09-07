@@ -8,11 +8,13 @@ $(document).ready(function() {
 
 	addArrows.init();
 
-
+	picModule.init();
 
 	//startDraga(false);
 	$('form').on('submit', function(e) {
 		e.preventDefault();
+
+
 	});
 
 
@@ -21,25 +23,15 @@ $(document).ready(function() {
 
 
 function startModulesAfterUpload() {
-	containerWidth = app.picture.width;
-    containerHeight = app.picture.height;
-
-    elemWidth = app.watermark.width;
-    elemHeight = app.watermark.height;
-
-    elemRightPosition = containerWidth - elemWidth;
-    elemBottomPosition = containerHeight - elemHeight;
-
-    elemMiddlePositonWidth = (containerWidth / 2) - (elemWidth / 2);
-    elemMiddlePositonHeight = (containerHeight / 2) - (elemHeight / 2);
-
-    pictureS = app.picture.width * app.picture.height;
-    watermarkS = app.watermark.width * app.watermark.height;
 
 
+    var elemRightPosition = app.picture.width - app.watermark.width,
+    		elemBottomPosition = app.picture.height - app.watermark.height,
 
+		    elemMiddlePositonWidth = (app.picture.width / 2) - (app.watermark.width / 2),
+		    elemMiddlePositonHeight = (app.picture.height / 2) - (app.watermark.height / 2);
 
-    objPos = {
+    app.objPos = {
     	'top-left': {
     		'left': 0,
     		'top': 0
@@ -86,11 +78,14 @@ function startModulesAfterUpload() {
         inputPush: '#' + imgID
     });
 
+		if($('#watermark').hasClass('buttons')) {
+    	multiplyElem.init();
+    	opacity.init();
+			drag.init();
 
-    multiplyElem.init();
-    opacity.init();
+			$('.ui-slider-handle').css({
+				'cursor': 'pointer'
+			});
+		};
 
-    if($('#watermark').hasClass('buttons')) {
-  		drag.init();
-  	}
 }

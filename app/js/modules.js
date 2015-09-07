@@ -27,6 +27,7 @@ var opacity = (function() {
 					value: app.uiSliderVal,
 					slide: function( event, ui ) {
 						app.uiSliderVal = ui.value;
+						app.watermark.opacity = ui.value / 100;
 						$('.draggable').removeClass('transition');
 						if($('#watermark').hasClass('buttons')) {
 							$('.draggable').css({
@@ -34,6 +35,7 @@ var opacity = (function() {
 							});
 
 						} else{ return false }
+						//console.log(app.watermark.opacity);
 
 					}
 				});
@@ -87,8 +89,8 @@ $.fn.draga = function(options) {
 
 
 	$(options.container).css({
-		'width': containerWidth + 'px',
-		'height': containerHeight + 'px'
+		'width': app.picture.width + 'px',
+		'height': app.picture.height + 'px'
 	});
 
 
@@ -100,9 +102,9 @@ $.fn.draga = function(options) {
   var buttons = (function() {
 
     var start = function() {
-			if($('#watermark').hasClass('buttons')) {
-      	_setUpListeners();
-			}
+
+    	_setUpListeners();
+
 
     },
     _setUpListeners = function() {
@@ -125,13 +127,15 @@ $.fn.draga = function(options) {
      		var position = $(this).data('pos');
 
 
-        posLeft = Math.round(objPos[position].left);
-        posTop = Math.round(objPos[position].top);
+        posLeft = Math.round(app.objPos[position].left);
+        posTop = Math.round(app.objPos[position].top);
 
-				elem.css(objPos[position]);
+				elem.css(app.objPos[position]);
 
       	$('.posX').val(posLeft);
     	  $('.posY').val(posTop);
+
+
 
      	});
     },
@@ -145,7 +149,7 @@ $.fn.draga = function(options) {
 		},
 		_switchOnButtons = function() {
 
-				elem.css(objPos['top-left']);
+				elem.css(app.objPos['top-left']);
 				$('[type=radio]').removeAttr("checked")
 												 .addClass('click');
 				$('.radio__label').css({
@@ -169,12 +173,15 @@ $.fn.draga = function(options) {
 	// method for arrows whitch move elem
   var arrows = (function() {
 
+		var elemRightPosition = app.picture.width - app.watermark.width,
+    		elemBottomPosition = app.picture.height - app.watermark.height;
+
     var arrow;
 
     var start = function() {
-			if($('#watermark').hasClass('buttons')) {
-        _setUpListeners();
-			}
+
+      _setUpListeners();
+
 
     },
     _setUpListeners = function() {
@@ -257,7 +264,7 @@ $.fn.draga = function(options) {
           elemCssLeftNumber,
           elemCssTop,
           elemCssTopNumber;
-      //console.log(elemRightPosition);
+
 
 
 			if(arrow.hasClass(up)) {
@@ -324,18 +331,18 @@ $.fn.draga = function(options) {
 
   }());
 
-
+	if($('#watermark').hasClass('buttons')) {
   	buttons.init();
-
   	arrows.init();
+	}
 		//opacity.init();
 
 	}
 
 	function addRed(left, top) {
 		$('[type=radio]').removeAttr("checked");
-		for(var key in objPos) {
-			if(left == objPos[key].left && top == objPos[key].top) {
+		for(var key in app.objPos) {
+			if(left == app.objPos[key].left && top == app.objPos[key].top) {
 				$('[data-pos = ' + key + ']').attr("checked", 'checked');
 			}
 		}
@@ -390,16 +397,19 @@ var drag = (function() {
 
 var multiplyElem = (function() {
 
+
+
 	var elem = $('.draggable');
 	var repeatWidth,
 	    repeatHeight,
-	    repeatS,
 	    imgSum,
 	    _difference,
 			_differenceHeight,
 			newImgSum,
 			posLeft,
-			posTop;
+			posTop,
+			watermarkS,
+			repeatS;
 
 	var start = function() {
 		_setUpListeners();
@@ -425,6 +435,8 @@ var multiplyElem = (function() {
 		if($('#watermark').hasClass('buttons')) {
 			if(app.flag === true) {
 
+				app.watermark.mode = 'tile';
+
 				app.flag = false;
 
 				$('#watermark')
@@ -448,6 +460,7 @@ var multiplyElem = (function() {
 	},
 	_doOneElem = function() {
 		if(app.flag === false) {
+			app.watermark.mode = 'notile';
 			_removeAll();
 		}
 	},
@@ -457,6 +470,7 @@ var multiplyElem = (function() {
     repeatS = repeatWidth * repeatHeight;
     _difference = (repeatWidth - app.picture.width) / 2;
 		_differenceHeight = (repeatHeight - app.picture.height) / 2;
+		watermarkS = app.watermark.width * app.watermark.height;
 
 
 		imgSum = Math.ceil(repeatS / watermarkS);
@@ -474,7 +488,7 @@ var multiplyElem = (function() {
 		$('.appendedImg').remove();
 	},
 	_dragImages = function() {
-
+		watermarkS = app.watermark.width * app.watermark.height
 			//console.log(repeatWidth);
 		$('.repeatBlock').draggable({
 
@@ -515,6 +529,8 @@ var multiplyElem = (function() {
 					$('.repeatBlock').draggable({ revert: false});
 
 				}
+
+
 
 			}
 			//containment: [-app.picture.width, -app.picture.height + app.watermark.width + _differenceHeight, repeatWidth + app.watermark.width - _difference, repeatHeight + app.picture.height - _differenceHeight]

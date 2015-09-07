@@ -669,7 +669,6 @@ body {
   .line-top:after {
     position: absolute;
     z-index: 2;
-    bottom: -10px;
     left: 50%;
     margin-left: -9px;
     content: '';
@@ -678,10 +677,9 @@ body {
     border-right: 9px solid transparent;
     border-left: 9px solid transparent; }
   .line-top:before {
-    top: -1px;
+    top: -2px;
     position: absolute;
     z-index: 5;
-    bottom: -8px;
     left: 50%;
     margin-left: -9px;
     content: '';
