@@ -44,6 +44,12 @@ var preloader = (function (){
   var stop = function() {
       imgPreloader.css({ 'display': 'none' });
       elemsForBlock.removeAttr('disabled');
+
+      // дополнительные проверки
+      // если основная картинка не выбрана, то инпут вотермарка должен быть заблокирован
+      if (!app.picture.url) {
+        $('#input-watermark').attr('disabled', 'disabled');
+      };
   };
 
   return {
