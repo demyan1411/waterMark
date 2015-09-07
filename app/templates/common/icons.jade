@@ -1,0 +1,14 @@
+aside.icons
+		ul.icons__language
+			//- each items in ["РУС", "ENG"]
+			//- 	li.icons__language-item
+			//- 		a.icons__language-link(href="#")= items
+			li.icons__language-item.active: a.icons__language-link(href="ru") РУС
+			li.icons__language-item: a.icons__language-link(href="en") ENG
+		div.icons__socials
+			a.icons__share-link.icons__share-link--like(href="#") like
+			ul.icons__share
+							- var items = {'fb' : 'facebook', 'tw' : 'twitter' , 'vk' : 'vkontakte'};
+							each value, key in items
+								li.icons__share-item--socials
+									a(href="#" class="icons__share-link icons__share-link--" + key)= value
