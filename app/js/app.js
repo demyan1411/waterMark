@@ -50,7 +50,17 @@ var app = {
                   'mode': 'notile', // режим наложения: tile или любое другое
                   'container': {}
                 },
-    objPos: {}
+    objPos: {
+      'top-left': {},
+    	'top-middle': {},
+    	'top-right': {},
+    	'middle-left': {},
+    	'middle-middle': {},
+    	'middle-right': {},
+    	'bottom-left': {},
+    	'bottom-middle': {},
+    	'bottom-right': {}
+    }
 };
 
 

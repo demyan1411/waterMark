@@ -120,7 +120,8 @@
 			display: inline-block;
 			top: 5px;
 			margin-left: 6px;
-			cursor: pointer;
+			cursor: default;
+			opacity: .5;
 
 			&:after {
 				content: '';

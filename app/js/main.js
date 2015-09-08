@@ -10,12 +10,16 @@ $(document).ready(function() {
 
 	picModule.init();
 
+	//resetAll.init();
+
 	//startDraga(false);
 	$('form').on('submit', function(e) {
 		e.preventDefault();
 
 
 	});
+
+
 
 
 
@@ -83,9 +87,11 @@ function startModulesAfterUpload() {
     	opacity.init();
 			drag.init();
 
+
 			$('.ui-slider-handle').css({
 				'cursor': 'pointer'
 			});
+
 		};
 
 }
