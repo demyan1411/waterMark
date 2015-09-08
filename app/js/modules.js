@@ -250,6 +250,12 @@ $.fn.draga = function(options) {
 				'margin-right': 0,
 				'margin-bottom': 0
 			});
+			$('.marginX').css({
+				'width': 0
+			});
+			$('.marginY').css({
+				'height': 0
+			});
 
 			if(arrowFlag === 'one') {
 				$('.coordinates__input_loc')

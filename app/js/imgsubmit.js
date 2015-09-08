@@ -23,6 +23,8 @@ var picModule = (function() {
 		if(app.watermark.mode === 'tile') {
 			app.watermark.coordx = parseInt($('.repeatBlock').css('left').slice(0, -2), 10);
 			app.watermark.coordy = parseInt($('.repeatBlock').css('top').slice(0, -2), 10);
+			app.watermark.marginx = $('.posX').val();
+			app.watermark.marginy = $('.posY').val();
 		} else {
 			app.watermark.coordx = $('.posX').val();
 			app.watermark.coordy = $('.posY').val();
