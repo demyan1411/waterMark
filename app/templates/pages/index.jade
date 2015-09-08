@@ -14,12 +14,12 @@ block content
 					.settings__title(data-lang='["Настройки", "Settings"]') Настройки
 					form(action='' , method='get')
 						.settings__form
-							.settings__form-wrap
+							.settings__form-wrap#formwrap-picture
 								label.settings__label(for='input-picture')
 									span(data-lang='["Исходное изображение", "Original image"]') Исходное изображение
 									input#input-picture.settings__input-hide(type= 'file', data-img="picture", data-fakeinput="fakeinput-picture")
 									div#fakeinput-picture.settings__input(data-lang='["Выберите файл", "Choose file"]') Выберите файл
-							.settings__form-wrap
+							.settings__form-wrap#formwrap-watermark
 								label.settings__label(for='input-watermark')
 									span(data-lang='["Водяной знак", "Watermark"]') Водяной знак
 									input#input-watermark.settings__input-hide(type= 'file', data-img="watermark", data-fakeinput="fakeinput-watermark", disabled="disabled")

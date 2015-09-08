@@ -43,7 +43,7 @@ var picModule = (function() {
 					mode:app.watermark.mode },
 				})
 			.done (function(answer) {
-				console.log(answer);
+				//console.log(answer);
 				_imgDownload(encodeURIComponent(answer));
 				})
 			.fail (function(answer) {

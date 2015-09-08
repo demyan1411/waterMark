@@ -50,6 +50,11 @@ var preloader = (function (){
       if (!app.picture.url) {
         $('#input-watermark').attr('disabled', 'disabled');
         $('.settings__btn-download').attr('disabled', 'disabled');
+        $('#formwrap-watermark').fadeTo(0, 0.5);
+        $('.settings__btn-download').fadeTo(0, 0.5);
+      } else {
+        $('#formwrap-watermark').fadeTo(0, 1);
+        $('.settings__btn-download').fadeTo(0, 1);
       };
   };
 

@@ -661,6 +661,9 @@ body {
 .settings__form-wrap {
   margin-bottom: 25px; }
 
+#formwrap-watermark {
+  opacity: 0.5; }
+
 /* инпуты END */
 /* линия красная с уголком */
 .line-top {
@@ -770,7 +773,8 @@ body {
     background: #c1cfd9; }
   .settings__btn-download {
     float: right;
-    background: #f97e76; }
+    background: #f97e76;
+    opacity: 0.5; }
 
 .form__btn {
   outline: none;

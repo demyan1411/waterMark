@@ -64,6 +64,10 @@
 .settings__form-wrap {
 		margin-bottom: 25px;
 }
+// начальное состояние вотермарка - заблокирован
+#formwrap-watermark {
+		opacity: 0.5;
+}
 
 /* инпуты END */
 
@@ -199,6 +203,7 @@
 		&-download {
 			float: right;
 			background: $main-red;
+			opacity: 0.5;
 		}
 }
 .form__btn {
