@@ -203,7 +203,11 @@ $.fn.draga = function(options) {
   var arrows = (function() {
 
 		var elemRightPosition = app.picture.width - app.watermark.width,
-    		elemBottomPosition = app.picture.height - app.watermark.height;
+    		elemBottomPosition = app.picture.height - app.watermark.height,
+				elemCssLeft,
+				elemCssLeftNumber,
+				elemCssTop,
+				elemCssTopNumber;
 
     var arrow,
 				arrowFlag = 'one';
@@ -216,7 +220,7 @@ $.fn.draga = function(options) {
     _setUpListeners = function() {
 
 			arrowFlag = 'one';
-			console.log(arrowFlag);
+			//console.log(arrowFlag);
 			_arrowsOn();
 			$('.settings__position-btn').css({
 				'opacity': 1,
@@ -253,7 +257,7 @@ $.fn.draga = function(options) {
 
 							arrow = $(this);
 							_moveElem();
-							console.log(arrowFlag);
+							//console.log(arrowFlag);
 						})
 						.addClass('js-hover');
 				$('.coordinates__input').css({
@@ -316,7 +320,7 @@ $.fn.draga = function(options) {
 
 			$('.coordinates__input')
 				.on('focus', function() {
-					$this = $(this);
+					var $this = $(this);
 
 					$this.val('')
 							 .removeAttr('readonly');
@@ -324,6 +328,7 @@ $.fn.draga = function(options) {
 				})
 	      .on('change keyup input click', function() {
 					$('.draggable').addClass('transition');
+					var $this = $(this);
 
 					if (this.value.match(/[^0-9]/g)) {
 			      this.value = this.value.replace(/[^0-9]/g, '');
@@ -373,7 +378,7 @@ $.fn.draga = function(options) {
 					}
 				})
 				.on('blur', function() {
-
+					var $this = $(this);
 					if($this.val() === '') {
 
 						if(arrowFlag === 'one') {
@@ -411,11 +416,8 @@ $.fn.draga = function(options) {
 
       var up = 'coordinates__input_loc-up',
           inputText = arrow.siblings('.coordinates__input'),
-          thisText = parseInt(inputText.val(), 10),
-          elemCssLeft,
-          elemCssLeftNumber,
-          elemCssTop,
-          elemCssTopNumber;
+          thisText = parseInt(inputText.val(), 10);
+
 
 
 
