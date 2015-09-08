@@ -46,9 +46,10 @@ var preloader = (function (){
       elemsForBlock.removeAttr('disabled');
 
       // дополнительные проверки
-      // если основная картинка не выбрана, то инпут вотермарка должен быть заблокирован
+      // если основная картинка не выбрана, то инпут вотермарка и кнопка Скачать остаются заблокированны
       if (!app.picture.url) {
         $('#input-watermark').attr('disabled', 'disabled');
+        $('.settings__btn-download').attr('disabled', 'disabled');
       };
   };
 
