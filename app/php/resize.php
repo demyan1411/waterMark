@@ -13,7 +13,7 @@ function resize($filename, $maxWidth, $maxHeight) {
     // то пропорционально уменьшает картинку и перезаписывает файл
     // возвращает: размеры картинки или false, если произошла ошибка
 
-    $layer = ImageWorkshop::initFromPath($filename);
+    $layer = ImageWorkshop::initFromPath($filename, true);
     $width = $layer->getWidth();
     $height = $layer->getHeight();
 
