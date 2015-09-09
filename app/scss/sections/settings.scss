@@ -64,6 +64,10 @@
 .settings__form-wrap {
 		margin-bottom: 25px;
 }
+// начальное состояние вотермарка - заблокирован
+#formwrap-watermark {
+		opacity: 0.5;
+}
 
 /* инпуты END */
 
@@ -74,7 +78,6 @@
 		&:after {
 			position: absolute;
 			z-index: 2;
-			bottom: -10px;
 			left: 50%;
 			margin-left: -9px;
 			content: '';
@@ -85,10 +88,9 @@
 
 		}
 		&:before {
-			top: -1px;
+			top: -2px;
 			position: absolute;
 			z-index: 5;
-			bottom: -8px;
 			left: 50%;
 			margin-left: -9px;
 			content: '';
@@ -122,7 +124,8 @@
 			display: inline-block;
 			top: 5px;
 			margin-left: 6px;
-			cursor: pointer;
+			cursor: default;
+			opacity: .5;
 
 			&:after {
 				content: '';
@@ -201,6 +204,7 @@
 		&-download {
 			float: right;
 			background: $main-red;
+			opacity: 0.5;
 		}
 }
 .form__btn {

@@ -17,15 +17,26 @@ var picModule = (function() {
 	};
 
 	// ajax запрос на обработчик картинок watermark
-	var _makePicture = function(ev) {
-		ev.preventDefault();
+	var _makePicture = function(event) {
+		event.preventDefault();
+
+		if(app.watermark.mode === 'tile') {
+			app.watermark.coordx = parseInt($('.repeatBlock').css('left').slice(0, -2), 10);
+			app.watermark.coordy = parseInt($('.repeatBlock').css('top').slice(0, -2), 10);
+			app.watermark.marginx = $('.posX').val();
+			app.watermark.marginy = $('.posY').val();
+		} else {
+			app.watermark.coordx = $('.posX').val();
+			app.watermark.coordy = $('.posY').val();
+		}
+
 		$.ajax({
 				url: app.URL_WATERMARK_REQUEST,
 				type: "POST",
 				data: {
-					imgmain:app.picture.url,
-					imgwmark:app.watermark.url,
-					imgresult: app.UPLOAD_DIR + app.FILENAME_RESULT,
+					imgmain:app.picture.filename,
+					imgwmark:app.watermark.filename,
+					uploaddir: app.UPLOAD_DIR,
 					coordx:app.watermark.coordx,
 					coordy:app.watermark.coordy,
 					marginx:app.watermark.marginx,
@@ -34,7 +45,8 @@ var picModule = (function() {
 					mode:app.watermark.mode },
 				})
 			.done (function(answer) {
-				_imgDownload(app.UPLOAD_DIR + app.FILENAME_RESULT);
+				//console.log(answer);
+				_imgDownload(encodeURIComponent(answer));
 				})
 			.fail (function(answer) {
 				console.log('fail');
@@ -54,5 +66,3 @@ var picModule = (function() {
 	};
 
 })();
-
-picModule.init();

@@ -76,12 +76,12 @@
   opacity: .5; }
 
 .radio {
-  width: 101px;
-  height: 100px;
+  width: 100px;
+  height: 104px;
   box-sizing: border-box;
   border-radius: 3px;
-  overflow: hidden;
-  border: 1px solid #9eb2c0;
+  /* overflow: hidden; */
+  /* border: 1px solid #9eb2c0; */
   display: inline-block;
   vertical-align: top;
   position: relative; }
@@ -155,13 +155,25 @@
   box-sizing: border-box;
   background: #dbe1e8;
   border: 1px solid #9eb2c0;
-  border-right: none;
-  margin-left: -1px;
-  margin-top: -2px;
-  margin-right: 0;
+  /* border-right: none; */
+  margin-right: -1px;
+  margin-top: -1px;
+  /* margin-right: 0; */
   float: left;
   -webkit-transition: all linear 0.3s;
   transition: all linear 0.3s; }
+
+.radio__label:nth-of-type(1) {
+  border-radius: 3px 0 0 0; }
+
+.radio__label:nth-of-type(3) {
+  border-radius: 0 3px 0 0; }
+
+.radio__label:nth-of-type(7) {
+  border-radius: 0 0 0 3px; }
+
+.radio__label:nth-of-type(9) {
+  border-radius: 0 0 3px 0; }
 
 .click:checked + .radio__label {
   cursor: pointer; }
@@ -175,6 +187,27 @@
 
 .slider.not_work .ui-state-default:active:after {
   background: #9eb2c0; }
+
+.appendedImg {
+  margin-right: 0;
+  margin-bottom: 0; }
+
+.margins {
+  position: absolute;
+  background: #f97e76;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 0;
+  height: 0; }
+
+.marginX {
+  height: 100%;
+  max-width: 96%; }
+
+.marginY {
+  width: 98%;
+  max-height: 96%; }
 
 /*! jQuery UI - v1.11.4 - 2015-08-27
 * http://jqueryui.com
@@ -479,13 +512,16 @@
     margin: 0 0 18px 0;
     font-family: "SegoeUILight";
     font-size: 20px; }
-    .icons__language-link {
+    .icons__language-item .icons__language-link {
       display: block;
       padding: 4px 2px;
-      color: #999ca1;
       margin-bottom: 1px;
-      background: #d7d5d7;
-      text-align: center; }
+      text-align: center;
+      color: #999ca1;
+      background: #d7d5d7; }
+    .icons__language-item.active .icons__language-link {
+      color: #ffffff;
+      background: #b2b0b2; }
 
 .icons__share-link {
   display: block;
@@ -658,6 +694,9 @@ body {
 .settings__form-wrap {
   margin-bottom: 25px; }
 
+#formwrap-watermark {
+  opacity: 0.5; }
+
 /* инпуты END */
 /* линия красная с уголком */
 .line-top {
@@ -666,7 +705,6 @@ body {
   .line-top:after {
     position: absolute;
     z-index: 2;
-    bottom: -10px;
     left: 50%;
     margin-left: -9px;
     content: '';
@@ -675,10 +713,9 @@ body {
     border-right: 9px solid transparent;
     border-left: 9px solid transparent; }
   .line-top:before {
-    top: -1px;
+    top: -2px;
     position: absolute;
     z-index: 5;
-    bottom: -8px;
     left: 50%;
     margin-left: -9px;
     content: '';
@@ -707,7 +744,8 @@ body {
     display: inline-block;
     top: 5px;
     margin-left: 6px;
-    cursor: pointer; }
+    cursor: default;
+    opacity: .5; }
     .settings__position-btn:after {
       content: '';
       width: 12px;
@@ -769,7 +807,8 @@ body {
     background: #c1cfd9; }
   .settings__btn-download {
     float: right;
-    background: #f97e76; }
+    background: #f97e76;
+    opacity: 0.5; }
 
 .form__btn {
   outline: none;
@@ -809,7 +848,7 @@ body {
     margin: 4px 0 56px 23px; }
   .generator__img-wrap {
     position: relative;
-    background: url(../img/bg.jpg) no-repeat 0 0;
+    background: url(../img/bg-mini.png) repeat 0 0;
     width: 650px;
     height: 538px;
     margin: 0 auto; }
