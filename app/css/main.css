@@ -507,7 +507,8 @@
 .icons {
   position: fixed;
   top: 100px;
-  left: 0; }
+  left: 0;
+  z-index: 5; }
   .icons__language {
     margin: 0 0 18px 0;
     font-family: "SegoeUILight";
@@ -553,17 +554,32 @@
 .icons__share-link--fb {
   background-position: -7px -342px; }
   .icons__share-link--fb:hover {
-    background-position: -7px -295px; }
+    background-position: -7px -295px;
+    animation: shakeThatBooty 0.3s linear 1;
+    -webkit-animation: shakeThatBooty 0.3s linear 1;
+    -moz-animation: shakeThatBooty 0.3s linear 1;
+    -o-animation: shakeThatBooty 0.3s linear 1;
+    -ms-animation: shakeThatBooty 0.3s linear 1; }
 
 .icons__share-link--tw {
   background-position: -13px -109px; }
   .icons__share-link--tw:hover {
-    background-position: -13px -67px; }
+    background-position: -13px -67px;
+    animation: shakeThatBooty 0.3s linear 1;
+    -webkit-animation: shakeThatBooty 0.3s linear 1;
+    -moz-animation: shakeThatBooty 0.3s linear 1;
+    -o-animation: shakeThatBooty 0.3s linear 1;
+    -ms-animation: shakeThatBooty 0.3s linear 1; }
 
 .icons__share-link--vk {
   background-position: -15px -26px; }
   .icons__share-link--vk:hover {
-    background-position: -15px 12px; }
+    background-position: -15px 12px;
+    animation: shakeThatBooty 0.3s linear 1;
+    -webkit-animation: shakeThatBooty 0.3s linear 1;
+    -moz-animation: shakeThatBooty 0.3s linear 1;
+    -o-animation: shakeThatBooty 0.3s linear 1;
+    -ms-animation: shakeThatBooty 0.3s linear 1; }
 
 .icons__socials {
   position: absolute;
@@ -575,6 +591,26 @@
   /* custom */ }
   .icons__socials:hover {
     left: 0; }
+
+@keyframes shakeThatBooty {
+  33% {
+    transform: rotateZ(10deg);
+    -webkit-transform: rotateZ(10deg);
+    -moz-transform: rotateZ(10deg);
+    -o-transform: rotateZ(10deg);
+    -ms-transform: rotateZ(10deg); }
+  67% {
+    transform: rotateZ(-10deg);
+    -webkit-transform: rotateZ(-10deg);
+    -moz-transform: rotateZ(-10deg);
+    -o-transform: rotateZ(-10deg);
+    -ms-transform: rotateZ(-10deg); }
+  100% {
+    transform: rotateZ(10deg);
+    -webkit-transform: rotateZ(10deg);
+    -moz-transform: rotateZ(10deg);
+    -o-transform: rotateZ(10deg);
+    -ms-transform: rotateZ(10deg); } }
 
 .footer {
   width: 100%;
@@ -810,6 +846,7 @@ body {
     background: #f97e76;
     opacity: 0.5; }
 
+/* общие для кнопок */
 .form__btn {
   outline: none;
   border: none;
@@ -823,7 +860,11 @@ body {
   -moz-background-clip: padding;
   -webkit-background-clip: padding-box;
   background-clip: padding-box;
-  width: 99px; }
+  width: 99px;
+  -webkit-transition: all 0.3s;
+  -moz-transition: all 0.3s;
+  transition: all 0.3s;
+  position: relative; }
 
 /* главный контейнер */
 .container {

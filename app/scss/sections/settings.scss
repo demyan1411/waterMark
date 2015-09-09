@@ -207,6 +207,7 @@
 			opacity: 0.5;
 		}
 }
+/* общие для кнопок */
 .form__btn {
 		outline: none;
 		border: none;
@@ -216,4 +217,8 @@
 		font-family: 'robotomedium';
 		@include border-radius (3px);
 		width: 99px;
+		-webkit-transition: all 0.3s;
+		-moz-transition: all 0.3s;
+		transition: all 0.3s;
+		position: relative;
 }
