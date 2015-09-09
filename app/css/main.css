@@ -54,12 +54,12 @@
   position: absolute;
   z-index: 2; }
 
+.containmentForWatermarks {
+  position: absolute; }
+
 .repeatBlock {
   position: absolute;
-  top: 0px;
   z-index: 2;
-  width: 120%;
-  height: 120%;
   overflow: hidden;
   margin-left: 0; }
   .repeatBlock .draggable {
@@ -69,6 +69,9 @@
 
 .draggable.transition {
   transition: all ease 0.3s; }
+
+.repeatBlock.transition {
+  transition: all ease 0.4s; }
 
 .location {
   position: relative;

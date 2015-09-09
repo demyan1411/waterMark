@@ -207,7 +207,11 @@ $.fn.draga = function(options) {
 				elemCssLeft,
 				elemCssLeftNumber,
 				elemCssTop,
-				elemCssTopNumber;
+				elemCssTopNumber,
+				ratioWidth = (Math.floor( app.picture.width / app.watermark.width)) * 2,
+				ratioHeight = (Math.floor( app.picture.height / app.watermark.height)) * 2,
+				repeatWidth,
+				repeatHeight;
 
     var arrow,
 				arrowFlag = 'one';
@@ -278,7 +282,7 @@ $.fn.draga = function(options) {
 				$('.coordinates__input_loc').on('click', function() {
 					arrow = $(this);
 					_giveMargin();
-					console.log(arrowFlag);
+					//console.log(arrowFlag);
 				});
 
 				_mousePress();
@@ -289,34 +293,79 @@ $.fn.draga = function(options) {
 
 			var	up = 'coordinates__input_loc-up',
           inputText = arrow.siblings('.coordinates__input'),
-          thisText = parseInt(inputText.val(), 10);
-			//console.log(thisText);
+          thisText = parseInt(inputText.val(), 10),
+					repeatWidth = parseInt($('.repeatBlock').css('width').slice(0, -2), 10),
+					repeatHeight = parseInt($('.repeatBlock').css('height').slice(0, -2), 10),
+
+					marginMinus = parseInt($('.posX').val(), 10);
+
 			if(arrow.hasClass(up)) {
         _move(1);
       } else {
-        if(thisText < 1) { thisText = 1; }
-        _move(-1);
+        if(thisText === 0) { return false }
+					else{
+	        	_move(-1);
+					}
       }
+
 
       function _move(one) {
         if(inputText.hasClass('posX')){
 					inputText.val(thisText + one);
-        	$('.appendedImg, #watermark').css({
-						'margin-right': thisText + one + 'px'
+
+					var inputMarX = parseInt($('.posX').val(), 10);
+					// 		inputMarY = parseInt($('.posY').val(), 10);
+					//
+					// console.log($('.repeatBlock').css('width'));
+					// console.log((ratioWidth * app.watermark.width) + ((ratioWidth-1) * inputMarX));
+					//console.log(parseInt($('.posX').val(), 10))
+					$('.repeatBlock').css({
+						'width': ((ratioWidth * app.watermark.width) + ((ratioWidth-1) * inputMarX)) + 'px'
 					});
 					$('.marginX').css({
 						'width': thisText + one + 'px'
 					});
+					$('.appendedImg:not(.lastW), #watermark').css({
+						'margin-right': thisText + one + 'px'
+					});
+					//console.log($('.lastW').css('margin-right'));
+					$('.lastW').css({
+						'margin-right': '0'
+					});
+
+
+
+
+
+					var leftForW = (app.watermark.width*ratioWidth) - (app.picture.width/2);
+
+				$('.containmentForWatermarks').css({
+					'width': app.watermark.width*ratioWidth*2 + 'px',
+
+					'left': -leftForW + 'px'
+				 });
+
+
+					// console.log($('.repeatBlock').css('width'));
+					// console.log((ratioWidth * app.watermark.width) + ((ratioWidth-1) * inputMarX));
 					//console.log(one);
 
         } else {
 					inputText.val(thisText + one);
-        	$('.appendedImg, #watermark').css({
+        	$('.appendedImg:not(.lastT), #watermark').css({
 						'margin-bottom': thisText + one +'px'
 					});
 					$('.marginY').css({
 						'height': thisText + one + 'px'
 					});
+					$('.repeatBlock').css({
+						'height':(repeatHeight + (one*(ratioHeight-1))) + 'px'
+					});
+					$('.lastT').css({
+						'margin-bottom': '0'
+					});
+
+					//console.log(ratioHeight);
         }
       }
 
@@ -333,7 +382,7 @@ $.fn.draga = function(options) {
 
 				})
 	      .on('change keyup input click', function() {
-					$('.draggable').addClass('transition');
+
 					var $this = $(this);
 
 					if (this.value.match(/[^0-9]/g)) {
@@ -341,6 +390,7 @@ $.fn.draga = function(options) {
 			    }
 
 					if(arrowFlag === 'one') {
+						$('.draggable').addClass('transition');
 
 						if($this.hasClass('posX') && $('.posX').val() > elemRightPosition) {
 
@@ -359,7 +409,7 @@ $.fn.draga = function(options) {
 						_addRed();
 
 					} else if(arrowFlag === 'many') {
-
+						//console.log($('.posX').val());
 						if($this.hasClass('posX') && $('.posX').val() > 200) {
 
 						 $('.posX').val(200);
@@ -374,6 +424,12 @@ $.fn.draga = function(options) {
 							'margin-right': $('.posX').val() + 'px',
 							'margin-bottom': $('.posY').val() + 'px'
 						});
+						$('.lastT').css({
+							'margin-bottom': '0'
+						});
+						$('.lastW').css({
+							'margin-right': '0'
+						});
 
 						$('.marginX').css({
 							'width': $('.posX').val() + 'px'
@@ -381,6 +437,14 @@ $.fn.draga = function(options) {
 						$('.marginY').css({
 							'height': $('.posY').val() + 'px'
 						});
+
+						var inputMarX = parseInt($('.posX').val(), 10),
+								inputMarY = parseInt($('.posY').val(), 10);
+						$('.repeatBlock').css({
+							'width': ((ratioWidth * app.watermark.width) + ((ratioWidth-1) * inputMarX)) + 'px',
+							'height': ((ratioHeight * app.watermark.height) + ((ratioHeight-1) * inputMarY)) + 'px'
+						});
+
 					}
 				})
 				.on('blur', function() {
@@ -408,10 +472,6 @@ $.fn.draga = function(options) {
 							$('.posX').val(marginRight);
 							$('.posY').val(marginBottom);
 
-							$('.appendedImg, #watermark').css({
-								'margin-right': $('.posX').val() + 'px',
-								'margin-bottom': $('.posY').val() + 'px'
-							});
 						}
 					}
 
@@ -521,7 +581,7 @@ $.fn.draga = function(options) {
 			 app.watermark.mode = 'notile';
 				app.flag = true;
 				$(".draggable").removeClass('repeatElem')
-						.unwrap()
+						.unwrap().unwrap()
 						.css({
 							'top': 0,
 							'left': 0
@@ -650,7 +710,7 @@ var multiplyElem = (function() {
 
 				app.flag = false;
 
-				$('#watermark')
+				//$('#watermark')
 
 				elem.wrap('<div class="repeatBlock"></div>')
 						.addClass('repeatElem')
@@ -660,11 +720,40 @@ var multiplyElem = (function() {
 						});
 				$(".draggable").draggable({ disabled: true });
 
-				_addImages();
-				_dragImages();
-
 				$('.settings__position-btn').removeClass('btn-active');
 				$('.settings__position-btn_many').addClass('btn-active');
+
+
+
+						// repeatWidth = parseInt($('.repeatBlock').css('width').slice(0, -2), 10),
+						// repeatHeight = parseInt($('.repeatBlock').css('height').slice(0, -2), 10),
+					var ratioWidth = Math.floor( app.picture.width / app.watermark.width),
+							ratioHeight = Math.floor( app.picture.height / app.watermark.height);
+
+					var leftForW = (app.watermark.width*ratioWidth*2) - (app.picture.width/2),
+							topForW = (app.watermark.height*ratioHeight*2) - (app.picture.height/2);
+
+				$('.repeatBlock').wrap('<div class="containmentForWatermarks"></div>')
+												 .css({
+													 'width': app.watermark.width*ratioWidth*2 + 'px',
+													 'height': app.watermark.height*ratioHeight*2 + 'px',
+													 'left': leftForW + 'px',
+													 'top' : topForW + 'px'
+												 });
+				$('.containmentForWatermarks').css({
+					'width': app.watermark.width*ratioWidth*4 + 'px',
+					'height': app.watermark.height*ratioHeight*4 + 'px',
+					'left': -leftForW + 'px',
+					'top' : -topForW + 'px'
+				 });
+
+
+				 _addImages();
+ 				_dragImages();
+				//  repeatS = repeatWidth * repeatHeight;
+				//  watermarkS = app.watermark.width * app.watermark.height;
+				//  imgSum = Math.ceil(repeatS / watermarkS);
+				//  	_increaseWidthAndHeight();
 			}
 		}
 
@@ -683,14 +772,21 @@ var multiplyElem = (function() {
 		_differenceHeight = (repeatHeight - app.picture.height) / 2;
 		watermarkS = app.watermark.width * app.watermark.height;
 
+		var ratioNewWidth = Math.floor($('.repeatBlock').width() / app.watermark.width);
 
-		imgSum = Math.ceil(repeatS / watermarkS);
+		//console.log(repeatWidth);
+		imgSum = Math.floor(repeatS / watermarkS);
 
-		for(var i = 0; i < imgSum; i++) {
+		for(var i = 0; i <= imgSum-2; i++) {
 			$('.repeatBlock').append('<img src="' + app.watermark.url + '" class="draggable appendedImg">');
 
 		}
+
+		$('.draggable:nth-child(' + ratioNewWidth + 'n)').addClass('lastW');
+
+		$('.draggable:gt(' + -(ratioNewWidth+1) + ')').addClass('lastT');
 		//console.log(imgSum);
+		//console.log(-ratioNewWidth);
 
 		$('.draggable').css({
 				'opacity': app.uiSliderVal / 100
@@ -725,70 +821,80 @@ var multiplyElem = (function() {
 				});
 
 
-				_increaseWidthAndHeight();
+				 //_increaseWidthAndHeight();
 
 
 
-				if (	 (posLeft  >  app.picture.width - app.watermark.width)
-						|| (posTop  >  app.picture.height - app.watermark.height)
-					  || ((posLeft + repeatWidth) < app.watermark.width)
-					 	|| ((posTop + repeatHeight) < app.watermark.height) ) {
-
-					$('.repeatBlock').draggable({
-						revert: true,
-						revertDuration: 200
-					});
-					//$('.repeatBlock').draggable({ containment: [0, 0, repeatWidth, repeatHeight] });
-				} else {
-					$('.repeatBlock').draggable({ revert: false});
-
-				}
 
 
 
-			}
-			//containment: [-app.picture.width, -app.picture.height + app.watermark.width + _differenceHeight, repeatWidth + app.watermark.width - _difference, repeatHeight + app.picture.height - _differenceHeight]
+
+				// if (	 (posLeft  >  app.picture.width - app.watermark.width)
+				// 		|| (posTop  >  app.picture.height - app.watermark.height)
+				// 	  || ((posLeft + repeatWidth) < app.watermark.width)
+				// 	 	|| ((posTop + repeatHeight) < app.watermark.height) ) {
+				//
+				// 	$('.repeatBlock').draggable({
+				// 		revert: true,
+				// 		revertDuration: 200
+				// 	});
+				// 	//$('.repeatBlock').draggable({ containment: [0, 0, repeatWidth, repeatHeight] });
+				// } else {
+				// 	$('.repeatBlock').draggable({ revert: false});
+				//
+				// }
+
+
+
+			},
+			// containment: [-(app.picture.width + (app.picture.width/2)), -(app.picture.height + (app.picture.height/2)), (2 * app.picture.width) + (app.picture.width / 2), (2 * app.picture.height) + (app.picture.height / 2)]
+			containment: '.containmentForWatermarks'
 
 		});
 	},
-	_increaseWidthAndHeight = function(nameBlock, namePic) {
-
-
-		var marginRight = $('.posX').val(),
-			marginBottom = $('.posY').val();
-
-		if(posLeft + repeatWidth < app.picture.width + _difference) {
-
-			if(repeatWidth < app.picture.width * 2) {
-				$('.repeatBlock').css({
-					'width': (repeatWidth + _difference) + 'px'
-				});
-			}
-
-			for(var i = 0; i < newImgSum - imgSum; i++) {
-				$('.repeatBlock').append('<img src="' + app.watermark.url + '" class="draggable appendedImg" style="margin-right: ' + marginRight + 'px; margin-bottom: ' + marginBottom + 'px;">');
-			}
-
-		};
-
-		if(posTop + repeatHeight < app.picture.height + _differenceHeight) {
-
-			if(repeatHeight < app.picture.height * 1.5) {
-				$('.repeatBlock').css({
-					'height': (repeatHeight + _differenceHeight) + 'px'
-				});
-			}
-
-			for(var i = 0; i < newImgSum - imgSum; i++) {
-				$('.repeatBlock').append('<img src="' + app.watermark.url + '" class="draggable appendedImg" style="margin-right: ' + marginRight + 'px; margin-bottom: ' + marginBottom + 'px;">');
-			}
-
-		};
-	},
+	// _increaseWidthAndHeight = function(nameBlock, namePic) {
+	// 	var marginRight = $('.posX').val(),
+	// 	  	marginBottom = $('.posY').val();
+	//
+	// 	for(var i = 0; i < newImgSum - imgSum; i++) {
+	// 			$('.repeatBlock').append('<img src="' + app.watermark.url + '" class="draggable appendedImg" style="margin-right: ' + marginRight + 'px; margin-bottom: ' + marginBottom + 'px;">');
+	// 		}
+	//
+	// 	// var marginRight = $('.posX').val(),
+	// 	// 	marginBottom = $('.posY').val();
+	// 	//
+	// 	// if(posLeft + repeatWidth < app.picture.width + _difference) {
+	// 	//
+	// 	// 	if(repeatWidth <= app.picture.width * 2) {
+	// 	// 		$('.repeatBlock').css({
+	// 	// 			'width': (repeatWidth + _difference) + 'px'
+	// 	// 		});
+	// 	// 	}
+	// 	//
+	// 	// 	for(var i = 0; i < newImgSum - imgSum; i++) {
+	// 	// 		$('.repeatBlock').append('<img src="' + app.watermark.url + '" class="draggable appendedImg" style="margin-right: ' + marginRight + 'px; margin-bottom: ' + marginBottom + 'px;">');
+	// 	// 	}
+	// 	//
+	// 	// };
+	// 	//
+	// 	// if(posTop + repeatHeight < app.picture.height + _differenceHeight) {
+	// 	//
+	// 	// 	if(repeatHeight <= app.picture.height * 2) {
+	// 	// 		$('.repeatBlock').css({
+	// 	// 			'height': (repeatHeight + _differenceHeight) + 'px'
+	// 	// 		});
+	// 	// 	}
+	// 	//
+	// 	// 	for(var i = 0; i < newImgSum - imgSum; i++) {
+	// 	// 		$('.repeatBlock').append('<img src="' + app.watermark.url + '" class="draggable appendedImg" style="margin-right: ' + marginRight + 'px; margin-bottom: ' + marginBottom + 'px;">');
+	// 	// 	}
+	// 	//
+	// 	// };
+	// },
 	_removeAll = function() {
 		app.flag = true;
 		$(".draggable").removeClass('repeatElem')
-				.unwrap()
+				.unwrap().unwrap()
 				.css({
 					'top': 0,
 					'left': 0

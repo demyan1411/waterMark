@@ -30,5 +30,5 @@ function resize($filename, $maxWidth, $maxHeight) {
         return false;
       };
     };
-    return array("width" => $width, "height" => $height);
+    return array("width" => (int)$width, "height" => (int)$height);
 };
