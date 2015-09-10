@@ -29,6 +29,9 @@ var picModule = (function() {
 			app.watermark.coordx = parseInt($('.posX').val(), 10);
 			app.watermark.coordy = parseInt($('.posY').val(), 10);
 		}
+		console.log(app.watermark.coordx);
+		console.log(app.watermark.coordy);
+		console.log(app.watermark.opacity);
 
 		$.ajax({
 				url: app.URL_WATERMARK_REQUEST,
