@@ -15,13 +15,10 @@ $(document).ready(function() {
 	//startDraga(false);
 	$('form').on('submit', function(e) {
 		e.preventDefault();
-
-
 	});
 
-
-
-
+    // инициализация плагина для сообщений об ошибках
+    Toast.init();
 
 }); // end ready
 

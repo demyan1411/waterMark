@@ -38,7 +38,7 @@ if (!getimagesize($tmp_file)) {
 // проверить максимальный размер
 else if ($_FILES[0]["size"] > $maxSize) {
     $answer['status'] = 'Error';
-    $answer['text'] = 'Ошибка: размер файла превышает максимальный - ' . $maxSize;
+    $answer['text'] = 'Ошибка: размер файла превышает максимальный - ' . $maxSize . ' байт';
 }
 // проверки пройдены, пробуем сохранить файл
 else if (!move_uploaded_file($tmp_file, $target_file)) {
