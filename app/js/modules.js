@@ -52,39 +52,6 @@ var opacity = (function() {
 		}
 }());
 
-//////////// plugin for drag and coordinates
-
-
-// var resetAll = (function() {
-//
-//   var start = function() {
-//     _setUpListeners();
-//   },
-//   _setUpListeners = function() {
-// 		$('form').on('reset', function(e) {
-// 			e.preventDefault();
-//
-//
-//
-//
-// 			// $('.coordinates__input_loc').off('click mousedown mouseup mouseleave');
-// 			// $('.coordinates__input').off('focus change keyup input click blur');
-//
-//   }
-//
-//   return {
-//     init: start
-//   }
-//
-// }());
-
-
-
-
-
-
-
-
 $.fn.draga = function(options) {
 
 	//console.log(app.containerWidth);
@@ -207,7 +174,13 @@ $.fn.draga = function(options) {
 				elemCssLeft,
 				elemCssLeftNumber,
 				elemCssTop,
-				elemCssTopNumber;
+				elemCssTopNumber,
+				ratioWidth = (Math.floor( app.picture.width / app.watermark.width)) * 2,
+				ratioHeight = (Math.floor( app.picture.height / app.watermark.height)) * 2,
+				repeatWidth,
+				repeatHeight,
+				leftOld,
+				topOld;
 
     var arrow,
 				arrowFlag = 'one';
@@ -242,8 +215,12 @@ $.fn.draga = function(options) {
     },
 		_arrowsOn = function() {
 
+			$('.generator__img-wrap').on('mousedown', '.appendedImg', function() {
+					$('.coordinates__input').blur();
+			});
 			$('.coordinates__input_loc').off('click mousedown mouseup mouseleave');
 			$('.coordinates__input').off('focus change keyup input click blur');
+
 			$('.posX').val(0);
 			$('.posY').val(0);
 			$('#watermark').css({
@@ -278,7 +255,7 @@ $.fn.draga = function(options) {
 				$('.coordinates__input_loc').on('click', function() {
 					arrow = $(this);
 					_giveMargin();
-					console.log(arrowFlag);
+					//console.log(arrowFlag);
 				});
 
 				_mousePress();
@@ -289,51 +266,130 @@ $.fn.draga = function(options) {
 
 			var	up = 'coordinates__input_loc-up',
           inputText = arrow.siblings('.coordinates__input'),
-          thisText = parseInt(inputText.val(), 10);
-			//console.log(thisText);
+          thisText = parseInt(inputText.val(), 10),
+					repeatWidth = parseInt($('.repeatBlock').css('width').slice(0, -2), 10),
+					repeatHeight = parseInt($('.repeatBlock').css('height').slice(0, -2), 10),
+
+					marginMinus = parseInt($('.posX').val(), 10);
+
 			if(arrow.hasClass(up)) {
         _move(1);
       } else {
-        if(thisText < 1) { thisText = 1; }
-        _move(-1);
+        if(thisText === 0) { return false }
+					else{
+	        	_move(-1);
+					}
       }
+
 
       function _move(one) {
         if(inputText.hasClass('posX')){
 					inputText.val(thisText + one);
-        	$('.appendedImg, #watermark').css({
-						'margin-right': thisText + one + 'px'
-					});
+
+					var inputMarX = parseInt($('.posX').val(), 10);
+
 					$('.marginX').css({
 						'width': thisText + one + 'px'
 					});
-					//console.log(one);
-
-        } else {
-					inputText.val(thisText + one);
-        	$('.appendedImg, #watermark').css({
-						'margin-bottom': thisText + one +'px'
+					$('.appendedImg:not(.lastW), #watermark').css({
+						'margin-right': thisText + one + 'px'
 					});
+					//console.log($('.lastW').css('margin-right'));
+					$('.lastW').css({
+						'margin-right': '0'
+					});
+
+					var leftForW = (app.watermark.width*ratioWidth) - (app.watermark.width);
+
+					leftOld = parseInt($('.repeatBlock').css('left').slice(0, -2), 10);
+					//console.log(leftOld);
+				 $('.containmentForWatermarks').css({
+					'width': ( ((leftForW * 2) + app.picture.width) + ((ratioWidth-1) * inputMarX * 2) ) + 'px',
+					'left': ( -leftForW - ((ratioWidth-1) * inputMarX) ) + 'px'
+				 });
+				 $('.repeatBlock').css({
+					 'width': ((ratioWidth * app.watermark.width) + ((ratioWidth-1) * inputMarX)) + 'px'
+				 });
+				 if(one === 1) {
+					 $('.repeatBlock').css({
+						 'left' : leftOld + (ratioWidth-1) + 'px'
+	 				 });
+			 	 } else if(one === -1) {
+
+					 if(leftOld <= 0) { leftOld = ratioWidth-1; }
+						 $('.repeatBlock').css({
+							 'left' : leftOld - (ratioWidth-1) + 'px'
+		 				 });
+				 }
+
+
+			 } else if(inputText.hasClass('posY')) {
+					inputText.val(thisText + one);
+
+					var inputMarY = parseInt($('.posY').val(), 10);
+
 					$('.marginY').css({
 						'height': thisText + one + 'px'
 					});
-        }
+
+        	$('.appendedImg:not(.lastT), #watermark').css({
+						'margin-bottom': thisText + one +'px'
+					});
+
+					$('.lastT').css({
+						'margin-bottom': '0'
+					});
+
+					var topForW = (app.watermark.height*ratioHeight) - (app.watermark.height);
+
+					var topOld = parseInt($('.repeatBlock').css('top').slice(0, -2), 10);
+
+				 $('.containmentForWatermarks').css({
+					'height': ( ((topForW * 2) + app.picture.height) + ((ratioHeight-1) * inputMarY * 2) ) + 'px',
+					'top': ( -topForW - ((ratioHeight-1) * inputMarY) ) + 'px'
+				 });
+				 $('.repeatBlock').css({
+					 'height': ((ratioHeight * app.watermark.height) + ((ratioHeight-1) * inputMarY)) + 'px'
+				 });
+
+				//  console.log(inputMarY);
+				 if(one === 1) {
+					 $('.repeatBlock').css({
+						 'top' : topOld +(ratioHeight-1)  + 'px'
+	 				 });
+			 	 } else if(one === -1) {
+
+					 if(topOld <= 0) { topOld = ratioHeight-1; }
+						 $('.repeatBlock').css({
+							 'top' : topOld - (ratioHeight-1) + 'px'
+		 				 });
+				 }
       }
+    }
 
 
 		},
 		_moveByText = function() {
 
+			var nameNumberFlag;
+
 			$('.coordinates__input')
 				.on('focus', function() {
 					var $this = $(this);
 
+					if (arrowFlag === 'many') {
+						leftOld = parseInt($('.repeatBlock').css('left').slice(0, -2), 10);
+						topOld = parseInt($('.repeatBlock').css('top').slice(0, -2), 10);
+						nameNumberFlag = $this.val();
+					}
+
 					$this.val('')
 							 .removeAttr('readonly');
 
+
 				})
 	      .on('change keyup input click', function() {
-					$('.draggable').addClass('transition');
+
 					var $this = $(this);
 
 					if (this.value.match(/[^0-9]/g)) {
@@ -341,6 +397,7 @@ $.fn.draga = function(options) {
 			    }
 
 					if(arrowFlag === 'one') {
+						$('.draggable').addClass('transition');
 
 						if($this.hasClass('posX') && $('.posX').val() > elemRightPosition) {
 
@@ -358,33 +415,84 @@ $.fn.draga = function(options) {
 						});
 						_addRed();
 
-					} else if(arrowFlag === 'many') {
+					}
 
-						if($this.hasClass('posX') && $('.posX').val() > 200) {
+					if(arrowFlag === 'many') {
+					 //console.log($('.posX').val());
+					 if($this.hasClass('posX') && $('.posX').val() > 200) {
 
-						 $('.posX').val(200);
+						$('.posX').val(200);
 
-					 } else if($this.hasClass('posY') && $('.posY').val() > 200) {
+					} else if($this.hasClass('posY') && $('.posY').val() > 200) {
 
-							$('.posY').val(200);
+						 $('.posY').val(200);
 
+					 }
+
+					 $('.appendedImg, #watermark').css({
+						 'margin-right': $('.posX').val() + 'px',
+						 'margin-bottom': $('.posY').val() + 'px'
+					 });
+					 $('.lastT').css({
+						 'margin-bottom': '0'
+					 });
+					 $('.lastW').css({
+						 'margin-right': '0'
+					 });
+
+					 $('.marginX').css({
+						 'width': $('.posX').val() + 'px'
+					 });
+					 $('.marginY').css({
+						 'height': $('.posY').val() + 'px'
+					 });
+
+					 var inputMarX = parseInt($('.posX').val(), 10),
+							 inputMarY = parseInt($('.posY').val(), 10);
+
+					 var leftForW = (app.watermark.width*ratioWidth) - (app.watermark.width),
+					 		 topForW = (app.watermark.height*ratioHeight) - (app.watermark.height);
+
+						$('.containmentForWatermarks').css({
+						 'width': ( ((leftForW * 2) + app.picture.width) + ((ratioWidth-1) * inputMarX * 2) ) + 'px',
+						 'left': ( -leftForW - ((ratioWidth-1) * inputMarX) ) + 'px',
+						 'height': ( ((topForW * 2) + app.picture.height) + ((ratioHeight-1) * inputMarY * 2) ) + 'px',
+	 					 'top': ( -topForW - ((ratioHeight-1) * inputMarY) ) + 'px'
+						});
+						$('.repeatBlock').css({
+							'width': ((ratioWidth * app.watermark.width) + ((ratioWidth-1) * inputMarX)) + 'px',
+							'height': ((ratioHeight * app.watermark.height) + ((ratioHeight-1) * inputMarY)) + 'px'
+						});
+
+
+						if($this.hasClass('posX') && $this.val() !== '') {
+							var leftNew = parseInt($('.repeatBlock').css('left').slice(0, -2), 10);
+							if(leftNew <= 0) {
+								$('.repeatBlock').css({
+									'left' : 0 + 'px'
+								});
+							} else {
+								$('.repeatBlock').css({
+									'left' : -( -leftOld - ((ratioWidth-1) * ($this.val() - nameNumberFlag) ) ) + 'px'
+								});
+							}
+						} else if($this.hasClass('posY') && $this.val() !== '') {
+							var topNew = parseInt($('.repeatBlock').css('top').slice(0, -2), 10);
+							if(topNew <= 0) {
+								$('.repeatBlock').css({
+									'top' : 0 + 'px'
+								});
+							} else {
+								$('.repeatBlock').css({
+									'top' : -( -topOld - ((ratioHeight-1) * ($this.val() - nameNumberFlag) ) ) + 'px'
+								});
+							}
 						}
 
-						$('.appendedImg, #watermark').css({
-							'margin-right': $('.posX').val() + 'px',
-							'margin-bottom': $('.posY').val() + 'px'
-						});
-
-						$('.marginX').css({
-							'width': $('.posX').val() + 'px'
-						});
-						$('.marginY').css({
-							'height': $('.posY').val() + 'px'
-						});
-					}
-				})
-				.on('blur', function() {
+				 }
+			 }).on('blur', function() {
 					var $this = $(this);
+
 					if($this.val() === '') {
 
 						if(arrowFlag === 'one') {
@@ -408,10 +516,13 @@ $.fn.draga = function(options) {
 							$('.posX').val(marginRight);
 							$('.posY').val(marginBottom);
 
-							$('.appendedImg, #watermark').css({
-								'margin-right': $('.posX').val() + 'px',
-								'margin-bottom': $('.posY').val() + 'px'
-							});
+
+
+							// leftOld = parseInt($('.repeatBlock').css('left').slice(0, -2), 10);
+							// $('.repeatBlock').css({
+							// 	'left' : leftOld + 'px'
+							// });
+
 						}
 					}
 
@@ -520,8 +631,8 @@ $.fn.draga = function(options) {
 		 if(app.flag === false) {
 			 app.watermark.mode = 'notile';
 				app.flag = true;
-				$(".draggable").removeClass('repeatElem')
-						.unwrap()
+				$("#watermark, .appendedImg").removeClass('repeatElem')
+						.unwrap().unwrap()
 						.css({
 							'top': 0,
 							'left': 0
@@ -529,7 +640,7 @@ $.fn.draga = function(options) {
 
 				$('.appendedImg').remove();
 
-				$(".draggable").draggable({ disabled: false })
+				$("#watermark").draggable({ disabled: false })
 											 ;
 				$('.settings__position-btn').removeClass('btn-active');
 				$('.settings__position-btn_one').addClass('btn-active');
@@ -650,7 +761,7 @@ var multiplyElem = (function() {
 
 				app.flag = false;
 
-				$('#watermark')
+				//$('#watermark')
 
 				elem.wrap('<div class="repeatBlock"></div>')
 						.addClass('repeatElem')
@@ -658,13 +769,42 @@ var multiplyElem = (function() {
 							'left': 0,
 							'top': 0
 						});
-				$(".draggable").draggable({ disabled: true });
-
-				_addImages();
-				_dragImages();
+				$("#watermark").draggable({ disabled: true });
 
 				$('.settings__position-btn').removeClass('btn-active');
 				$('.settings__position-btn_many').addClass('btn-active');
+
+
+
+						// repeatWidth = parseInt($('.repeatBlock').css('width').slice(0, -2), 10),
+						// repeatHeight = parseInt($('.repeatBlock').css('height').slice(0, -2), 10),
+					var ratioWidth = (Math.floor( app.picture.width / app.watermark.width)) * 2,
+							ratioHeight = (Math.floor( app.picture.height / app.watermark.height)) * 2;
+
+					var leftForW = (app.watermark.width*ratioWidth) - (app.watermark.width),
+							topForW = (app.watermark.height*ratioHeight) - (app.watermark.height);
+
+				$('.repeatBlock').wrap('<div class="containmentForWatermarks"></div>')
+												 .css({
+													 'width': app.watermark.width*ratioWidth + 'px',
+													 'height': app.watermark.height*ratioHeight + 'px',
+													 'left': leftForW + 'px',
+													 'top' : topForW + 'px'
+												 });
+				$('.containmentForWatermarks').css({
+					'width': ((leftForW * 2) + app.picture.width) + 'px',
+					'height': ((topForW * 2) + app.picture.height) + 'px',
+					'left': -leftForW + 'px',
+					'top' : -topForW + 'px'
+				 });
+
+
+				_addImages();
+ 				_dragImages();
+				//  repeatS = repeatWidth * repeatHeight;
+				//  watermarkS = app.watermark.width * app.watermark.height;
+				//  imgSum = Math.ceil(repeatS / watermarkS);
+				//  	_increaseWidthAndHeight();
 			}
 		}
 
@@ -683,14 +823,20 @@ var multiplyElem = (function() {
 		_differenceHeight = (repeatHeight - app.picture.height) / 2;
 		watermarkS = app.watermark.width * app.watermark.height;
 
+		var ratioNewWidth = Math.floor($('.repeatBlock').width() / app.watermark.width);
 
-		imgSum = Math.ceil(repeatS / watermarkS);
+		//console.log(repeatWidth);
+		imgSum = Math.floor(repeatS / watermarkS);
 
-		for(var i = 0; i < imgSum; i++) {
+		for(var i = 0; i <= imgSum-2; i++) {
 			$('.repeatBlock').append('<img src="' + app.watermark.url + '" class="draggable appendedImg">');
-
 		}
+
+		$('.draggable:nth-child(' + ratioNewWidth + 'n)').addClass('lastW');
+
+		$('.draggable:gt(' + -(ratioNewWidth+1) + ')').addClass('lastT');
 		//console.log(imgSum);
+		//console.log(-ratioNewWidth);
 
 		$('.draggable').css({
 				'opacity': app.uiSliderVal / 100
@@ -706,89 +852,63 @@ var multiplyElem = (function() {
 
 			drag: function(){
 
-
-				var left = $(this).css('left'),
-						top = $(this).css('top'),
-						marginLeft = parseInt($(this).css('margin-left').slice(0, -2), 10);
-
-				posLeft = parseInt(left.slice(0, -2), 10);
-				posTop = parseInt(top.substring(0, top.length - 2), 10);
-
-				newImgSum = Math.ceil(repeatS / watermarkS);
-
-				repeatWidth = $('.repeatBlock').width();
-				repeatHeight = $('.repeatBlock').height();
-				repeatS = repeatWidth * repeatHeight;
+				//var marginRight = parseInt($('#watermark').css('margin-right').slice(0, -2), 10);
 
 				$('.draggable').css({
 						'opacity': app.uiSliderVal / 100
 				});
 
+				//$('.posX').val(marginRight);
 
-				_increaseWidthAndHeight();
-
-
-
-				if (	 (posLeft  >  app.picture.width - app.watermark.width)
-						|| (posTop  >  app.picture.height - app.watermark.height)
-					  || ((posLeft + repeatWidth) < app.watermark.width)
-					 	|| ((posTop + repeatHeight) < app.watermark.height) ) {
-
-					$('.repeatBlock').draggable({
-						revert: true,
-						revertDuration: 200
-					});
-					//$('.repeatBlock').draggable({ containment: [0, 0, repeatWidth, repeatHeight] });
-				} else {
-					$('.repeatBlock').draggable({ revert: false});
-
-				}
-
-
-
-			}
-			//containment: [-app.picture.width, -app.picture.height + app.watermark.width + _differenceHeight, repeatWidth + app.watermark.width - _difference, repeatHeight + app.picture.height - _differenceHeight]
+			},
+			// containment: [-(app.picture.width + (app.picture.width/2)), -(app.picture.height + (app.picture.height/2)), (2 * app.picture.width) + (app.picture.width / 2), (2 * app.picture.height) + (app.picture.height / 2)]
+			containment: '.containmentForWatermarks'
 
 		});
 	},
-	_increaseWidthAndHeight = function(nameBlock, namePic) {
-
-
-		var marginRight = $('.posX').val(),
-			marginBottom = $('.posY').val();
-
-		if(posLeft + repeatWidth < app.picture.width + _difference) {
-
-			if(repeatWidth < app.picture.width * 2) {
-				$('.repeatBlock').css({
-					'width': (repeatWidth + _difference) + 'px'
-				});
-			}
-
-			for(var i = 0; i < newImgSum - imgSum; i++) {
-				$('.repeatBlock').append('<img src="' + app.watermark.url + '" class="draggable appendedImg" style="margin-right: ' + marginRight + 'px; margin-bottom: ' + marginBottom + 'px;">');
-			}
-
-		};
-
-		if(posTop + repeatHeight < app.picture.height + _differenceHeight) {
-
-			if(repeatHeight < app.picture.height * 1.5) {
-				$('.repeatBlock').css({
-					'height': (repeatHeight + _differenceHeight) + 'px'
-				});
-			}
-
-			for(var i = 0; i < newImgSum - imgSum; i++) {
-				$('.repeatBlock').append('<img src="' + app.watermark.url + '" class="draggable appendedImg" style="margin-right: ' + marginRight + 'px; margin-bottom: ' + marginBottom + 'px;">');
-			}
-
-		};
-	},
+	// _increaseWidthAndHeight = function(nameBlock, namePic) {
+	// 	var marginRight = $('.posX').val(),
+	// 	  	marginBottom = $('.posY').val();
+	//
+	// 	for(var i = 0; i < newImgSum - imgSum; i++) {
+	// 			$('.repeatBlock').append('<img src="' + app.watermark.url + '" class="draggable appendedImg" style="margin-right: ' + marginRight + 'px; margin-bottom: ' + marginBottom + 'px;">');
+	// 		}
+	//
+	// 	// var marginRight = $('.posX').val(),
+	// 	// 	marginBottom = $('.posY').val();
+	// 	//
+	// 	// if(posLeft + repeatWidth < app.picture.width + _difference) {
+	// 	//
+	// 	// 	if(repeatWidth <= app.picture.width * 2) {
+	// 	// 		$('.repeatBlock').css({
+	// 	// 			'width': (repeatWidth + _difference) + 'px'
+	// 	// 		});
+	// 	// 	}
+	// 	//
+	// 	// 	for(var i = 0; i < newImgSum - imgSum; i++) {
+	// 	// 		$('.repeatBlock').append('<img src="' + app.watermark.url + '" class="draggable appendedImg" style="margin-right: ' + marginRight + 'px; margin-bottom: ' + marginBottom + 'px;">');
+	// 	// 	}
+	// 	//
+	// 	// };
+	// 	//
+	// 	// if(posTop + repeatHeight < app.picture.height + _differenceHeight) {
+	// 	//
+	// 	// 	if(repeatHeight <= app.picture.height * 2) {
+	// 	// 		$('.repeatBlock').css({
+	// 	// 			'height': (repeatHeight + _differenceHeight) + 'px'
+	// 	// 		});
+	// 	// 	}
+	// 	//
+	// 	// 	for(var i = 0; i < newImgSum - imgSum; i++) {
+	// 	// 		$('.repeatBlock').append('<img src="' + app.watermark.url + '" class="draggable appendedImg" style="margin-right: ' + marginRight + 'px; margin-bottom: ' + marginBottom + 'px;">');
+	// 	// 	}
+	// 	//
+	// 	// };
+	// },
 	_removeAll = function() {
 		app.flag = true;
-		$(".draggable").removeClass('repeatElem')
-				.unwrap()
+		$("#watermark, .appendedImg").removeClass('repeatElem')
+				.unwrap().unwrap()
 				.css({
 					'top': 0,
 					'left': 0
@@ -798,7 +918,7 @@ var multiplyElem = (function() {
 
 		_removeImages();
 
-		$(".draggable").draggable({ disabled: false });
+		$("#watermark").draggable({ disabled: false });
 		$('.settings__position-btn').removeClass('btn-active');
 		$('.settings__position-btn_one').addClass('btn-active');
 	},
