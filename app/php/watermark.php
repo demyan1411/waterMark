@@ -3,13 +3,24 @@
 	 функция watermark для наложения одного изображения поверх другого по заданным параметрам
 	 возвращает имя результирующего файла
 */
+
+// работаем с библиотекой для обработки изображений
+use PHPImageWorkshop\ImageWorkshop;
+require_once('PHPImageWorkshop/ImageWorkshop.php');
+
 session_start();
 $session_dir = session_id() . "/"; // уникализированное имя директории для файлов юзера
 
-//Входные параметры
+// Параметры
+$result_filename = "result.png"; // имя результирующего файла (формат png)
+$createFolders = true; // создавать директории при сохранении?
+$backgroundColor = transparent; // transparent, only for PNG (otherwise it will be white if set null)
+$imageQuality = 80; // useless for GIF, usefull for PNG and JPEG (0 to 100%)
+
+// Входные параметры
 $img_main = "../" . filter_input(INPUT_POST, 'uploaddir') . $session_dir . filter_input(INPUT_POST, 'imgmain');
 $img_wmark = "../" . filter_input(INPUT_POST, 'uploaddir') . $session_dir . filter_input(INPUT_POST, 'imgwmark');
-$img_result = "../" . filter_input(INPUT_POST, 'uploaddir') . $session_dir . "result.png";
+$dir2save = "../" . filter_input(INPUT_POST, 'uploaddir') . $session_dir;
 $coordx = filter_input(INPUT_POST, 'coordx');
 $coordy = filter_input(INPUT_POST, 'coordy');
 $marginx = filter_input(INPUT_POST, 'marginx');
@@ -18,13 +29,14 @@ $opacity = filter_input(INPUT_POST, 'opacity') * 100;
 $mode = filter_input(INPUT_POST, 'mode'); // tile or not
 
 // открываем картинки
-$bgpic = createImgObj($img_main);
-$wmpic = createImgObj($img_wmark);
+$bgpic = ImageWorkshop::initFromPath($img_main);
+$wmpic = ImageWorkshop::initFromPath($img_wmark);
 
-$bgpic_width = imagesx($bgpic);
-$bgpic_height = imagesy($bgpic);
-$wmpic_width = imagesx($wmpic);
-$wmpic_height = imagesy($wmpic);
+// узнать размеры картинок
+$bgpic_width = $bgpic->getWidth();
+$bgpic_height = $bgpic->getHeight();
+$wmpic_width = $wmpic->getWidth();
+$wmpic_height = $wmpic->getHeight();
 
 if ($mode == 'tile') {
 
@@ -32,61 +44,45 @@ if ($mode == 'tile') {
 	$wmpic_width += $marginx;
 	$wmpic_height += $marginy;
 
-	// создаём прозрачную канву
-	$idest=imagecreate($wmpic_width, $wmpic_height);
-	imagealphablending($idest, false);
-	imagesavealpha($idest, true);
+	$col_x = intval($bgpic_width / $wmpic_width);
+	$col_y = intval($bgpic_height / $wmpic_height);
 
-	//копируем исходное изображение на канву с левого верхнего края
-	imagecopy($idest, $wmpic, 0, 0, 0, 0, imagesx($wmpic), imagesy($wmpic));
+	// создаём прозрачный слой для замощения по горизонтале
+	$layerHor = ImageWorkshop::initVirginLayer($wmpic_width*2*($col_x+1), $wmpic_height);
 
-	// создаём слой для тайлов, на 1 тайл больший чем bgpic
-	$tiles = imagecreate($bgpic_width+$wmpic_width, $bgpic_height+$wmpic_height);
+	// создаём прозрачный слой для замощения полного
+	$layer = ImageWorkshop::initVirginLayer($wmpic_width*2*($col_x+1), $wmpic_height*2*$col_y);
 
-	// замостить idest поверхность слоя tiles
-	imagesettile($tiles, $idest);
-	imagefilledrectangle($tiles, 0, 0, $bgpic_width+$wmpic_width, $bgpic_height+$wmpic_height, IMG_COLOR_TILED);
-
-	// подготавливаем координаты к тайлингу. положительные координаты при тайлинге быть не могут
-	($coordx > 0) ? $coordx = 0 : $coordx;
-	($coordy > 0) ? $coordy = 0 : $coordy;
-
-	imagecopymerge_alpha($bgpic, $tiles, $coordx, $coordy, 0,0 , $bgpic_width+$wmpic_width, $bgpic_height+$wmpic_height, $opacity );
-
-	// освобождаем память
-	imagedestroy($tiles);
-	imagedestroy($idest);
+	// накладываем ватермарки в цикле по одному по горизонтали
+	$tile_x = 0;
+	$tile_y = 0;
+	$x=0;
+	$y=0;
+	while ($x++<$col_x+3) {
+		$layerHor->addLayer(1, $wmpic, $tile_x, $tile_y, "LT");
+		$tile_x += $wmpic_width;
 	}
-else {
-	// простое наложение одиночного ватермарка
-	imagecopymerge_alpha($bgpic, $wmpic, $coordx, $coordy, 0, 0, imagesx($wmpic), imagesy($wmpic), $opacity );
+
+	// накладываем ряды ватермарков в цикле по вертикали
+	$tile_x = 0;
+	while ($y++<$col_y+2) {
+		$layer->addLayer(1, $layerHor, $tile_x, $tile_y, "LT");
+		$tile_y += $wmpic_height;
+	}
+
+	$wmpic = clone ($layer);
+
 }
 
-// сохраняем картинку-результат на сервере
-imagepng($bgpic, $img_result, 6);
+// применяем прозрачность к вотермарку и накладываем на основу
+$wmpic->opacity($opacity);
+$bgpic->addLayer(1, $wmpic, $coordx, $coordy, "LT");
 
-// уничтожаем объекты картинок
-imagedestroy($bgpic);
-imagedestroy($wmpic);
 
-exit($img_result);
+// сохранение картинки на сервере
+$bgpic->save($dir2save, $result_filename, $createFolders, $backgroundColor, $imageQuality);
 
-/**
- * imagecopymerge() с поддержкой альфа-канала;
- * http://sina.salek.ws/content/alpha-support-phps-imagecopymerge-function
- **/
-function imagecopymerge_alpha($dst_im, $src_im, $dst_x, $dst_y, $src_x, $src_y, $src_w, $src_h, $opacity) {
-	// creating a cut resource
-	$cut = imagecreatetruecolor($src_w, $src_h);
-
-	// copying that section of the background to the cut
-	imagecopy($cut, $dst_im, 0, 0, $dst_x, $dst_y, $src_w, $src_h);
-
-	// placing the watermark now
-	imagecopy($cut, $src_im, 0, 0, $src_x, $src_y, $src_w, $src_h);
-	imagecopymerge($dst_im, $cut, $dst_x, $dst_y, $src_x, $src_y, $src_w, $src_h, $opacity);
-	imagedestroy($cut);
-}
+exit($dir2save . $result_filename);
 
 /**
  * функция создания объёкта картинки в соответствии с её типом
