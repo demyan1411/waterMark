@@ -59,10 +59,8 @@
 
 .repeatBlock {
   position: absolute;
-
   top: 0px;
   left: 0px;
-
   z-index: 2;
   overflow: hidden;
   margin-left: 0; }
@@ -737,6 +735,9 @@ body {
 .settings__form-wrap {
   margin-bottom: 25px; }
 
+#formwrap-watermark {
+  opacity: 0.5; }
+
 /* инпуты END */
 /* линия красная с уголком */
 .line-top {
@@ -784,7 +785,8 @@ body {
     display: inline-block;
     top: 5px;
     margin-left: 6px;
-    cursor: default; }
+    cursor: default;
+    opacity: .5; }
     .settings__position-btn:after {
       content: '';
       width: 12px;
@@ -848,7 +850,8 @@ body {
       color: #c1cfd9; }
   .settings__btn-download {
     float: right;
-    background: #f97e76; }
+    background: #f97e76;
+    opacity: 0.5; }
     .settings__btn-download:hover {
       color: #f97e76; }
 

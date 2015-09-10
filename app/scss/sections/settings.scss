@@ -66,7 +66,7 @@
 }
 // начальное состояние вотермарка - заблокирован
 #formwrap-watermark {
-		//opacity: 0.5;
+		opacity: 0.5;
 }
 
 /* инпуты END */
@@ -125,7 +125,7 @@
 			top: 5px;
 			margin-left: 6px;
 			cursor: default;
-			//opacity: .5;
+			opacity: .5;
 
 			&:after {
 				content: '';
@@ -207,7 +207,7 @@
 		&-download {
 			float: right;
 			background: $main-red;
-			//opacity: 0.5;
+			opacity: 0.5;
 			&:hover {
 				color: $main-red;
 			}
