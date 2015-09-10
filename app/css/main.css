@@ -59,10 +59,8 @@
 
 .repeatBlock {
   position: absolute;
-
   top: 0px;
   left: 0px;
-
   z-index: 2;
   overflow: hidden;
   margin-left: 0; }
@@ -514,7 +512,8 @@
 .icons {
   position: fixed;
   top: 100px;
-  left: 0; }
+  left: 0;
+  z-index: 5; }
   .icons__language {
     margin: 0 0 18px 0;
     font-family: "SegoeUILight";
@@ -560,17 +559,32 @@
 .icons__share-link--fb {
   background-position: -7px -342px; }
   .icons__share-link--fb:hover {
-    background-position: -7px -295px; }
+    background-position: -7px -295px;
+    animation: shakeThatBooty 0.3s linear 1;
+    -webkit-animation: shakeThatBooty 0.3s linear 1;
+    -moz-animation: shakeThatBooty 0.3s linear 1;
+    -o-animation: shakeThatBooty 0.3s linear 1;
+    -ms-animation: shakeThatBooty 0.3s linear 1; }
 
 .icons__share-link--tw {
   background-position: -13px -109px; }
   .icons__share-link--tw:hover {
-    background-position: -13px -67px; }
+    background-position: -13px -67px;
+    animation: shakeThatBooty 0.3s linear 1;
+    -webkit-animation: shakeThatBooty 0.3s linear 1;
+    -moz-animation: shakeThatBooty 0.3s linear 1;
+    -o-animation: shakeThatBooty 0.3s linear 1;
+    -ms-animation: shakeThatBooty 0.3s linear 1; }
 
 .icons__share-link--vk {
   background-position: -15px -26px; }
   .icons__share-link--vk:hover {
-    background-position: -15px 12px; }
+    background-position: -15px 12px;
+    animation: shakeThatBooty 0.3s linear 1;
+    -webkit-animation: shakeThatBooty 0.3s linear 1;
+    -moz-animation: shakeThatBooty 0.3s linear 1;
+    -o-animation: shakeThatBooty 0.3s linear 1;
+    -ms-animation: shakeThatBooty 0.3s linear 1; }
 
 .icons__socials {
   position: absolute;
@@ -582,6 +596,26 @@
   /* custom */ }
   .icons__socials:hover {
     left: 0; }
+
+@keyframes shakeThatBooty {
+  33% {
+    transform: rotateZ(10deg);
+    -webkit-transform: rotateZ(10deg);
+    -moz-transform: rotateZ(10deg);
+    -o-transform: rotateZ(10deg);
+    -ms-transform: rotateZ(10deg); }
+  67% {
+    transform: rotateZ(-10deg);
+    -webkit-transform: rotateZ(-10deg);
+    -moz-transform: rotateZ(-10deg);
+    -o-transform: rotateZ(-10deg);
+    -ms-transform: rotateZ(-10deg); }
+  100% {
+    transform: rotateZ(10deg);
+    -webkit-transform: rotateZ(10deg);
+    -moz-transform: rotateZ(10deg);
+    -o-transform: rotateZ(10deg);
+    -ms-transform: rotateZ(10deg); } }
 
 .footer {
   width: 100%;
@@ -812,11 +846,22 @@ body {
   .settings__btn-reset {
     float: left;
     background: #c1cfd9; }
+    .settings__btn-reset:hover {
+      color: #c1cfd9; }
   .settings__btn-download {
     float: right;
     background: #f97e76;
     opacity: 0.5; }
+    .settings__btn-download:hover {
+      color: #f97e76; }
 
+.settings__btn-reset:hover:before {
+  background-color: #97b4c8; }
+
+.settings__btn-download:hover:before {
+  background-color: #fc584d; }
+
+/* общие для кнопок */
 .form__btn {
   outline: none;
   border: none;
@@ -830,7 +875,54 @@ body {
   -moz-background-clip: padding;
   -webkit-background-clip: padding-box;
   background-clip: padding-box;
-  width: 99px; }
+  width: 99px;
+  -webkit-transition: all 0.3s;
+  -moz-transition: all 0.3s;
+  transition: all 0.3s;
+  position: relative; }
+
+.form__btn {
+  vertical-align: middle;
+  position: relative;
+  z-index: 1;
+  -webkit-backface-visibility: hidden;
+  -moz-osx-font-smoothing: grayscale; }
+
+.form__btn {
+  overflow: hidden;
+  -webkit-transition: border-color 0.3s, color 0.3s;
+  transition: border-color 0.3s, color 0.3s;
+  -webkit-transition-timing-function: cubic-bezier(0.2, 1, 0.3, 1);
+  transition-timing-function: cubic-bezier(0.2, 1, 0.3, 1); }
+
+.form__btn:before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 150%;
+  height: 100%;
+  box-sizing: border-box;
+  z-index: -1;
+  -webkit-transform: rotate3d(0, 0, 1, -45deg) translate3d(0, -3em, 0);
+  transform: rotate3d(0, 0, 1, -45deg) translate3d(0, -3em, 0);
+  -webkit-transform-origin: 0% 100%;
+  transform-origin: 0% 100%;
+  -webkit-transition: -webkit-transform 0.3s, opacity 0.3s, background-color 0.3s;
+  transition: transform 0.5s, opacity 0.3s, background-color 0.3s; }
+
+.form__btn:hover {
+  color: #f2eaee;
+  cursor: pointer;
+  box-sizing: border-box; }
+
+.form__btn:hover:before {
+  opacity: 1;
+  box-sizing: border-box;
+  -webkit-transform: rotate3d(0, 0, 1, 0deg);
+  transform: rotate3d(0, 0, 1, 0deg);
+  -webkit-transition-timing-function: cubic-bezier(0.2, 1, 0.3, 1);
+  transition-timing-function: cubic-bezier(0.2, 1, 0.3, 1); }
 
 /* главный контейнер */
 .container {
