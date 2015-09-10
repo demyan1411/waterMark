@@ -8,7 +8,7 @@
    - после ответа сервера у элемента с фэйковым инпутом меняется текст
    - в общие переменные записываются новые значения
    - выполняются проверки на соответствие размеров основной картинки и вотермарка
-   - ошибки выводятся в консоль
+   - ошибки выводятся в консоль и в в виде уведомления на экран
 */
 
 'use strict';
@@ -29,13 +29,9 @@ $(document).ready(function() {
         var
             input = this,    // текущий инпут
             fakeinputID = this.dataset['fakeinput'], // id фэйкового инпута, соответствующего текщему
-            btn = $(this),   // нажатая кнопка для выбора файла
             data = new FormData();  // данные для запроса
 
         imgID = this.dataset['img'];  // id изображения, соответствующего инпуту
-
-        // заблокировать кнопку на время загрузки файла
-        // btn.attr('disabled', 'disabled');
 
         // запустить прелоадер на время загрузки файла
         preloader.start();
@@ -57,12 +53,12 @@ $(document).ready(function() {
             contentType: false  // установить в false, т.к. jQuery отправит серверу query string request
         })
         .fail( function(answer) {
-            console.log('Ошибка: сервер не ответил, попробуйте попозже');
-            // btn.removeAttr('disabled'); // разблокировать кнопку
+            var message = "Ошибка: сервер не ответил, попробуйте попозже";
+            Toast({ text: message, time: 4000, type: 'fixedTop' }).show();
+            console.log(message);
             preloader.stop();  // остановить работу прелоадера
         })
         .done( function(answer) {
-            console.log(answer.text);
             if (answer.status === 'OK') {
                 // изменить url картинки для элемента, который указан в атрибуте 'data-img'
                 //$('#'+imgID).attr("src", answer.url);
@@ -101,14 +97,20 @@ $(document).ready(function() {
                         app.watermark.url = '';
                         app.watermark.width = 0;
                         app.watermark.height = 0;
-                        console.log('Водяной знак удален, т.к. его размеры превышают размеры основной картинки');
+                        var message = 'Водяной знак удален, т.к. его размеры превышают размеры основной картинки';
+                        Toast({ text: message, time: 4000, type: 'fixedTop' }).show();
+                        console.log(message);
                     };
                 };
 
                 startModulesAfterUpload();
 
+            } else {
+                // показать пользователю сообщение об ошибке
+                Toast({ text: answer.text, time: 4000, type: 'fixedTop' }).show();
             };
-            // btn.removeAttr('disabled'); // разблокировать кнопку
+
+            console.log(answer.text);
             preloader.stop();  // остановить работу прелоадера
         });
     });

@@ -38,7 +38,7 @@ if (!getimagesize($tmp_file)) {
 // проверить максимальный размер
 else if ($_FILES[0]["size"] > $maxSize) {
     $answer['status'] = 'Error';
-    $answer['text'] = 'Ошибка: размер файла превышает максимальный - ' . $maxSize;
+    $answer['text'] = 'Ошибка: размер файла превышает максимальный - ' . $maxSize . ' байт';
 }
 // проверки пройдены, пробуем сохранить файл
 else if (!move_uploaded_file($tmp_file, $target_file)) {
@@ -49,7 +49,7 @@ else if (!move_uploaded_file($tmp_file, $target_file)) {
     $newSize = resize($target_file, $maxWidth, $maxHeight);
     if (!$newSize) {
         $answer['status'] = 'Error';
-        $answer['text'] = 'Ошибка: не удалось обработать и уменьшить изображение';
+        $answer['text'] = 'Ошибка: не удалось обработать изображение, выбирайте файл с типом jpeg, png или gif';
     }
     // все удачно завершилось, сформировать ответ сервера
     else {
