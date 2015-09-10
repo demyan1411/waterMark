@@ -125,7 +125,17 @@
 	}
 }
 
-
+@-webkit-keyframes shakeThatBooty {
+	33% {
+		@include transform(rotateZ(10deg));
+	}
+	67% {
+		@include transform(rotateZ(-10deg));
+	}
+	100% {
+		@include transform(rotateZ(10deg));
+	}
+}
 @keyframes shakeThatBooty {
 	33% {
 		@include transform(rotateZ(10deg));

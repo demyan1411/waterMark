@@ -200,7 +200,7 @@
 		&-reset {
 			float: left;
 			background: $btn-grey;
-			&:hover{
+			.js-form__btn:hover{
 				color: $btn-grey;
 			}
 		}
@@ -208,7 +208,7 @@
 			float: right;
 			background: $main-red;
 			opacity: 0.5;
-			&:hover {
+			.js-form__btn:hover {
 				color: $main-red;
 			}
 		}
@@ -237,7 +237,7 @@
 		transition: all 0.3s;
 		position: relative;
 }
-.form__btn {
+.js-form__btn {
 
 
 	vertical-align: middle;
@@ -249,7 +249,7 @@
 
 
 
- .form__btn {
+ .js-form__btn {
 	overflow: hidden;
 
 	-webkit-transition: border-color 0.3s, color 0.3s;
@@ -258,7 +258,7 @@
 	transition-timing-function: cubic-bezier(0.2, 1, 0.3, 1);
 }
 
-.form__btn:before {
+.js-form__btn:before {
 	content: '';
 	position: absolute;
 	top: 0;
@@ -275,13 +275,13 @@
 	-webkit-transition: -webkit-transform 0.3s, opacity 0.3s, background-color 0.3s;
 	transition: transform 0.5s, opacity 0.3s, background-color 0.3s;
 }
-.form__btn:hover {
+.js-form__btn:hover {
 	color: #f2eaee;
     cursor: pointer;
   box-sizing: border-box;
 }
 
-.form__btn:hover:before {
+.js-form__btn:hover:before {
 	opacity: 1;
   box-sizing: border-box;
 	-webkit-transform: rotate3d(0, 0, 1, 0deg);

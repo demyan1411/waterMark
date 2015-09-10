@@ -623,8 +623,6 @@ $.fn.draga = function(options) {
 	if($('#watermark').hasClass('buttons')) {
   	buttons.init();
   	arrows.init();
-	}
-		//opacity.init();
 
 		$('form').on('reset', function(e) {
 			e.preventDefault();
@@ -653,6 +651,10 @@ $.fn.draga = function(options) {
 
 
 		});
+	}
+		//opacity.init();
+
+
 
 
 }

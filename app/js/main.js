@@ -78,9 +78,10 @@ function startModulesAfterUpload() {
         container: app.imgConteiner,
         inputPush: '#' + imgID
     });
-		
+
 
 		if($('#watermark').hasClass('buttons')) {
+			$('.settings__btn-reset, .settings__btn-download').addClass('js-form__btn');
     	multiplyElem.init();
     	opacity.init();
 			drag.init();
