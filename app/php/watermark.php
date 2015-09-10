@@ -44,40 +44,51 @@ if ($mode == 'tile') {
 	$wmpic_width += $marginx;
 	$wmpic_height += $marginy;
 
-	$col_x = intval($bgpic_width / $wmpic_width);
-	$col_y = intval($bgpic_height / $wmpic_height);
+	// дефолтные размеры контейнера для тайлов
+	$layerWidth = $bgpic_width;
+	$layerHeight = $bgpic_height;
 
-	// создаём прозрачный слой для замощения по горизонтале
-	$layerHor = ImageWorkshop::initVirginLayer($wmpic_width*2*($col_x+1), $wmpic_height);
-
-	// создаём прозрачный слой для замощения полного
-	$layer = ImageWorkshop::initVirginLayer($wmpic_width*2*($col_x+1), $wmpic_height*2*$col_y);
-
-	// накладываем ватермарки в цикле по одному по горизонтали
-	$tile_x = 0;
-	$tile_y = 0;
-	$x=0;
-	$y=0;
-	while ($x++<$col_x+3) {
-		$layerHor->addLayer(1, $wmpic, $tile_x, $tile_y, "LT");
-		$tile_x += $wmpic_width;
+	// оптимизируем слой для тайлов, чтобы не тайлить в невидимой области
+	if ($coordx > 0) {
+		$layerWidth = $bgpic_width - $coordx;
+	}
+	if ($coordy > 0) {
+		$layerHeight = $bgpic_height - $coordy;
+	}
+	if ($coordx < 0) {
+		$coordx = $coordx - $wmpic_width * intval($coordx / $wmpic_width);
+		$layerWidth = $bgpic_width + abs($coordx);
+	}
+	if ($coordy < 0) {
+		$coordy = $coordy - $wmpic_height * intval($coordy / $wmpic_height);
+		$layerHeight = $bgpic_height + abs($coordy);
 	}
 
-	// накладываем ряды ватермарков в цикле по вертикали
-	$tile_x = 0;
-	while ($y++<$col_y+2) {
-		$layer->addLayer(1, $layerHor, $tile_x, $tile_y, "LT");
+	// количество тайлов по ширине и высоте
+	$col_x = ceil($layerWidth / $wmpic_width);
+	$col_y = ceil($layerHeight / $wmpic_height);
+
+	// создаём прозрачный слой для замощения
+	$layer = ImageWorkshop::initVirginLayer($layerWidth, $layerHeight);
+	// функция наложения ватермарков в цикле по одному — очень медленно
+	$tile_y = 0;
+	$y=0;
+	while ($y++<$col_y) {
+		$tile_x = 0;
+		$x=0;
+		while ($x++<$col_x) {
+			$layer->addLayer(1, $wmpic, $tile_x, $tile_y, "LT");
+			$tile_x += $wmpic_width;
+		}
 		$tile_y += $wmpic_height;
 	}
 
 	$wmpic = clone ($layer);
-
 }
 
 // применяем прозрачность к вотермарку и накладываем на основу
 $wmpic->opacity($opacity);
 $bgpic->addLayer(1, $wmpic, $coordx, $coordy, "LT");
-
 
 // сохранение картинки на сервере
 $bgpic->save($dir2save, $result_filename, $createFolders, $backgroundColor, $imageQuality);
