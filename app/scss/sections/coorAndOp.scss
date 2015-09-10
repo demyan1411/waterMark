@@ -28,14 +28,20 @@
   position: absolute;
   z-index: 2;
 }
+.containmentForWatermarks {
+  position: absolute;
+  // width: 400%;
+  // height: 400%;
+}
 .repeatBlock {
   position: absolute;
   top: 0px;
+  left: 0px;
   //right: 0px;
   //transform: translate(-50%, -50%);
   z-index: 2;
-  width: 120%;
-  height: 120%;
+  // width: 200%;
+  // height: 200%;
   overflow: hidden;
   margin-left: 0;
 
@@ -48,6 +54,10 @@
 .draggable.transition {
   transition: all ease .3s;
 }
+.repeatBlock.transition {
+  transition: all ease .4s;
+}
+
 .location {
   position: relative;
   height: 100px;

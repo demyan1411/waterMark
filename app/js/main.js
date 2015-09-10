@@ -15,13 +15,10 @@ $(document).ready(function() {
 	//startDraga(false);
 	$('form').on('submit', function(e) {
 		e.preventDefault();
-
-
 	});
 
-
-
-
+    // инициализация плагина для сообщений об ошибках
+    Toast.init();
 
 }); // end ready
 
@@ -81,11 +78,13 @@ function startModulesAfterUpload() {
         container: app.imgConteiner,
         inputPush: '#' + imgID
     });
+		
 
 		if($('#watermark').hasClass('buttons')) {
     	multiplyElem.init();
     	opacity.init();
 			drag.init();
+
 
 
 			$('.ui-slider-handle').css({
