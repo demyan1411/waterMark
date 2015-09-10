@@ -81,11 +81,13 @@ function startModulesAfterUpload() {
         container: app.imgConteiner,
         inputPush: '#' + imgID
     });
+		
 
 		if($('#watermark').hasClass('buttons')) {
     	multiplyElem.init();
     	opacity.init();
 			drag.init();
+
 
 
 			$('.ui-slider-handle').css({
