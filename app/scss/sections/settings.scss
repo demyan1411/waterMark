@@ -66,7 +66,7 @@
 }
 // начальное состояние вотермарка - заблокирован
 #formwrap-watermark {
-		opacity: 0.5;
+		//opacity: 0.5;
 }
 
 /* инпуты END */
@@ -125,7 +125,7 @@
 			top: 5px;
 			margin-left: 6px;
 			cursor: default;
-			opacity: .5;
+			//opacity: .5;
 
 			&:after {
 				content: '';
@@ -200,13 +200,28 @@
 		&-reset {
 			float: left;
 			background: $btn-grey;
+			&:hover{
+				color: $btn-grey;
+			}
 		}
 		&-download {
 			float: right;
 			background: $main-red;
-			opacity: 0.5;
+			//opacity: 0.5;
+			&:hover {
+				color: $main-red;
+			}
 		}
 }
+
+.settings__btn-reset:hover:before {
+	background-color: #97b4c8;
+}
+
+.settings__btn-download:hover:before {
+  background-color: #fc584d;
+}
+
 /* общие для кнопок */
 .form__btn {
 		outline: none;
@@ -221,4 +236,56 @@
 		-moz-transition: all 0.3s;
 		transition: all 0.3s;
 		position: relative;
+}
+.form__btn {
+
+
+	vertical-align: middle;
+	position: relative;
+	z-index: 1;
+	-webkit-backface-visibility: hidden;
+	-moz-osx-font-smoothing: grayscale;
+}
+
+
+
+ .form__btn {
+	overflow: hidden;
+
+	-webkit-transition: border-color 0.3s, color 0.3s;
+	transition: border-color 0.3s, color 0.3s;
+	-webkit-transition-timing-function: cubic-bezier(0.2, 1, 0.3, 1);
+	transition-timing-function: cubic-bezier(0.2, 1, 0.3, 1);
+}
+
+.form__btn:before {
+	content: '';
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 150%;
+	height: 100%;
+	  box-sizing: border-box;
+	z-index: -1;
+	-webkit-transform: rotate3d(0, 0, 1, -45deg) translate3d(0, -3em, 0);
+	transform: rotate3d(0, 0, 1, -45deg) translate3d(0, -3em, 0);
+	-webkit-transform-origin: 0% 100%;
+	transform-origin: 0% 100%;
+
+	-webkit-transition: -webkit-transform 0.3s, opacity 0.3s, background-color 0.3s;
+	transition: transform 0.5s, opacity 0.3s, background-color 0.3s;
+}
+.form__btn:hover {
+	color: #f2eaee;
+    cursor: pointer;
+  box-sizing: border-box;
+}
+
+.form__btn:hover:before {
+	opacity: 1;
+  box-sizing: border-box;
+	-webkit-transform: rotate3d(0, 0, 1, 0deg);
+	transform: rotate3d(0, 0, 1, 0deg);
+	-webkit-transition-timing-function: cubic-bezier(0.2, 1, 0.3, 1);
+	transition-timing-function: cubic-bezier(0.2, 1, 0.3, 1);
 }
