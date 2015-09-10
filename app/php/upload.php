@@ -49,7 +49,7 @@ else if (!move_uploaded_file($tmp_file, $target_file)) {
     $newSize = resize($target_file, $maxWidth, $maxHeight);
     if (!$newSize) {
         $answer['status'] = 'Error';
-        $answer['text'] = 'Ошибка: не удалось обработать и уменьшить изображение';
+        $answer['text'] = 'Ошибка: не удалось обработать изображение, выбирайте файл с типом jpeg, png или gif';
     }
     // все удачно завершилось, сформировать ответ сервера
     else {

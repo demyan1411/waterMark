@@ -13,22 +13,22 @@ function resize($filename, $maxWidth, $maxHeight) {
     // то пропорционально уменьшает картинку и перезаписывает файл
     // возвращает: размеры картинки или false, если произошла ошибка
 
-    $layer = ImageWorkshop::initFromPath($filename, true);
-    $width = $layer->getWidth();
-    $height = $layer->getHeight();
+    try {
+      $layer = ImageWorkshop::initFromPath($filename, true);
+      $width = $layer->getWidth();
+      $height = $layer->getHeight();
 
-    if ($width > $maxWidth  || $height > $maxHeight) {
-      try {
+      if ($width > $maxWidth  || $height > $maxHeight) {
         $layer->resizeToFit($maxWidth, $maxHeight, true);
         $layer->save('./', $filename);
         // получить изменившиеся размеры
         $width = $layer->getWidth();
         $height = $layer->getHeight();
-      } catch (Exception $e) {
-        // если поймали исключение, то записать в лог и продолжить работу
-        error_log($e->getMessage());
-        return false;
       };
+    } catch (Exception $e) {
+      // если поймали исключение, то записать в лог и продолжить работу
+      error_log($e->getMessage());
+      return false;
     };
     return array("width" => $width, "height" => $height);
 };
