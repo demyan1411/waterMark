@@ -53,6 +53,7 @@ var app = {
                   'mode': 'notile', // режим наложения: tile или любое другое
                   'container': {}
                 },
+
     objPos: {
       'top-left': {},
     	'top-middle': {},
@@ -63,6 +64,11 @@ var app = {
     	'bottom-left': {},
     	'bottom-middle': {},
     	'bottom-right': {}
+    },
+
+    // стандартное всплывающее сообщение об ошибке - 4 сек, вверху экрана
+    showMessage : function(message) {
+      Toast({ text: message, time: 4000, type: 'fixedTop' }).show();
     }
 
 };

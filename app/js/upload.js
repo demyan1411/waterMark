@@ -54,7 +54,7 @@ $(document).ready(function() {
         })
         .fail( function(answer) {
             var message = "Ошибка: сервер не ответил, попробуйте попозже";
-            Toast({ text: message, time: 4000, type: 'fixedTop' }).show();
+            app.showMessage(message);
             console.log(message);
             preloader.stop();  // остановить работу прелоадера
         })
@@ -98,7 +98,7 @@ $(document).ready(function() {
                         app.watermark.width = 0;
                         app.watermark.height = 0;
                         var message = 'Водяной знак удален, т.к. его размеры превышают размеры основной картинки';
-                        Toast({ text: message, time: 4000, type: 'fixedTop' }).show();
+                        app.showMessage(message);
                         console.log(message);
                     };
                 };
@@ -106,8 +106,7 @@ $(document).ready(function() {
                 startModulesAfterUpload();
 
             } else {
-                // показать пользователю сообщение об ошибке
-                Toast({ text: answer.text, time: 4000, type: 'fixedTop' }).show();
+                app.showMessage(answer.text); // показать пользователю сообщение об ошибке
             };
 
             console.log(answer.text);
