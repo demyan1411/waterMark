@@ -46,15 +46,22 @@ var preloader = (function (){
       elemsForBlock.removeAttr('disabled');
 
       // дополнительные проверки
-      // если основная картинка не выбрана, то инпут вотермарка и кнопка Скачать остаются заблокированны
-      if (!app.picture.url) {
-        $('#input-watermark').attr('disabled', 'disabled');
-        $('.settings__btn-download').attr('disabled', 'disabled');
-        $('#formwrap-watermark').fadeTo(0, 0.5);
-        $('.settings__btn-download').fadeTo(0, 0.5);
+      // если основная картинка выбрана, то инпут вотермарка становится доступным
+      if (app.picture.url) {
+        $('#formwrap-watermark').css({ 'opacity': '1' });
       } else {
-        $('#formwrap-watermark').fadeTo(0, 1);
-        $('.settings__btn-download').fadeTo(0, 1);
+        $('#input-watermark').attr('disabled', 'disabled');
+        $('#formwrap-watermark').css({ 'opacity': '0.5' });
+      };
+      // если выбраны обе картинки, то становятся доступны кнопки Сброс и Скачать
+      if (app.picture.url && app.watermark.url) {
+        $('.settings__btn-reset').css({ 'opacity': '1' });
+        $('.settings__btn-download').css({ 'opacity': '1' });
+      } else {
+        $('.settings__btn-reset').attr('disabled', 'disabled');
+        $('.settings__btn-reset').css({ 'opacity': '0.5' });
+        $('.settings__btn-download').attr('disabled', 'disabled');
+        $('.settings__btn-download').css({ 'opacity': '0.5' });
       };
   };
 

@@ -200,6 +200,7 @@
 		&-reset {
 			float: left;
 			background: $btn-grey;
+			opacity: 0.5;
 			.js-form__btn:hover{
 				color: $btn-grey;
 			}

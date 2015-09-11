@@ -865,7 +865,8 @@ body {
     clear: both; }
   .settings__btn-reset {
     float: left;
-    background: #c1cfd9; }
+    background: #c1cfd9;
+    opacity: 0.5; }
     .settings__btn-reset .js-form__btn:hover {
       color: #c1cfd9; }
   .settings__btn-download {
