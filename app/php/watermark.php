@@ -86,18 +86,24 @@ if ($mode == 'tile') {
 
 	// создаём прозрачный слой для замощения
 	$layer = ImageWorkshop::initVirginLayer($layerWidth, $layerHeight);
-	// функция наложения ватермарков в цикле по одному — очень медленно
-	$tile_y = 0;
-	$y=0;
-	while ($y++<$col_y) {
-		$tile_x = 0;
-		$x=0;
-		while ($x++<$col_x) {
-			$layer->addLayer(1, $wmpic, $tile_x, $tile_y, "LT");
-			$tile_x += $wmpic_width;
-		}
-		$tile_y += $wmpic_height;
-	}
+	// создаём прозрачный слой высотой в 1 вотермарк
+	$row = ImageWorkshop::initVirginLayer($layerWidth, $wmpic_height);
+			// функция наложения ватермарков
+			// для ускорения сначала мостим 1 ряд, а потом накладываем рядами по высоте
+			$tile_x = 0;
+			$tile_y = 0;
+			$x=0;
+			$y=0;
+
+			while ($x++<$col_x) {
+				$row->addLayer(1, $wmpic, $tile_x, 0, "LT");
+				$tile_x += $wmpic_width;
+			}
+
+			while ($y++<$col_y) {
+				$layer->addLayer(1, $row, 0, $tile_y, "LT");
+				$tile_y += $wmpic_height;
+			}
 
 	$wmpic = clone ($layer);
 }
