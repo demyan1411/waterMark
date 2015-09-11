@@ -54,11 +54,13 @@ var picModule = (function() {
 				})
 			.done (function(answer) {
 				console.log(answer);
-				preloader.stop();  // остановить работу прелоадера
 				_imgDownload(encodeURIComponent(answer));
+				preloader.stop();  // остановить работу прелоадера
 				})
 			.fail (function(answer) {
-				console.log('fail');
+				var message = "Ошибка: сервер не справился";
+				Toast({ text: message, time: 4000, type: 'fixedTop' }).show();
+				console.log(message);
 				preloader.stop();  // остановить работу прелоадера
 			});
 
