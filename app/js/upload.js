@@ -13,8 +13,6 @@
 
 'use strict';
 
-var imgID;
-
 $(document).ready(function() {
 
     // установить обработчик событий на кнопки загрузки файлов
@@ -28,10 +26,10 @@ $(document).ready(function() {
 
         var
             input = this,    // текущий инпут
+            imgID = this.dataset['img'],  // id изображения, соответствующего инпуту
             fakeinputID = this.dataset['fakeinput'], // id фэйкового инпута, соответствующего текщему
             data = new FormData();  // данные для запроса
 
-        imgID = this.dataset['img'];  // id изображения, соответствующего инпуту
 
         // запустить прелоадер на время загрузки файла
         preloader.start();
@@ -64,7 +62,7 @@ $(document).ready(function() {
                 //$('#'+imgID).attr("src", answer.url);
 
                 // хак, который позволяет принудительно загрузить картинку, даже если она есть в кэше браузера
-                $('#'+imgID).attr("src", answer.url+'?' + new Date().getTime());
+                // $('#'+imgID).attr("src", answer.url+'?' + new Date().getTime());
 
                 // изменить текст фэйкового инпута на имя сохраненного файла
                 $('#'+fakeinputID).text(answer.filename);
@@ -103,7 +101,9 @@ $(document).ready(function() {
                     };
                 };
 
-                startModulesAfterUpload();
+                $('#'+imgID).attr("src", '');
+                startModulesAfterUpload(imgID);
+                $('#'+imgID).attr("src", answer.url+'?' + new Date().getTime());
 
             } else {
                 app.showMessage(answer.text); // показать пользователю сообщение об ошибке

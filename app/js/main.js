@@ -23,7 +23,7 @@ $(document).ready(function() {
 }); // end ready
 
 
-function startModulesAfterUpload() {
+function startModulesAfterUpload(imgID) {
 
 
     var elemRightPosition = app.picture.width - app.watermark.width,
