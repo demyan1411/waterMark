@@ -44,10 +44,6 @@ if ($mode == 'tile') {
 	$wmpic_width += $marginx;
 	$wmpic_height += $marginy;
 
-	// дефолтные размеры контейнера для тайлов
-	$layerWidth = $bgpic_width;
-	$layerHeight = $bgpic_height;
-
 	// оптимизируем слой для тайлов, чтобы не тайлить в невидимой области
 	if ($coordx >= 0) {
 		$layerWidth = $bgpic_width - $coordx;
@@ -61,7 +57,7 @@ if ($mode == 'tile') {
 	}
 	if ($coordx < 0) {
 		// макс. колво вотермарков на поле
-		$maxWM_x = 2 * intval($bgpic_width / $wmpic_width);
+		$maxWM_x = 2 * intval($bgpic_width / ($wmpic_width-$marginx));
 		// колво вотермарков за границей видимости
 		$unseenWM_x = intval(abs($coordx) / $wmpic_width);
 		// вычисляем требуемую ширину поля вотермарков
@@ -73,7 +69,7 @@ if ($mode == 'tile') {
 	}
 	if ($coordy < 0) {
 		// макс. колво вотермарков на поле
-		$maxWM_y = 2 * intval($bgpic_height / $wmpic_height);
+		$maxWM_y = 2 * intval($bgpic_height / ($wmpic_height-$marginy));
 		// колво вотермарков за границей видимости
 		$unseenWM_y = intval(abs($coordy) / $wmpic_height);
 		// вычисляем требуемую ширину поля вотермарков
@@ -83,6 +79,9 @@ if ($mode == 'tile') {
 		// отбрасываем невидимые итерации вотермарков
 		$coordy = $coordy + $unseenWM_y * $wmpic_height;
 	}
+
+// вывод отладочной инфы
+// exit('col_x: ' . $col_x . ' coordx: ' . $coordx . ' layerW: ' . $layerWidth . ' rest: ' . $wmpic_width);
 
 	// создаём прозрачный слой для замощения
 	$layer = ImageWorkshop::initVirginLayer($layerWidth, $layerHeight);
