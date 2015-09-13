@@ -80,9 +80,6 @@ if ($mode == 'tile') {
 		$coordy = $coordy + $unseenWM_y * $wmpic_height;
 	}
 
-// вывод отладочной инфы
-// exit('col_x: ' . $col_x . ' coordx: ' . $coordx . ' layerW: ' . $layerWidth . ' rest: ' . $wmpic_width);
-
 	// создаём прозрачный слой для замощения
 	$layer = ImageWorkshop::initVirginLayer($layerWidth, $layerHeight);
 	// создаём прозрачный слой высотой в 1 вотермарк
