@@ -1,7 +1,7 @@
 /* imgsubmit.js
-   модуль устанавливает обработчик события на кнопку Скачать
-   и делает запрос с параметрами к watemark.php
-   после чего вызывает imgsave.php для сохранения картинки у юзера
+	 модуль устанавливает обработчик события на кнопку Скачать
+	 и делает запрос с параметрами к watemark.php
+	 после чего вызывает imgsave.php для сохранения картинки у юзера
 */
 'use strict'
 
@@ -35,6 +35,9 @@ var picModule = (function() {
 			app.watermark.coordy = parseInt($('.posY').val(), 10);
 		}
 
+		// запустить прелоадер на время обработки файла
+		preloader.start();
+
 		$.ajax({
 				url: app.URL_WATERMARK_REQUEST,
 				type: "POST",
@@ -50,11 +53,15 @@ var picModule = (function() {
 					mode:app.watermark.mode },
 				})
 			.done (function(answer) {
-				// console.log(answer);
+				console.log(answer);
 				_imgDownload(encodeURIComponent(answer));
+				preloader.stop();  // остановить работу прелоадера
 				})
 			.fail (function(answer) {
-				console.log('fail');
+				var message = "Ошибка: сервер не справился";
+				Toast({ text: message, time: 4000, type: 'fixedTop' }).show();
+				console.log(message);
+				preloader.stop();  // остановить работу прелоадера
 			});
 
 		return true;
