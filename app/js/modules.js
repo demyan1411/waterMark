@@ -649,6 +649,14 @@ $.fn.draga = function(options) {
 			buttons.init();
 			arrows.init();
 
+			$('.draggable').css({
+				'margin-right' : '0px',
+				'margin-bottom': '0px'
+			});
+
+			app.watermark.marginx = 0;
+			app.watermark.marginy = 0;
+
 
 		});
 	}
@@ -868,45 +876,7 @@ var multiplyElem = (function() {
 
 		});
 	},
-	// _increaseWidthAndHeight = function(nameBlock, namePic) {
-	// 	var marginRight = $('.posX').val(),
-	// 	  	marginBottom = $('.posY').val();
-	//
-	// 	for(var i = 0; i < newImgSum - imgSum; i++) {
-	// 			$('.repeatBlock').append('<img src="' + app.watermark.url + '" class="draggable appendedImg" style="margin-right: ' + marginRight + 'px; margin-bottom: ' + marginBottom + 'px;">');
-	// 		}
-	//
-	// 	// var marginRight = $('.posX').val(),
-	// 	// 	marginBottom = $('.posY').val();
-	// 	//
-	// 	// if(posLeft + repeatWidth < app.picture.width + _difference) {
-	// 	//
-	// 	// 	if(repeatWidth <= app.picture.width * 2) {
-	// 	// 		$('.repeatBlock').css({
-	// 	// 			'width': (repeatWidth + _difference) + 'px'
-	// 	// 		});
-	// 	// 	}
-	// 	//
-	// 	// 	for(var i = 0; i < newImgSum - imgSum; i++) {
-	// 	// 		$('.repeatBlock').append('<img src="' + app.watermark.url + '" class="draggable appendedImg" style="margin-right: ' + marginRight + 'px; margin-bottom: ' + marginBottom + 'px;">');
-	// 	// 	}
-	// 	//
-	// 	// };
-	// 	//
-	// 	// if(posTop + repeatHeight < app.picture.height + _differenceHeight) {
-	// 	//
-	// 	// 	if(repeatHeight <= app.picture.height * 2) {
-	// 	// 		$('.repeatBlock').css({
-	// 	// 			'height': (repeatHeight + _differenceHeight) + 'px'
-	// 	// 		});
-	// 	// 	}
-	// 	//
-	// 	// 	for(var i = 0; i < newImgSum - imgSum; i++) {
-	// 	// 		$('.repeatBlock').append('<img src="' + app.watermark.url + '" class="draggable appendedImg" style="margin-right: ' + marginRight + 'px; margin-bottom: ' + marginBottom + 'px;">');
-	// 	// 	}
-	// 	//
-	// 	// };
-	// },
+
 	_removeAll = function() {
 		app.flag = true;
 		$("#watermark, .appendedImg").removeClass('repeatElem')
@@ -923,6 +893,13 @@ var multiplyElem = (function() {
 		$("#watermark").draggable({ disabled: false });
 		$('.settings__position-btn').removeClass('btn-active');
 		$('.settings__position-btn_one').addClass('btn-active');
+
+		$('.draggable').css({
+			'margin-right' : '0px',
+			'margin-bottom': '0px'
+		});
+		app.watermark.marginx = 0;
+		app.watermark.marginy = 0;
 	},
 	_loadRemove = function() {
 		if($("div").is(".repeatBlock")) {
