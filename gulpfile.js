@@ -177,11 +177,14 @@ gulp.task('php', function () {
 		'app/php/**/*',
 	]).pipe(gulp.dest('dist/php'));
 });
+
 gulp.task('uploads', function () {
 	return gulp.src([
-		'app/uploads/*.*',
+		'app/uploads/.htaccess',
+		'app/uploads/.gitignore'
 	]).pipe(gulp.dest('dist/uploads'));
 });
+
 gulp.task('extras', ['php', 'uploads'] ,function () {
 	return gulp.src([
 		'app/*.*',

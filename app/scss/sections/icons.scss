@@ -1,8 +1,32 @@
 ﻿/* иконки слева - язык и share */
+
+@mixin transition($in) {
+	transition:$in;
+	-webkit-transition:$in;
+	-moz-transition:$in;
+	-o-transition:$in;
+	-ms-transition:$in;
+}
+@mixin transform($in) {
+	transform:$in;
+	-webkit-transform:$in;
+	-moz-transform:$in;
+	-o-transform:$in;
+	-ms-transform:$in;
+}
+@mixin animation($in) {
+	animation:$in;
+	-webkit-animation:$in;
+	-moz-animation:$in;
+	-o-animation:$in;
+	-ms-animation:$in;
+}
+
 .icons {
 	position: fixed;
 	top: 100px;
 	left: 0;
+	z-index: 5;
 	&__language {
 		margin: 0 0 18px 0;
 		font-family: "SegoeUILight";
@@ -70,18 +94,21 @@
 		background-position: -7px -342px;
 			&:hover {
 			background-position: -7px -295px;
+			@include animation(shakeThatBooty 0.3s linear 1);
 			}
 		}
 		&--tw {
 		background-position: -13px -109px;
 			&:hover {
 			background-position: -13px -67px;
+			@include animation(shakeThatBooty 0.3s linear 1);
 			}
 		}
 		&--vk {
 		background-position: -15px -26px;
 			&:hover {
 			background-position: -15px 12px;
+			@include animation(shakeThatBooty 0.3s linear 1);
 			}
 		}
 }
@@ -95,5 +122,28 @@
 
 	&:hover {
 		left:0;
+	}
+}
+
+@-webkit-keyframes shakeThatBooty {
+	33% {
+		@include transform(rotateZ(10deg));
+	}
+	67% {
+		@include transform(rotateZ(-10deg));
+	}
+	100% {
+		@include transform(rotateZ(10deg));
+	}
+}
+@keyframes shakeThatBooty {
+	33% {
+		@include transform(rotateZ(10deg));
+	}
+	67% {
+		@include transform(rotateZ(-10deg));
+	}
+	100% {
+		@include transform(rotateZ(10deg));
 	}
 }

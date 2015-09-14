@@ -8,7 +8,9 @@ $(document).ready(function() {
 
 	addArrows.init();
 
-	picModule.init();
+    picModule.init();
+
+	sharingModule.init();
 
 	//resetAll.init();
 
@@ -20,10 +22,16 @@ $(document).ready(function() {
     // инициализация плагина для сообщений об ошибках
     Toast.init();
 
+		var colors = ['#f2e4f5', '#e1f8fb', '#f9ecdc', '#d8faf2', '#9daff3', '#f25c5c', '#f9d568', '#f9924e'];
+    var randomValue = colors[Math.floor(colors.length * Math.random())];
+    $('html').css({
+      'background' : randomValue
+    });
+
 }); // end ready
 
 
-function startModulesAfterUpload() {
+function startModulesAfterUpload(imgID) {
 
 
     var elemRightPosition = app.picture.width - app.watermark.width,
@@ -78,9 +86,10 @@ function startModulesAfterUpload() {
         container: app.imgConteiner,
         inputPush: '#' + imgID
     });
-		
+
 
 		if($('#watermark').hasClass('buttons')) {
+			$('.settings__btn-reset, .settings__btn-download').addClass('js-form__btn');
     	multiplyElem.init();
     	opacity.init();
 			drag.init();

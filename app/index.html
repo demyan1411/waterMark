@@ -4,10 +4,10 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>WaterMark</title>
-    <meta name="description" content="watermark">
-    <meta name="keywords" content="watermark">
-    <meta name="author" content="Анастасия Ким, Демьян Дроздов , Андрей Баландин, Тимофей Арбаев">
+    <title>WaterMark Service</title>
+    <meta name="description" content="Сервис позволяет быстро и удобно наложить одиночный водяной знак или замостить поверхность исходного изображения">
+    <meta name="keywords" content="watermark, service, watermark service, наложить водяной знак, наложить ватермарк, сервис ватермарков">
+    <meta name="author" content="Анастасия Ким, Демьян Дроздов , Андрей Баландин, Тимур Арбаев">
     <link rel="shortcut icon" href="./favicon.ico" type="image/x-icon">
     <link rel="icon" href="./favicon.ico" type="image/x-icon">
     <!-- build:css css/vendor.min.css-->
@@ -18,7 +18,6 @@
     <!-- build:css css/style.min.css-->
     <link rel="stylesheet" href="css/main.css">
     <!--endbuild-->
-    
     <!-- build:css css/oldIe.min.css--><!--[if lte IE 8]>
     <link rel="stylesheet" href="css/oldIe.css"><![endif]-->
     <!-- endbuild-->
@@ -30,6 +29,7 @@
     <!--[if lt IE 7]>
     <p class="browsehappy">Ваш браузер <strong>устарел</strong>. Пожалуйста<a href="http://browsehappy.com/">обновите</a> его.</p>
     <![endif]-->
+    <div id="bg"></div>
     <div class="wrapper">
       <div class="main-content">
         <aside class="icons">
@@ -39,9 +39,9 @@
           </ul>
           <div class="icons__socials"><a href="#" class="icons__share-link icons__share-link--like">like</a>
             <ul class="icons__share">
-              <li class="icons__share-item--socials"><a href="#" class="icons__share-link icons__share-link--fb">facebook</a></li>
-              <li class="icons__share-item--socials"><a href="#" class="icons__share-link icons__share-link--tw">twitter</a></li>
-              <li class="icons__share-item--socials"><a href="#" class="icons__share-link icons__share-link--vk">vkontakte</a></li>
+              <li class="icons__share-item--socials"><a href="#" id="fb" class="icons__share-link icons__share-link--fb">facebook</a></li>
+              <li class="icons__share-item--socials"><a href="#" id="tw" class="icons__share-link icons__share-link--tw">twitter</a></li>
+              <li class="icons__share-item--socials"><a href="#" id="vk" class="icons__share-link icons__share-link--vk">vkontakte</a></li>
             </ul>
           </div>
         </aside>
@@ -51,6 +51,23 @@
               <div data-lang="[&quot;Генератор водяных знаков&quot;, &quot;Watermark generator&quot;]" class="generator__title">Генератор водяных знаков</div>
               <div class="generator__img-wrap cont">
                 <div class="main-img-container"><img id="picture" class="main-img"><img id="watermark" class="opacity_block draggable radio_position"></div>
+                <div class="cssload-container">
+                  <div class="cssload-circle-1">
+                    <div class="cssload-circle-2">
+                      <div class="cssload-circle-3">
+                        <div class="cssload-circle-4">
+                          <div class="cssload-circle-5">
+                            <div class="cssload-circle-6">
+                              <div class="cssload-circle-7">
+                                <div class="cssload-circle-8"></div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
               </div>
             </section>
             <section class="settings">
@@ -98,7 +115,7 @@
                   </div>
                 </div>
                 <div class="settings__btn line-top">
-                  <button type="reset" data-lang="[&quot;Сброс&quot;, &quot;Reset&quot;]" class="settings__btn-reset form__btn">Сброс</button>
+                  <button type="reset" data-lang="[&quot;Сброс&quot;, &quot;Reset&quot;]" disabled="disabled" class="settings__btn-reset form__btn">Сброс</button>
                   <button type="submit" data-lang="[&quot;Скачать&quot;, &quot;Download&quot;]" disabled="disabled" class="settings__btn-download form__btn">Скачать</button>
                 </div>
               </form>
@@ -128,6 +145,8 @@
     <script src="js/translate.js"></script>
     <script src="js/preloader.js"></script>
     <script src="js/upload.js"></script>
+    <script src="js/socialsharing.js"></script>
+    <script src="js/bg.js"></script>
     <!-- endbuild-->
   </body>
 </html>
