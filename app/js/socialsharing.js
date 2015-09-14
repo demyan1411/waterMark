@@ -6,10 +6,10 @@ var sharingModule = (function() {
 
 	// объявление переменных
 	var
-			host = window.location.hostname,
+			host = location.protocol + '//' + window.location.hostname,
 			title = document.title,
-			text = document.getElementsByName('description')[0].getAttribute('content'),
-			screenshot = location.protocol + '//' + host + "/img/watermark-screenshot1.jpg",
+			desc = document.getElementsByName('description')[0].getAttribute('content'),
+			screenshot = host + "/img/watermark-screenshot1.jpg",
 			shareWindowWidth = 626, // ширина окна шаринга
 			shareWindowHeight = 436, // высота окна шаринга
 			shareWindowLeft = screen.availWidth / 2 - shareWindowWidth / 2, // отступ слева
@@ -25,16 +25,15 @@ var sharingModule = (function() {
 		$('.icons__share-link').on('click', _sharing);
 	};
 
-	// вызов соответствующего апи шаринга
+	// вызов соответствующего шаринга
 	var _sharing = function(event) {
 		event.preventDefault();
 
 		if ($(this).attr("id") == 'tw') {_twitter(host, title)};
-		if ($(this).attr("id") == 'vk') {_vk(host, title, screenshot, text)};
-		if ($(this).attr("id") == 'fb') {_facebook(host, title, screenshot, text)};
+		if ($(this).attr("id") == 'vk') {_vk(host, title, screenshot, desc)};
+		if ($(this).attr("id") == 'fb') {_facebook(host, title, screenshot, desc)};
 
 	};
-
 
 	var _vk = function(purl, ptitle, pimg, text) {
 			var url  = 'http://vkontakte.ru/share.php?';
@@ -56,15 +55,15 @@ var sharingModule = (function() {
 	};
 
 	var _twitter = function(purl, ptitle) {
-			var url  = 'http://twitter.com/share?';
-			url += 'text='      + encodeURIComponent(ptitle);
-			url += '&url='      + encodeURIComponent(purl);
-			url += '&counturl=' + encodeURIComponent(purl);
+			var url  = 'http://twitter.com/timeline/home?';
+			url += 'status='    + encodeURIComponent(ptitle);
+			url += '%20'        + encodeURIComponent(purl);
 			_popup(url);
 	};
 
+	// открытие урла с заданными параметрами
 	var _popup = function(url) {
-		window.open(url,'','toolbar=no,status=no,width=' + shareWindowWidth + ',height=' + shareWindowHeight + 'left=' + shareWindowLeft + ', top=' + shareWindowTop);
+		window.open(url,'','toolbar=0,status=0,width=' + shareWindowWidth + ',height=' + shareWindowHeight + 'left=' + shareWindowLeft + ', top=' + shareWindowTop);
 	};
 
 	return {
