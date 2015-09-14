@@ -24,14 +24,14 @@ var preloader = (function (){
 
   // создание нового элемента с картинкой прелоада
   var _createPreloader = function() {
-      imgPreloader = $('<img id="preloader" src="img/loader.gif"/>').appendTo('.generator__img-wrap');
-      imgPreloader.css({ 'display': 'none',
-                         'position': 'absolute',
-                         'top': '50%',
-                         'left': '50%',
-                         '-webkit-transform': 'translate(-50%, -50%)',
-                         'transform': 'translate(-50%, -50%)'
-                       });
+      imgPreloader = $('.cssload-container');
+      // imgPreloader.css({ 'display': 'none',
+      //                    'position': 'absolute',
+      //                    'top': '50%',
+      //                    'left': '50%',
+      //                    '-webkit-transform': 'translate(-50%, -50%)',
+      //                    'transform': 'translate(-50%, -50%)'
+      //                  });
   };
 
   // блокировать активные элементы и показать картинку прелоадера

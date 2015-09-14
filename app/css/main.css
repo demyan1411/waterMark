@@ -214,6 +214,128 @@
   width: 98%;
   max-height: 96%; }
 
+.cssload-container {
+  width: 100%;
+  height: 100%;
+  position: relative;
+  background: rgba(0, 0, 0, 0.3);
+  display: none; }
+
+.cssload-circle-1 {
+  height: 118px;
+  width: 118px;
+  background: #612e8d;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  margin-left: -59px;
+  margin-top: -59px; }
+
+.cssload-circle-2 {
+  height: 97px;
+  width: 97px;
+  background: #c22286; }
+
+.cssload-circle-3 {
+  height: 78px;
+  width: 78px;
+  background: #ea225e; }
+
+.cssload-circle-4 {
+  height: 58px;
+  width: 58px;
+  background: #ed5b35; }
+
+.cssload-circle-5 {
+  height: 39px;
+  width: 39px;
+  background: #f5b52e; }
+
+.cssload-circle-6 {
+  height: 19px;
+  width: 19px;
+  background: #81c540; }
+
+.cssload-circle-7 {
+  height: 10px;
+  width: 10px;
+  background: #00a396; }
+
+.cssload-circle-8 {
+  height: 5px;
+  width: 5px;
+  background: #1674bc; }
+
+.cssload-circle-1,
+.cssload-circle-2,
+.cssload-circle-3,
+.cssload-circle-4,
+.cssload-circle-5,
+.cssload-circle-6,
+.cssload-circle-7,
+.cssload-circle-8 {
+  border-bottom: none;
+  border-radius: 50%;
+  -o-border-radius: 50%;
+  -ms-border-radius: 50%;
+  -webkit-border-radius: 50%;
+  -moz-border-radius: 50%;
+  box-shadow: 1px 1px 1px rgba(0, 0, 0, 0.1);
+  -o-box-shadow: 1px 1px 1px rgba(0, 0, 0, 0.1);
+  -ms-box-shadow: 1px 1px 1px rgba(0, 0, 0, 0.1);
+  -webkit-box-shadow: 1px 1px 1px rgba(0, 0, 0, 0.1);
+  -moz-box-shadow: 1px 1px 1px rgba(0, 0, 0, 0.1);
+  animation-name: cssload-spin;
+  -o-animation-name: cssload-spin;
+  -ms-animation-name: cssload-spin;
+  -webkit-animation-name: cssload-spin;
+  -moz-animation-name: cssload-spin;
+  animation-duration: 4600ms;
+  -o-animation-duration: 4600ms;
+  -ms-animation-duration: 4600ms;
+  -webkit-animation-duration: 4600ms;
+  -moz-animation-duration: 4600ms;
+  animation-iteration-count: infinite;
+  -o-animation-iteration-count: infinite;
+  -ms-animation-iteration-count: infinite;
+  -webkit-animation-iteration-count: infinite;
+  -moz-animation-iteration-count: infinite;
+  animation-timing-function: linear;
+  -o-animation-timing-function: linear;
+  -ms-animation-timing-function: linear;
+  -webkit-animation-timing-function: linear;
+  -moz-animation-timing-function: linear; }
+
+@keyframes cssload-spin {
+  from {
+    transform: rotate(0deg); }
+  to {
+    transform: rotate(360deg); } }
+
+@-o-keyframes cssload-spin {
+  from {
+    -o-transform: rotate(0deg); }
+  to {
+    -o-transform: rotate(360deg); } }
+
+@-ms-keyframes cssload-spin {
+  from {
+    -ms-transform: rotate(0deg); }
+  to {
+    -ms-transform: rotate(360deg); } }
+
+@-webkit-keyframes cssload-spin {
+  from {
+    -webkit-transform: rotate(0deg); }
+  to {
+    -webkit-transform: rotate(360deg); } }
+
+@-moz-keyframes cssload-spin {
+  from {
+    -moz-transform: rotate(0deg); }
+  to {
+    -moz-transform: rotate(360deg); } }
+
 /*! jQuery UI - v1.11.4 - 2015-08-27
 * http://jqueryui.com
 * Includes: core.css, draggable.css, slider.css, theme.css
