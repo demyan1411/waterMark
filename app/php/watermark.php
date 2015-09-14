@@ -93,11 +93,13 @@ if ($mode == 'tile') {
 
 			while ($x++<$col_x) {
 				$row->addLayer(1, $wmpic, $tile_x, 0, "LT");
+				$row->mergeAll();
 				$tile_x += $wmpic_width;
 			}
 
 			while ($y++<$col_y) {
 				$layer->addLayer(1, $row, 0, $tile_y, "LT");
+				$layer->mergeAll();
 				$tile_y += $wmpic_height;
 			}
 
