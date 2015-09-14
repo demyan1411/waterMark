@@ -8,7 +8,8 @@ $(document).ready(function() {
 
 	addArrows.init();
 
-	picModule.init();
+    picModule.init();
+	sharingModule.init();
 
 	//resetAll.init();
 
