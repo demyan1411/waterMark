@@ -23,11 +23,7 @@ function onLoad()
 {
 
 
-    var colors = ['#f2e4f5', '#e1f8fb', '#f9ecdc', '#d8faf2', '#9daff3', '#f25c5c', '#f9d568', '#f9924e'];
-    var randomValue = colors[Math.floor(colors.length * Math.random())];
-    $('html').css({
-      'background' : randomValue
-    });
+    
 
     var svg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
     svg.setAttribute('width',window.innerWidth);
