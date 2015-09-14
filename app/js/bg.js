@@ -16,15 +16,14 @@ $(window).resize(function() {
     document.body.offsetHeight, document.documentElement.offsetHeight,
     document.body.clientHeight, document.documentElement.clientHeight
   );
+  $('body').css({
+    'height' : scrollHeight + 'px'
+  });
   onResize();
 });
 
 function onLoad()
 {
-
-
-    
-
     var svg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
     svg.setAttribute('width',window.innerWidth);
     svg.setAttribute('height',scrollHeight);
