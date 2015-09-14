@@ -87,12 +87,12 @@ function onLoad()
                     }
                 }
                 polygon.setAttribute('fill','rgba(0,0,0,'+(Math.random()/3)+')');
-                var animate = document.createElementNS('http://www.w3.org/2000/svg','animate');
-                animate.setAttribute('fill','freeze');
-                animate.setAttribute('attributeName','points');
-                animate.setAttribute('dur',refreshDuration+'ms');
-                animate.setAttribute('calcMode','linear');
-                polygon.appendChild(animate);
+                // var animate = document.createElementNS('http://www.w3.org/2000/svg','animate');
+                // animate.setAttribute('fill','freeze');
+                // animate.setAttribute('attributeName','points');
+                // animate.setAttribute('dur',refreshDuration+'ms');
+                // animate.setAttribute('calcMode','linear');
+                // polygon.appendChild(animate);
                 svg.appendChild(polygon);
             }
         }
@@ -118,18 +118,18 @@ function refresh() {
     for(var i = 0; i < document.querySelector('#bg svg').childNodes.length; i++) {
         var polygon = document.querySelector('#bg svg').childNodes[i];
         var animate = polygon.childNodes[0];
-        if(animate.getAttribute('to')) {
-            animate.setAttribute('from',animate.getAttribute('to'));
-        }
-        animate.setAttribute('to',points[polygon.point1].x+','+points[polygon.point1].y+' '+points[polygon.point2].x+','+points[polygon.point2].y+' '+points[polygon.point3].x+','+points[polygon.point3].y);
-        animate.beginElement();
+        // if(animate.getAttribute('to')) {
+        //     animate.setAttribute('from',animate.getAttribute('to'));
+        // }
+        // animate.setAttribute('to',points[polygon.point1].x+','+points[polygon.point1].y+' '+points[polygon.point2].x+','+points[polygon.point2].y+' '+points[polygon.point3].x+','+points[polygon.point3].y);
+        // animate.beginElement();
     }
-    refreshTimeout = setTimeout(function() {refresh();}, refreshDuration);
+    // refreshTimeout = setTimeout(function() {refresh();}, refreshDuration);
 }
 
 function onResize() {
     document.querySelector('#bg svg').remove();
-    clearTimeout(refreshTimeout);
+    // clearTimeout(refreshTimeout);
     onLoad();
 }
 

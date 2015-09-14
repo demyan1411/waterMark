@@ -6,7 +6,7 @@ var sharingModule = (function() {
 
 	// объявление переменных
 	var
-			host = location.protocol + '//' + window.location.hostname,
+			host = window.location.href,
 			title = document.title,
 			desc = document.getElementsByName('description')[0].getAttribute('content'),
 			screenshot = host + "/img/watermark-screenshot1.jpg",
@@ -14,6 +14,7 @@ var sharingModule = (function() {
 			shareWindowHeight = 436, // высота окна шаринга
 			shareWindowLeft = screen.availWidth / 2 - shareWindowWidth / 2, // отступ слева
 			shareWindowTop = screen.availHeight / 2 - shareWindowHeight / 2; // отступ сверху
+
 
 	// инициализация функций
 	var init = function () {
