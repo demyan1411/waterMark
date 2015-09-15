@@ -60,24 +60,30 @@ if ($mode == 'tile') {
 		$maxWM_x = 2 * intval($bgpic_width / ($wmpic_width-$marginx));
 		// колво вотермарков за границей видимости
 		$unseenWM_x = intval(abs($coordx) / $wmpic_width);
-		// вычисляем требуемую ширину поля вотермарков
-		$layerWidth = $wmpic_width * ($maxWM_x - $unseenWM_x);
-		// количество тайлов по ширине
-		$col_x = $maxWM_x - $unseenWM_x;
 		// отбрасываем невидимые итерации вотермарков
 		$coordx = $coordx + $unseenWM_x * $wmpic_width;
+		// количество видимых тайлов по ширине
+		$col_x = ceil((abs($coordx)+$bgpic_width)/ $wmpic_width);
+		// вычисляем требуемую ширину поля вотермарков
+		$layerWidth = $wmpic_width * ($maxWM_x - $unseenWM_x);
+		if ($layerWidth > $bgpic_width) {
+			$layerWidth = $col_x * $wmpic_width;
+		}
 	}
 	if ($coordy < 0) {
 		// макс. колво вотермарков на поле
 		$maxWM_y = 2 * intval($bgpic_height / ($wmpic_height-$marginy));
 		// колво вотермарков за границей видимости
 		$unseenWM_y = intval(abs($coordy) / $wmpic_height);
-		// вычисляем требуемую ширину поля вотермарков
-		$layerHeight = $wmpic_height * ($maxWM_y - $unseenWM_y);
-		// количество тайлов по высоте
-		$col_y = $maxWM_y - $unseenWM_y;
 		// отбрасываем невидимые итерации вотермарков
 		$coordy = $coordy + $unseenWM_y * $wmpic_height;
+		// количество видимых тайлов по высоте
+		$col_y = ceil((abs($coordy)+$bgpic_height)/ $wmpic_height);
+		// вычисляем требуемую ширину поля вотермарков
+		$layerHeight = $wmpic_height * ($maxWM_y - $unseenWM_y);
+		if ($layerHeight > $bgpic_height) {
+			$layerHeight = $col_y * $wmpic_height;
+		}
 	}
 
 	// создаём прозрачный слой для замощения
